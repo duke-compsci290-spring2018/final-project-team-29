@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="christine hwang"/>
+   <link rel="stylesheet" type="text/css" href="topic.css">
+  <title>final project topic</title>
+</head>
+
+<body>
+    <div class="header">
+        <br><h1>FINAL PROJECT PLAN</h1><br><hr>
+    </div>
+    
+    <div class="plan">    
+        <span id="underline"><h3>OVERVIEW</h3></span>
+        We would like to create a web application that helps Duke students organize their tenting schedules on a platform that also functions as a social network. Since a third of the Duke population participates in any form of tenting, our app would appeal to many students who struggle to organize shifts for their tenting groups.
+        
+        <span id="underline"><h3>FEATURES: USERS</h3></span>
+        
+        <ul>
+            <li>Admin (app developers & line monitors)</li>
+                <ul>
+                    <li>Read-write permissions for all calendars</li>
+                    <li>Add, remove, edit people on any calendar and/or team</li>
+                </ul>
+            <li>User (tenting participant)</li>
+                <ul>
+                    <li>Read-write permission for individual calendar</li>
+                    <li>Read-only access for global calendar</li>
+                    <li>Captain can add, remove, edit people on individual calendar and/or team</li>
+                </ul>
+            <li>Guest (anyone not logged in)</li>
+                <ul>
+                    <li>Read-only access for global calendar</li>
+                </ul>
+        </ul>
+        
+        <span id="underline"><h3>FEATURES: FILTERS, NOTIFICATIONS</h3></span>
+        Filters will allow guests, users, and admins to view specific events of each calendar. Another feature that we would like to include is push notifications to notify people of their tenting shift(s), a grace period (dependent on if there is another basketball game during the season and/or severe weather conditions), and instances where a tenting shift is dropped and needs picking up.
+        
+        <span id="underline"><h3>TOOLS: FIREBASE</h3></span>
+        In the "Teams" array, we plan on implementing functionality that allows for one person, the captain of the team, to perform certain tasks on the application. Each team will have a unique key that will be referenced when a user joins a team. Availability will be determined by a string where 1 indicates that a user is free and a 0 indicates that they're not for each hour. We will have a similar method for determining when a user is assigned to a shift and in the tent.<br><br>
+        In the "Calendars" array, 
+        
+        <img src="teams.png" alt="" id="teams">
+        <img src="calendars.png" alt="" id="teams">
+        
+        <span id="underline"><h3>METHODS: DATABASE</h3></span>
+  
+        
+    </div>
+  
+
+</body>
+</html>
