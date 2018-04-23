@@ -3,11 +3,19 @@
     <h1>Personal Calendar:</h1>
     <Personal_Calendar :test="calendarInfo"></Personal_Calendar>
     <Schedule_Builder :test="calendarInfo"></Schedule_Builder>
-    <div v-for="thing in person_schedule">
-      This is the schedule for {{thing["People"][0]["name"]}}
-      <Personal_Calendar :test='thing["People"][0]["schedule"]'></Personal_Calendar>
-      <br/>
-    </div>
+    <!--<p>{{current_schedule[0]["code"]}}</p>-->
+    <p>{{curr_team_info}}</p>
+    <p>{{current_schedule}}</p>
+    <!--<p>{{first_team["People"]}}</p>-->
+    <!--<p>{{team_people}}</p>-->
+    <!--<div v-for="thing in person_schedule">-->
+      <!--<h1>This is the information for {{thing["code"]}}</h1>-->
+      <!--This is the schedule for {{thing["People"][0]["name"]}}-->
+      <!--<Personal_Calendar :test='thing["People"][0]["schedule"]'></Personal_Calendar>-->
+      <!--This is the schedule for {{thing["People"][1]["name"]}}-->
+      <!--<Personal_Calendar :test='thing["People"][1]["schedule"]'></Personal_Calendar>-->
+      <!--<br/> <br/> <br/>-->
+    <!--</div>-->
   </div>
 
 </template>
@@ -42,7 +50,9 @@ export default {
         [false, true, true, true, false, false, false, true],
         [false, false, false, true, false, false, false, false]
       ],
-      msg: 'This is a cool calendar!'
+      msg: 'This is a cool calendar!',
+      currName: "Matt",
+      currTeam: "TEAM 0"
 
     }
   },
@@ -53,7 +63,23 @@ export default {
     person_schedule: function() {
       console.log(this.teams[0]);
       this.teams.forEach(user => console.log(user));
-      return this.teams.filter(user => true);
+      return this.teams;
+    },
+    first_team: function() {
+      return this.teams[0];
+    },
+    team_people: function() {
+      return this.teams[0]["People"];
+    },
+    curr_team_info: function() {
+      return this.teams.filter(team => team["code"] === "TEAM 0")[0];
+    },
+    current_schedule: function() {
+      return this.curr_team_info["People"].filter(person => person["name"] === this.currName)[0]["schedule"];
+      // return this.curr_team_info();
+      // var temp = this.teams.filter(team => team["code"] === "TEAM 0");
+      // return temp[0]["People"].filter(person => person["name"] === this.currName);
+        // .filter(person => person["name"] === this.currName);
     }
   },
   components: {
