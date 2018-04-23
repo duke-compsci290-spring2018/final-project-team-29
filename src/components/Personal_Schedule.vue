@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <h1>Personal Calendar:</h1>
-    {{teamsRef}}
+    {{name}}
   </div>
 
 </template>
 
 <script>
 
-  import Firebase from '../App.vue';
+  import Firebase from 'firebase';
 
   import Personal_Calendar from './Personal_Calendar.vue'
 
@@ -21,7 +21,7 @@
     storageBucket: "final-efcc8.appspot.com",
     messagingSenderId: "718555914790"
   };
-
+  //
   var db = Firebase.initializeApp(config).database();
   var teamsRef = db.ref('Teams');
 
@@ -46,10 +46,10 @@
         this.teams.forEach(user => console.log(user));
         return this.teams;
       }
-    },
-    firebase: {
-      teams: teamsRef
     }
+    // firebase: {
+    //   teams: teamsRef
+    // }
   }
 </script>
 

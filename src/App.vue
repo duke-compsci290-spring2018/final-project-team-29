@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Personal_Schedule :name="currName"></Personal_Schedule>
+    <Personal_Schedule :name="teamsRef"></Personal_Schedule>
     <!--<h1>Personal Calendar:</h1>-->
     <!--<Personal_Calendar :schedule="calendarInfo"></Personal_Calendar>-->
     <!--<Schedule_Builder :schedule="calendarInfo"></Schedule_Builder>-->
