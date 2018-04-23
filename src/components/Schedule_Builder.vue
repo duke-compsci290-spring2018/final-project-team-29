@@ -8,9 +8,9 @@
       </th>
     </tr>
     <br/>
-    <div v-for="thing in schedule">
-      {{thing}}
-    </div>
+    <!--<div v-for="thing in schedule">-->
+      <!--{{thing}}-->
+    <!--</div>-->
     <!--<p>{{test[0]}}</p>-->
   </table>
 </template>

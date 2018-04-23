@@ -3,9 +3,10 @@
     <h1>Personal Calendar:</h1>
     <Personal_Calendar :test="calendarInfo"></Personal_Calendar>
     <Schedule_Builder :test="calendarInfo"></Schedule_Builder>
-    <button @click="testFirebase">Test firebase</button>
-    <div v-for="team in teams">
-      {{team}}
+    <div v-for="thing in person_schedule">
+      This is the schedule for {{thing["People"][0]["name"]}}
+      <Personal_Calendar :test='thing["People"][0]["schedule"]'></Personal_Calendar>
+      <br/>
     </div>
   </div>
 
@@ -33,7 +34,6 @@
 export default {
   name: 'app',
   data () {
-    console.log(this.teams);
     return {
       calendarInfo: [
         [true, true, true, false, false, false, false, true],
@@ -43,10 +43,18 @@ export default {
         [false, false, false, true, false, false, false, false]
       ],
       msg: 'This is a cool calendar!'
+
     }
   },
   firebase: {
     teams: teamsRef
+  },
+  computed: {
+    person_schedule: function() {
+      console.log(this.teams[0]);
+      this.teams.forEach(user => console.log(user));
+      return this.teams.filter(user => true);
+    }
   },
   components: {
     Personal_Calendar,
