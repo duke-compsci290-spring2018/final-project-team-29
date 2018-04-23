@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <div v-for="team in teams">
-      <p>{{team}}</p>
-    </div>
     <h1>Personal Calendar:</h1>
     <Personal_Calendar :test="calendarInfo"></Personal_Calendar>
-    <Schedule_Builder> :test="calendarInfo"</Schedule_Builder>
+    <Schedule_Builder :test="calendarInfo"></Schedule_Builder>
+    <button @click="testFirebase">Test firebase</button>
+    <div v-for="team in teams">
+      {{team}}
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -31,7 +33,7 @@
 export default {
   name: 'app',
   data () {
-    console.log(this.books);
+    console.log(this.teams);
     return {
       calendarInfo: [
         [true, true, true, false, false, false, false, true],
@@ -40,18 +42,23 @@ export default {
         [false, true, true, true, false, false, false, true],
         [false, false, false, true, false, false, false, false]
       ],
-      msg: 'This is a cool calendar!',
-      teams: [1,2,3,4,5]
+      msg: 'This is a cool calendar!'
     }
   },
-  firebase() {
-    return {
-      teams: teamsRef
-    }
+  firebase: {
+    teams: teamsRef
   },
   components: {
     Personal_Calendar,
     Schedule_Builder
+  },
+  methods: {
+    testFirebase: function() {
+      // teamsRef.push({
+      //   Teams: "Matt"
+      // });
+      console.log(this.teams);
+    }
   }
 }
 </script>
