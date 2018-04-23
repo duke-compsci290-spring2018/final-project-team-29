@@ -21,6 +21,7 @@
     <h2>Personal Calendar</h2>
     <div class="calendar">
         <Personal_Calendar :test="calendarInfo"></Personal_Calendar>
+        <Schedule_Builder :test="calendarInfo"></Schedule_Builder>
     </div>
       
     <a href="https://diddukewin.com" class="didduke">did duke win?</a>  
@@ -29,7 +30,10 @@
 
 <script>
     import Firebase from 'firebase';
+    import Router from 'vue-router';
+
     import Personal_Calendar from './components/Personal_Calendar.vue'
+    import Schedule_Builder from './components/Schedule_Builder.vue'
 
     var config = {
         apiKey: "AIzaSyCk3ttnDL-mfdMNJO27thtvd31CvRxpmvM",
@@ -65,7 +69,8 @@
             }
         },
         components: {
-            Personal_Calendar
+            Personal_Calendar,
+            Schedule_Builder
         }
     }
     
@@ -79,7 +84,7 @@
             $('body').css('margin-left', '0');
         });
     });
-    
+
 </script>
 
 <style lang="scss">
@@ -112,7 +117,7 @@
         font-size: 2.5em;
     }
     .calendar {
-        margin-left: 34%;
+        margin-left: 10%;
     }
     .userIcon {
         font-size: 0.8em;
