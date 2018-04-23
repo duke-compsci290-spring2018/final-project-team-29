@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <h1>Personal Calendar:</h1>
-    <Personal_Calendar :test="calendarInfo"></Personal_Calendar>
-    <Schedule_Builder :test="calendarInfo"></Schedule_Builder>
+    <Personal_Schedule :name="currName"></Personal_Schedule>
+    <!--<h1>Personal Calendar:</h1>-->
+    <!--<Personal_Calendar :schedule="calendarInfo"></Personal_Calendar>-->
+    <!--<Schedule_Builder :schedule="calendarInfo"></Schedule_Builder>-->
     <!--<p>{{current_schedule[0]["code"]}}</p>-->
-    <p>{{curr_team_info}}</p>
-    <p>{{current_schedule}}</p>
+    <!--<p>{{curr_team_info}}</p>-->
+    <!--<p>{{current_schedule}}</p>-->
     <!--<p>{{first_team["People"]}}</p>-->
     <!--<p>{{team_people}}</p>-->
     <!--<div v-for="thing in person_schedule">-->
@@ -25,6 +26,7 @@
 
   import Personal_Calendar from './components/Personal_Calendar.vue'
   import Schedule_Builder from './components/Schedule_Builder.vue'
+  import Personal_Schedule from './components/Personal_Schedule.vue'
 
 
   var config = {
@@ -53,7 +55,6 @@ export default {
       msg: 'This is a cool calendar!',
       currName: "Matt",
       currTeam: "TEAM 0"
-
     }
   },
   firebase: {
@@ -84,7 +85,8 @@ export default {
   },
   components: {
     Personal_Calendar,
-    Schedule_Builder
+    Schedule_Builder,
+    Personal_Schedule
   },
   methods: {
     testFirebase: function() {
