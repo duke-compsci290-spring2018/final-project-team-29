@@ -5,6 +5,7 @@
     </div>
     <h1>Personal Calendar:</h1>
     <Personal_Calendar :test="calendarInfo"></Personal_Calendar>
+    <Schedule_Builder> :test="calendarInfo"</Schedule_Builder>
   </div>
 </template>
 
@@ -12,6 +13,8 @@
   import Firebase from 'firebase';
 
   import Personal_Calendar from './components/Personal_Calendar.vue'
+  import Schedule_Builder from './components/Schedule_Builder.vue'
+
 
   var config = {
     apiKey: "AIzaSyCk3ttnDL-mfdMNJO27thtvd31CvRxpmvM",
@@ -47,7 +50,8 @@ export default {
     }
   },
   components: {
-    Personal_Calendar
+    Personal_Calendar,
+    Schedule_Builder
   }
 }
 </script>
