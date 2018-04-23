@@ -26,6 +26,7 @@
       
     <a href="https://diddukewin.com" class="didduke">did duke win?</a>  
   </div>
+
 </template>
 
 <script>
@@ -84,7 +85,6 @@
             $('body').css('margin-left', '0');
         });
     });
-
 </script>
 
 <style lang="scss">
