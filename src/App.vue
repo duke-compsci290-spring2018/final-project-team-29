@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <Personal_Schedule :name="teamsRef"></Personal_Schedule>
+    <Personal_Schedule :db="db_data"
+                       :teamsRef="storage"
+                       :teams="teams"
+    >
+
+    </Personal_Schedule>
     <!--<h1>Personal Calendar:</h1>-->
     <!--<Personal_Calendar :schedule="calendarInfo"></Personal_Calendar>-->
     <!--<Schedule_Builder :schedule="calendarInfo"></Schedule_Builder>-->
@@ -52,6 +57,8 @@ export default {
         [false, true, true, true, false, false, false, true],
         [false, false, false, true, false, false, false, false]
       ],
+      db_data: db,
+      storage: teamsRef,
       msg: 'This is a cool calendar!',
       currName: "Matt",
       currTeam: "TEAM 0"

@@ -1,33 +1,20 @@
 <template>
   <div id="app">
     <h1>Personal Calendar:</h1>
-    {{name}}
+    <div v-for="team in teams">
+      {{team["code"]}}
+    </div>
+    <button @click="push">Firebase</button>
   </div>
 
 </template>
 
 <script>
-
-  import Firebase from 'firebase';
-
-  import Personal_Calendar from './Personal_Calendar.vue'
-
-
-  var config = {
-    apiKey: "AIzaSyCk3ttnDL-mfdMNJO27thtvd31CvRxpmvM",
-    authDomain: "final-efcc8.firebaseapp.com",
-    databaseURL: "https://final-efcc8.firebaseio.com",
-    projectId: "final-efcc8",
-    storageBucket: "final-efcc8.appspot.com",
-    messagingSenderId: "718555914790"
-  };
   //
-  var db = Firebase.initializeApp(config).database();
-  var teamsRef = db.ref('Teams');
 
   export default {
     name: 'app',
-    props: [ 'name'],
+    props: ['db', 'teamsRef', 'teams'],
     data () {
       return {
         calendarInfo: [
@@ -45,6 +32,11 @@
       person_schedule: function() {
         this.teams.forEach(user => console.log(user));
         return this.teams;
+      }
+    },
+    methods: {
+      push: function() {
+        this.teamsRef.push("TESTING");
       }
     }
     // firebase: {
