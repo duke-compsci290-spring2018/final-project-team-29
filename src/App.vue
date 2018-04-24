@@ -14,7 +14,7 @@
       
     <h1>K-VITE</h1>
     
-    <div class="teamName" v-for="team in teams">
+    <div class="teamName" v-for="(teamID, team) in teams">
       {{team}} <span class="userIcon glyphicon glyphicon-user"></span>
     </div>
       
@@ -25,16 +25,16 @@
     </div>
       
     <a href="https://diddukewin.com" class="didduke">did duke win?</a>  
+    <router-link to="/login">did duke win?</router-link>
   </div>
 
 </template>
 
 <script>
     import Firebase from 'firebase';
-    import Router from 'vue-router';
-
     import Personal_Calendar from './components/Personal_Calendar.vue'
     import Schedule_Builder from './components/Schedule_Builder.vue'
+    import Team_Calendar from './components/Team_Calendar.vue'
 
     var config = {
         apiKey: "AIzaSyCk3ttnDL-mfdMNJO27thtvd31CvRxpmvM",
@@ -52,6 +52,7 @@
         name: 'app',
         data () {
             console.log(this.books);
+            console.log(teams);
             return {
                 calendarInfo: [
                     [true, true, true, false, false, false, false, true],
@@ -74,6 +75,7 @@
             Schedule_Builder
         }
     }
+    
     
     $(document).ready(function(){
         $(document).on('click', '#openBtn', function() {
@@ -107,6 +109,7 @@
         margin-top: -1%;
         font-size: 3em;
         position: absolute;
+        z-index: 1;
     }
     .teamName {
         right: 0;
