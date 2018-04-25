@@ -10,7 +10,7 @@
                        :team="curr_team"
     >
     </Personal_Schedule>
-    <p>{{curr_team}}</p>
+    <button @click="createSchedule">Generate a random schedule for this user</button>
   </div>
 
 </template>
@@ -49,6 +49,9 @@ export default {
   computed: {
     curr_team: function() {
       return this.teams.filter(team => this.containsName(team, this.currName))[0];
+    },
+    curr_person: function() {
+      return this.curr_team["People"].filter(person => person["name"] === this.currName)[0];
     }
   },
   components: {
@@ -65,18 +68,18 @@ export default {
     submitName: function() {
       this.currName = this.nameInput;
       this.nameInput = '';
+    },
+    test: function() {
+      console.log(this.curr_team);
+    },
+    createSchedule: function() {
+      console.log("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule");
+      db.ref("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule").set(
+        this.generateRandomSchedule());
+    },
+    generateRandomSchedule: function() {
+      return this.curr_person["schedule"].map(arr => arr.map(bool => Math.random() >= 0.5));
     }
-    // createFakeData: function() {
-    //   db.ref("Teams/0/People/0/schedule").set([
-    //     [true, false, false, false, true, true, false, true, true, true, true, true, true],
-    //     [true, false, false, true, true, false, false, true, true, true, true, false, false],
-    //     [false, false, false, true, true, true, true, false, true, true, false, true, true],
-    //     [true, true, true, true, true, false, true, true, false, true, false, true, false],
-    //     [false, true, true, true, false, false, true, true, false, false, true, false, false],
-    //     ]
-    //   );
-    //
-    // }
 
   }
 }
