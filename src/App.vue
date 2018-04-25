@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "aaaaa", "bbbbb")</label>
+    <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
     <input v-model="nameInput">
     <button @click="submitName">View Info</button>
     <p>{{currName}} is part of {{curr_team["code"]}}</p>
-    <!--<p>{{curr_team}}</p>-->
-    <!--<Personal_Calendar :curr_team-->
     <Personal_Schedule :teamsRef="storage"
                        :teams="teams"
                        :name="currName"
                        :team="curr_team"
     >
     </Personal_Schedule>
-    <!--<button @click="createFakeData">Add stuff to firebase</button>-->
+    <p>{{curr_team}}</p>
   </div>
 
 </template>
@@ -68,6 +66,17 @@ export default {
       this.currName = this.nameInput;
       this.nameInput = '';
     }
+    // createFakeData: function() {
+    //   db.ref("Teams/0/People/0/schedule").set([
+    //     [true, false, false, false, true, true, false, true, true, true, true, true, true],
+    //     [true, false, false, true, true, false, false, true, true, true, true, false, false],
+    //     [false, false, false, true, true, true, true, false, true, true, false, true, true],
+    //     [true, true, true, true, true, false, true, true, false, true, false, true, false],
+    //     [false, true, true, true, false, false, true, true, false, false, true, false, false],
+    //     ]
+    //   );
+    //
+    // }
 
   }
 }
