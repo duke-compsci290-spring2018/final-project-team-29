@@ -11,6 +11,10 @@
     >
     </Personal_Schedule>
     <button @click="createSchedule">Generate a random schedule for this user</button>
+    <New_User :teams="teams"
+              :teamsRef="storage">
+    </New_User>
+
   </div>
 
 </template>
@@ -20,6 +24,7 @@
 
   import Schedule_Builder from './components/Schedule_Builder.vue'
   import Personal_Schedule from './components/Personal_Schedule.vue'
+  import New_User from './components/New_User.vue'
 
 
   var config = {
@@ -48,6 +53,7 @@ export default {
   },
   computed: {
     curr_team: function() {
+      console.log(this.currName);
       return this.teams.filter(team => this.containsName(team, this.currName))[0];
     },
     curr_person: function() {
@@ -56,11 +62,16 @@ export default {
   },
   components: {
     Schedule_Builder,
-    Personal_Schedule
+    Personal_Schedule,
+    New_User
   },
   methods: {
     containsName: function(team, name) {
+      console.log("TEAM");
+      console.log(team);
+      console.log("TEAM PEOPLE");
       try {
+        team["People"].forEach(person => console.log(person));
         return team["People"].filter(person => person["name"] === name).length >= 1;
       } catch(err) {
       }

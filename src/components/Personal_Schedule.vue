@@ -1,13 +1,18 @@
 <template>
   <div id="app">
     <h1>Personal Calendar:</h1>
-    <Personal_Calendar :schedule='person_schedule'></Personal_Calendar>
+    <Personal_Availability :schedule='person_schedule'
+                           :storage="teamsRef"
+                           :teamKey="team['.key']"
+
+    ></Personal_Availability>
   </div>
 
 </template>
 
 <script>
   import Personal_Calendar from './Personal_Calendar.vue'
+  import Personal_Availability from './Personal_Availability.vue'
 
 
   export default {
@@ -24,7 +29,8 @@
       }
     },
     components: {
-      Personal_Calendar
+      Personal_Calendar,
+      Personal_Availability
     }
   }
 </script>

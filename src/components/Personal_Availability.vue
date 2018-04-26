@@ -8,10 +8,10 @@
     </tr>
     <tr class="border" v-for="(one, col) in schedule">
       Day {{col+1}}
-      <th class="border" v-for="(two, row) in one" v-bind:style="[two ? trueStyle : falseStyle]">
+      <th class="border" v-for="(two, row) in one" v-bind:style="[two ? trueStyle : falseStyle]"
+          @click="toggleAvailability(col, row)">
       </th>
     </tr>
-    <!--<p>{{test[0]}}</p>-->
   </table>
 </template>
 
@@ -19,7 +19,7 @@
   // export anonymous object from this module so it can be accessed by others when imported
   export default {
     name: 'Personal_Calendar',
-    props: [ 'schedule'],
+    props: [ 'schedule', "storage", "teamKey"],
     data: function() {
       return {
         thing: "Hi",
@@ -41,9 +41,13 @@
         }
         else if (parseInt(n) >= 2) {
           return (n+7).toString() + "am";
-        } else {
-
         }
+      },
+      toggleAvailability(col, row) {
+        var curr_key = this.teamkey
+        this.storage.child(this.teamkey['.key']).child("People").child(people_in_team).set
+        console.log(this.storage);
+
       }
     }
 
