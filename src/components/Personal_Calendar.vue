@@ -1,7 +1,7 @@
 <template>
   <!-- template must have a SINGLE root tag that encloses all others -->
   <table>
-    <tr v-for="(one, index1) in test">
+    <tr v-for="(one, index1) in schedule">
       Day {{index1+1}}
       <th v-for="(two, index2) in one" v-bind:style="[two ? trueStyle : falseStyle]">
 
@@ -15,7 +15,7 @@
   // export anonymous object from this module so it can be accessed by others when imported
   export default {
     name: 'Personal_Calendar',
-    props: [ 'test'],
+    props: [ 'schedule'],
     data: function() {
       return {
         thing: "Hi",

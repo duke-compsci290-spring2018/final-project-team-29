@@ -1,34 +1,45 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login">
-        Login to your account
-        <input type="text" placeholder="Name"><br>
-        <input type="text" placeholder="Email"><br>
+        Login to your Account
+        <input type="text" v-model="username" placeholder="Name"><br>
+        <input type="text" v-model="useremail" placeholder="Email"><br>
         <button onclick="login">Login</button>
-        Don't have an account? Register <router-link to="/register">here.</router-link>
+        Don't have an account? <router-link to="/register">Register.</router-link>
     </div>
 </template>
 
 <script>
-    // export anonymous object from this module so it can be accessed by others when imported
+    import Firebase from 'firebase'
+    
     export default {
         name: 'Login',
-        props: ['test'],
         data: function() {
+            console.log("hi");
             return {
-                
+                username: '',
+                useremail: ''
             }
         },
         methods: {
-            login() {
-                
+            login: function() {
+                Firebase.auth().signInWithEmailAndPassword(this.username, this.useremail).then(
+                    function(user) {
+                        alert("Welcome!");
+                    },
+                    function(err) {
+                        alert("Oops!" + err.message);
+                    }
+                );
             }
         }
     }
 </script>
 
 <style lang="scss">
-    
+    body {
+        background-color: white;
+    }
 </style>
 
 

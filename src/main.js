@@ -8,8 +8,8 @@ import Personal from './components/Personal_Calendar.vue'
 import Schedule from './components/Schedule_Builder.vue'
 import Team from './components/Team_Calendar.vue'
 
-Vue.use(VueFire)
-Vue.use(VueRouter)
+Vue.use(VueFire);
+Vue.use(VueRouter);
 
 const links = [
     { path: '/', component: App },
@@ -18,14 +18,14 @@ const links = [
     { path: '/personal', component: Personal },
     { path: '/schedule', component: Schedule },
     { path: '/team', component: Team }
-]
+];
 
 const router = new VueRouter({
     links
-})
+});
 
 new Vue({
     el: '#app',
     router,
     render: h => h(App)
-})
+});
