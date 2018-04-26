@@ -1,38 +1,52 @@
 <template>
   <div id="app">
-    <div class="nav" id="openBtn">☰</div>
-    <div class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
-        <tr class="navOption">
-            <span class="glyphicon glyphicon-group"></span>Team
-        </tr>
-        <tr class="navOption">
-            <span class="navIcon glyphicon glyphicon-cogwheels"></span>Settings
-        </tr>
-    </div>
-    <h1>K-VITE</h1>
-    <div class="teamName" v-if="signedIn" v-for="team in teams">
-      {{team.code}} <span class="userIcon glyphicon glyphicon-user"></span>
-    </div>
-    <div class="teamName" v-if="!signedIn" v-for="team in teams">
-        <button class="loginBtn"><router-link to="/login">Sign in</router-link></button>
-    </div>
-    <Personal_Schedule :db="db_data"
-                       :teamsRef="storage"
-                       :teams="teams">
-    </Personal_Schedule>
-    <a href="https://diddukewin.com" class="didduke">did duke win?</a>  
-    <router-link to="/register">did duke win?</router-link>
+      <div class="nav" id="openBtn">☰</div>
+      <div class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
+          <tr class="navOption">
+              <router-link to="/team" class="routerLink">
+                  <span class="glyphicon glyphicon-group"></span>Team
+              </router-link>
+          </tr>
+          <tr class="navOption">
+              <span class="navIcon glyphicon glyphicon-cogwheels"></span>Settings
+          </tr>
+      </div>
+    
+      <h1><router-link to="/" class="routerLink">K-VITE</router-link></h1>
+      <div class="teamName" v-for="team in teams">
+          <router-link to="/login">
+              <button class="signInBtn">Sign in</button>
+          </router-link>
+      </div>
+      
+      <router-view></router-view>
+      
+      <div class="col-lg-12">
+          <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label><br>
+          <input v-model="nameInput"><button @click="submitName">View Info</button>
+          {{currName}} is part of {{curr_team["code"]}}
+      </div>
+      
+      <div class="col-lg-12">
+          <Personal_Schedule :teamsRef="storage"
+                             :teams="teams"
+                             :name="currName"
+                             :team="curr_team">
+          </Personal_Schedule><br>
+      </div>
+      <div class="createScheduleBtn">
+        <button @click="createSchedule">Generate random schedule</button>
+      </div>
+      <a href="https://diddukewin.com" class="didduke">did duke win?</a>
   </div>
 </template>
 
 <script>
     import Firebase from 'firebase'
-    import Register from './components/Register.vue'
-    import Personal_Calendar from './components/Personal_Calendar.vue'
-    import Personal_Schedule from './components/Personal_Schedule.vue'
     import Schedule_Builder from './components/Schedule_Builder.vue'
-    import Team_Calendar from './components/Team_Calendar.vue'
+    import Personal_Schedule from './components/Personal_Schedule.vue'
+    import Register from './components/Register.vue'
     
     var config = {
         apiKey: "AIzaSyCk3ttnDL-mfdMNJO27thtvd31CvRxpmvM",
@@ -42,60 +56,63 @@
         storageBucket: "final-efcc8.appspot.com",
         messagingSenderId: "718555914790"
     };
+    
     var db = Firebase.initializeApp(config).database();
     var teamsRef = db.ref('Teams');
+    
     export default {
         name: 'app',
         data () {
-            console.log(teams);
             return {
-                calendarInfo: [
-                    [true, true, true, false, false, false, false, true],
-                    [true, true, false, false, false, true, false, true],
-                    [true, false, true, true, false, false, true, false],
-                    [false, true, true, true, false, false, false, true],
-                    [false, false, false, true, false, false, false, false]
-                ],
-                db_data: db,
                 storage: teamsRef,
-                msg: 'This is a cool calendar!',
                 currName: "Matt",
-                currTeam: "TEAM 0"
+                nameInput: '',
+                username: '',
+                useremail: ''
             }
         },
         firebase: {
             teams: teamsRef
         },
         computed: {
-            person_schedule: function() {
-                console.log(this.teams[0]);
-                this.teams.forEach(user => console.log(user));
-                return this.teams;
+            curr_team: function() {
+                return this.teams.filter(team => this.containsName(team, this.currName))[0];
             },
-            first_team: function() {
-                return this.teams[0];
-            },
-            team_people: function() {
-                return this.teams[0]["People"];
-            },
-            curr_team_info: function() {
-                return this.teams.filter(team => team["code"] === "TEAM 0")[0];
-            },
-            current_schedule: function() {
-                return this.curr_team_info["People"].filter(person => person["name"] === this.currName)[0]["schedule"];
+            curr_person: function() {
+                return this.curr_team["People"].filter(person => person["name"] === this.currName)[0];
             }
         },
         components: {
-            Personal_Calendar,
             Schedule_Builder,
-            Personal_Schedule
+            Personal_Schedule,
+            Register
         },
         methods: {
-            testFirebase: function() {
-                console.log(this.teams);
+            containsName: function(team, name) {
+                try {
+                    team["People"].forEach(person => console.log(person));
+                    return team["People"].filter(person => person["name"] === name).length >= 1;
+                } catch(err) {
+                }
+            },
+            submitName: function() {
+                this.currName = this.nameInput;
+                this.nameInput = '';
+            },
+            test: function() {
+                console.log(this.curr_team);
+            },
+            createSchedule: function() {
+                console.log("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule");
+                db.ref("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule").set(
+                this.generateRandomSchedule());
+            },
+            generateRandomSchedule: function() {
+                return this.curr_person["schedule"].map(arr => arr.map(bool => Math.random() >= 0.5));
             }
         }
-    } 
+    }
+    
     $(document).ready(function(){
         $(document).on('click', '#openBtn', function() {
             $('.sidenav').css('width', '20%');
@@ -106,11 +123,16 @@
             $('body').css('margin-left', '0');
         });
     });
+    
 </script>
 
 <style lang="scss">
     body {
         background-color: aliceblue;
+    }
+    .routerLink, .routerLink:hover, .routerLink:visited, .routerLink:active, .routerLink:link {
+        color: black;
+        text-decoration: none;
     }
     h1 {
         font-family: Didot;
@@ -147,7 +169,7 @@
     .navIcon {
         color: black;
     }
-    .loginBtn {
+    .signInBtn {
         color: navy;
         background-color: white;
         text-transform: uppercase;
@@ -157,6 +179,10 @@
         letter-spacing: 0.1em;
         text-align: center;
         border: 1% black;
+    }
+    .createScheduleBtn {
+        margin: 0 auto;
+        width: 15%;
     }
     .sidenav {
         background-color: white;

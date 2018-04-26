@@ -11,8 +11,7 @@ import Team from './components/Team_Calendar.vue'
 Vue.use(VueFire);
 Vue.use(VueRouter);
 
-const links = [
-    { path: '/', component: App },
+const routes = [
     { path: '/login', component: Login },
     { path: '/register', component: Register },
     { path: '/personal', component: Personal },
@@ -21,7 +20,7 @@ const links = [
 ];
 
 const router = new VueRouter({
-    links
+    routes
 });
 
 new Vue({
