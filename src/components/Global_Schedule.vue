@@ -1,20 +1,9 @@
 <template>
-  <!-- template must have a SINGLE root tag that encloses all others -->
-  <!--<table>-->
-    <!--<tr>-->
-      <!--<th v-for="n in 14">-->
-        <!--{{convert_to_time(n)}}-->
-      <!--</th>-->
-    <!--</tr>-->
-    <!--<tr class="border" v-for="(one, col) in schedule">-->
-      <!--Day {{col+1}}-->
-      <!--<th class="border" v-for="(two, row) in one" v-bind:style="[two ? trueStyle : falseStyle]">-->
-      <!--</th>-->
-    <!--</tr>-->
-  <Global_Calendar :schedule="data_map">
+  <div id="app">
+    <Global_Calendar :schedule="data_map">
 
-  </Global_Calendar>
-  <!--</table>-->
+    </Global_Calendar>
+  </div>
 </template>
 
 <script>

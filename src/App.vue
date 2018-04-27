@@ -1,15 +1,21 @@
 <template>
   <div id="app">
+    <Event_Creator :db="db"
+                   :events="events"
+    ></Event_Creator>
+    <br/>
     <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
     <input v-model="nameInput">
     <button @click="submitName">View Info</button>
-    <p>{{currName}} is part of {{curr_team["code"]}}</p>
-    <Personal_Schedule :teamsRef="storage"
-                       :teams="teams"
-                       :name="currName"
-                       :team="curr_team"
-    >
-    </Personal_Schedule>
+    <div v-if="curr_team !== undefined">
+      <p>{{currName}} is part of {{curr_team["code"]}}</p>
+      <Personal_Schedule :teamsRef="storage"
+                         :teams="teams"
+                         :name="currName"
+                         :team="curr_team"
+      >
+      </Personal_Schedule>
+    </div>
     <button @click="createSchedule">Generate a random schedule for this user</button>
     <New_User :teams="teams"
               :teamsRef="storage">
@@ -19,6 +25,19 @@
     >
 
     </Global_Schedule>
+    <h1>Events Calendar:</h1>
+    <Events_Calendar :events="events">
+
+    </Events_Calendar>
+
+    <!--<div v-for="arr in events">-->
+      <!--<div v-for="event in arr">-->
+        <!--<div v-for="bool in event">-->
+          <!--{{bool}}-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<p>{{events[0]['.value']}}</p>-->
 
 
   </div>
@@ -32,6 +51,8 @@
   import Personal_Schedule from './components/Personal_Schedule.vue'
   import New_User from './components/New_User.vue'
   import Global_Schedule from './components/Global_Schedule.vue'
+  import Event_Creator from './components/Event_Creator.vue'
+  import Events_Calendar from './components/Events_Calendar.vue'
 
 
   var config = {
@@ -45,6 +66,7 @@
 
   var db = Firebase.initializeApp(config).database();
   var teamsRef = db.ref('Teams');
+  var eventsRef = db.ref('events');
 
 export default {
   name: 'app',
@@ -52,26 +74,31 @@ export default {
     return {
       storage: teamsRef,
       currName: "Matt",
-      nameInput: ''
+      nameInput: '',
+      db: db
     }
   },
   firebase: {
-    teams: teamsRef
+    teams: teamsRef,
+    events: eventsRef
   },
   computed: {
     curr_team: function() {
-      console.log(this.currName);
       return this.teams.filter(team => this.containsName(team, this.currName))[0];
     },
     curr_person: function() {
-      return this.curr_team["People"].filter(person => person["name"] === this.currName)[0];
+      if (this.curr_team !== undefined) {
+        return this.curr_team["People"].filter(person => person["name"] === this.currName)[0];
+      }
     }
   },
   components: {
     Schedule_Builder,
     Personal_Schedule,
     New_User,
-    Global_Schedule
+    Global_Schedule,
+    Events_Calendar,
+    Event_Creator
   },
   methods: {
     containsName: function(team, name) {

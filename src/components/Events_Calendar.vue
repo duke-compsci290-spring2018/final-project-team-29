@@ -6,11 +6,11 @@
           {{convert_to_time(n)}}
         </th>
       </tr>
-      <tr class="border" v-for="(one, col) in schedule">
+      <tr class="border" v-for="(one, col) in events">
         Day {{col+1}}
-        <th class="border" v-for="(two, row) in one">
-          <ul v-for="person in two">
-            <li>{{person}}</li>
+        <th class="border" v-for="(two, row) in one['.value']">
+          <ul v-for="event in two">
+            <li>{{event}}</li>
           </ul>
         </th>
       </tr>
@@ -25,7 +25,7 @@
   // export anonymous object from this module so it can be accessed by others when imported
   export default {
     name: 'Personal_Calendar',
-    props: [ 'schedule'],
+    props: [ 'events'],
     data: function() {
       return {
         thing: "Hi",
@@ -57,6 +57,13 @@
 </script>
 
 <style lang="scss">
+  .border {
+    border: 1px solid black;
+  }
+  .green {
+    background-color: green;
+
+  }
 </style>
 
 
