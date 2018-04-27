@@ -26,6 +26,11 @@
     computed: {
       person_schedule: function() {
         return this.team["People"].filter(person => person["name"] === this.name)[0]["schedule"];
+      },
+      team_key: function() {
+        console.log("A")
+        console.log(this.team['.key']);
+        return this.team[".key"];
       }
     },
     components: {

@@ -14,6 +14,12 @@
     <New_User :teams="teams"
               :teamsRef="storage">
     </New_User>
+    <h1>Global Calendar:</h1>
+    <Global_Schedule :teams="teams"
+    >
+
+    </Global_Schedule>
+
 
   </div>
 
@@ -25,6 +31,7 @@
   import Schedule_Builder from './components/Schedule_Builder.vue'
   import Personal_Schedule from './components/Personal_Schedule.vue'
   import New_User from './components/New_User.vue'
+  import Global_Schedule from './components/Global_Schedule.vue'
 
 
   var config = {
@@ -63,13 +70,11 @@ export default {
   components: {
     Schedule_Builder,
     Personal_Schedule,
-    New_User
+    New_User,
+    Global_Schedule
   },
   methods: {
     containsName: function(team, name) {
-      console.log("TEAM");
-      console.log(team);
-      console.log("TEAM PEOPLE");
       try {
         team["People"].forEach(person => console.log(person));
         return team["People"].filter(person => person["name"] === name).length >= 1;
