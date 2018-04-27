@@ -1,22 +1,25 @@
 <template>
   <div id="app">
-    <Event_Creator :db="db"
-                   :events="events"
-    ></Event_Creator>
-    <br/>
     <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
     <input v-model="nameInput">
     <button @click="submitName">View Info</button>
-    <div v-if="curr_team !== undefined">
-      <p>{{currName}} is part of {{curr_team["code"]}}</p>
-      <Personal_Schedule :teamsRef="storage"
-                         :teams="teams"
-                         :name="currName"
-                         :team="curr_team"
-      >
-      </Personal_Schedule>
-    </div>
+    <p>{{currName}} is part of {{curr_team["code"]}}</p>
+    <br/>
+    <h1>Personal Availability: Click any cell to edit</h1>
+    <Personal_Availability :schedule="curr_person['available']"
+                           :storage_ref="availability_ref"
+                           :db="db"
+
+    ></Personal_Availability>
+
+    <Personal_Schedule :teamsRef="storage"
+                       :teams="teams"
+                       :name="currName"
+                       :team="curr_team"
+    >
+    </Personal_Schedule>
     <button @click="createSchedule">Generate a random schedule for this user</button>
+    <br/> <br/>
     <New_User :teams="teams"
               :teamsRef="storage">
     </New_User>
@@ -26,6 +29,12 @@
 
     </Global_Schedule>
     <h1>Events Calendar:</h1>
+    <br/>
+    <Event_Creator :db="db"
+                   :events="events"
+    ></Event_Creator>
+    <br/>
+    <br/>
     <Events_Calendar :events="events">
 
     </Events_Calendar>
@@ -53,6 +62,7 @@
   import Global_Schedule from './components/Global_Schedule.vue'
   import Event_Creator from './components/Event_Creator.vue'
   import Events_Calendar from './components/Events_Calendar.vue'
+  import Personal_Availability from './components/Personal_Availability.vue'
 
 
   var config = {
@@ -90,6 +100,10 @@ export default {
       if (this.curr_team !== undefined) {
         return this.curr_team["People"].filter(person => person["name"] === this.currName)[0];
       }
+    },
+    availability_ref: function() {
+      return 'Teams/' + this.curr_team['.key'] + "/People/" + this.curr_person['key'] + "/available/";
+
     }
   },
   components: {
@@ -98,7 +112,8 @@ export default {
     New_User,
     Global_Schedule,
     Events_Calendar,
-    Event_Creator
+    Event_Creator,
+    Personal_Availability
   },
   methods: {
     containsName: function(team, name) {

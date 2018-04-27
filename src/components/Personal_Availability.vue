@@ -1,25 +1,29 @@
 <template>
+  <div id="app">
+    <table>
+      <tr>
+        <th v-for="n in 14">
+          {{convert_to_time(n)}}
+        </th>
+      </tr>
+      <tr class="border" v-for="(one, col) in schedule">
+        Day {{col+1}}
+        <th class="border" @click="toggleAvailability(col, row)" v-for="(two, row) in one"
+            v-bind:style="[two ? trueStyle : falseStyle]">
+        </th>
+      </tr>
+      <!--<p>{{test[0]}}</p>-->
+    </table>
+
+  </div>
   <!-- template must have a SINGLE root tag that encloses all others -->
-  <table>
-    <tr>
-      <th v-for="n in 14">
-        {{convert_to_time(n)}}
-      </th>
-    </tr>
-    <tr class="border" v-for="(one, col) in schedule">
-      Day {{col+1}}
-      <th class="border" v-for="(two, row) in one" v-bind:style="[two ? trueStyle : falseStyle]"
-          @click="toggleAvailability(col, row)">
-      </th>
-    </tr>
-  </table>
 </template>
 
 <script>
   // export anonymous object from this module so it can be accessed by others when imported
   export default {
-    name: 'Personal_Calendar',
-    props: [ 'schedule', "storage", "teamKey"],
+    name: 'Personal_Availability',
+    props: [ 'schedule', 'storage_ref', 'db'],
     data: function() {
       return {
         thing: "Hi",
@@ -44,9 +48,9 @@
         }
       },
       toggleAvailability(col, row) {
-        var curr_key = this.teamKey;
-        this.storage.child(curr_key['.key']).child("People").child(people_in_team).set
-        console.log(this.storage);
+        this.db.ref(this.storage_ref + col.toString() + "/" + row.toString()).set(
+          !this.schedule[col][row]
+        );
 
       }
     }

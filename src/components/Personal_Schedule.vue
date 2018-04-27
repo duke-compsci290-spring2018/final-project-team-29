@@ -1,11 +1,9 @@
 <template>
   <div id="app">
-    <h1>Personal Calendar:</h1>
-    <Personal_Availability :schedule='person_schedule'
-                           :storage="teamsRef"
-                           :teamKey="team['.key']"
+    <h1>Personal Schedule: Click button to generate a random schedule</h1>
+    <Personal_Calendar :schedule='person_schedule'
 
-    ></Personal_Availability>
+    ></Personal_Calendar>
   </div>
 
 </template>
