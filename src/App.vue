@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div v-if="curr_team != undefined" id="app">
     <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
     <input v-model="nameInput">
     <button @click="submitName">View Info</button>
@@ -27,6 +27,13 @@
 
     </Schedule_Builder>
     <button @click="createSchedule">Generate a random schedule for this user</button>
+    <br/> <br/>
+
+    <h1>Team Schedule: </h1>
+    <Team_Schedule :curr_team="curr_team"
+    >
+    </Team_Schedule>
+
     <br/> <br/>
     <New_User :teams="teams"
               :teamsRef="storage">
@@ -71,6 +78,7 @@
   import Events_Calendar from './components/Events_Calendar.vue'
   import Personal_Availability from './components/Personal_Availability.vue'
   import Schedule_Builder from './components/Schedule_Builder.vue'
+  import Team_Schedule from './components/Team_Schedule.vue'
 
 
   var config = {
@@ -123,7 +131,8 @@ export default {
     Events_Calendar,
     Event_Creator,
     Personal_Availability,
-    Schedule_Builder
+    Schedule_Builder,
+    Team_Schedule
   },
   methods: {
     containsName: function(team, name) {
