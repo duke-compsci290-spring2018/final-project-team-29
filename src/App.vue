@@ -18,6 +18,14 @@
                        :team="curr_team"
     >
     </Personal_Schedule>
+    <Schedule_Builder :availability_schedule="curr_person['available']"
+                      :schedule_ref="schedule_ref"
+                      :db="db"
+                      :curr_team="curr_team"
+                      :personal_schedule="curr_person['schedule']"
+    >
+
+    </Schedule_Builder>
     <button @click="createSchedule">Generate a random schedule for this user</button>
     <br/> <br/>
     <New_User :teams="teams"
@@ -56,13 +64,13 @@
 <script>
   import Firebase from 'firebase';
 
-  import Schedule_Builder from './components/Schedule_Builder.vue'
   import Personal_Schedule from './components/Personal_Schedule.vue'
   import New_User from './components/New_User.vue'
   import Global_Schedule from './components/Global_Schedule.vue'
   import Event_Creator from './components/Event_Creator.vue'
   import Events_Calendar from './components/Events_Calendar.vue'
   import Personal_Availability from './components/Personal_Availability.vue'
+  import Schedule_Builder from './components/Schedule_Builder.vue'
 
 
   var config = {
@@ -103,17 +111,19 @@ export default {
     },
     availability_ref: function() {
       return 'Teams/' + this.curr_team['.key'] + "/People/" + this.curr_person['key'] + "/available/";
-
+    },
+    schedule_ref: function() {
+      return 'Teams/' + this.curr_team['.key'] + "/People/" + this.curr_person['key'] + "/schedule/";
     }
   },
   components: {
-    Schedule_Builder,
     Personal_Schedule,
     New_User,
     Global_Schedule,
     Events_Calendar,
     Event_Creator,
-    Personal_Availability
+    Personal_Availability,
+    Schedule_Builder
   },
   methods: {
     containsName: function(team, name) {
@@ -131,7 +141,6 @@ export default {
       console.log(this.curr_team);
     },
     createSchedule: function() {
-      console.log("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule");
       db.ref("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule").set(
         this.generateRandomSchedule());
     },

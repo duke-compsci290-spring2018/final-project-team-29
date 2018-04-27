@@ -1,51 +1,50 @@
 <template>
-  <!-- template must have a SINGLE root tag that encloses all others -->
-  <table>
-    <tr v-for="i in 5">
-      Day {{i}}
-      <th v-for="j in 12" @click="method(i,j)">
-        Hour {{j}}
-      </th>
-    </tr>
+  <div id="app">
+    <label>Enter number of slots to schedule</label>
+    <input v-model="slotsToSchedule">
+    <button @click="generateSchedule">Generate schedule based on availability</button>
     <br/>
-    <!--<div v-for="thing in schedule">-->
-      <!--{{thing}}-->
-    <!--</div>-->
-    <!--<p>{{test[0]}}</p>-->
-  </table>
+    <button @click="resetSchedule">Reset Schedule (REMOVES ALL SCHEDULE SLOTS)</button>
+  </div>
+  <!-- template must have a SINGLE root tag that encloses all others -->
 </template>
 
 <script>
   // export anonymous object from this module so it can be accessed by others when imported
   export default {
     name: 'Schedule_Builder',
-    props: [ 'test'],
+    props: [ 'availability_schedule', 'schedule_ref', 'db', 'curr_team', 'personal_schedule'],
     data: function() {
       return {
-        thing: "Hi",
-        schedule: [new Array(5), new Array(5),new Array(5),new Array(5),new Array(5)]
+        slotsToSchedule: 0
       }
     },
     methods: {
-      method: function(one, two) {
-        console.log(one);
-        console.log(two);
+      slotFull: function(day, hour) {
+        return this.curr_team["People"].filter(person => person["schedule"][day][hour]).length >= 2;
+      },
+      generateSchedule: function() {
+        var i = 0;
+        this.availability_schedule.forEach((arr, day) => arr.forEach((bool, hour) => {
+          if (bool && i < this.slotsToSchedule && !this.slotFull(day, hour) && !this.personal_schedule[day][hour]) {
+            this.db.ref(this.schedule_ref + "/" + day.toString() + "/" + hour.toString()).set(true);
+            i++;
+          }
+        }))
+      },
+      resetSchedule: function() {
+        this.personal_schedule.forEach((arr, day) => arr.forEach((bool, hour) =>
+          this.db.ref(this.schedule_ref + "/" + day.toString() + "/" + hour.toString()).set(false)
+        ));
 
       }
+
     }
 
   }
 </script>
 
 <style lang="scss">
-  table tr th {
-    border: 1px solid black;
-    width: 70px;
-  }
-  .green {
-    background-color: green;
-
-  }
 </style>
 
 
