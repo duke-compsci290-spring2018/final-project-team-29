@@ -1,68 +1,35 @@
 <template>
   <div v-if="curr_team != undefined" id="app">
-    <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
-    <input v-model="nameInput">
-    <button @click="submitName">View Info</button>
-    <p>{{currName}} is part of {{curr_team["code"]}}</p>
-    <br/>
-    <h1>Personal Availability: Click any cell to edit</h1>
-    <Personal_Availability :schedule="curr_person['available']"
-                           :storage_ref="availability_ref"
-                           :db="db"
+    <button @click="modeOfViewing = 'guest'">Guest</button>
+    <button @click="modeOfViewing = 'user'">User</button>
+    <button @click="modeOfViewing = 'admin'">Admin</button>
 
-    ></Personal_Availability>
 
-    <Personal_Schedule :teamsRef="storage"
-                       :teams="teams"
-                       :name="currName"
-                       :team="curr_team"
-    >
-    </Personal_Schedule>
-    <Schedule_Builder :availability_schedule="curr_person['available']"
-                      :schedule_ref="schedule_ref"
-                      :db="db"
-                      :curr_team="curr_team"
-                      :personal_schedule="curr_person['schedule']"
-    >
+    <div v-if="modeOfViewing === 'guest'">
+      <Guest :teams="teams"
+             :events="events"
+      ></Guest>
+      <br/>
+    </div>
 
-    </Schedule_Builder>
-    <button @click="createSchedule">Generate a random schedule for this user</button>
-    <br/> <br/>
+    <div v-if="modeOfViewing === 'user'">
+      <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
+      <input v-model="nameInput">
+      <button @click="submitName">View Info</button>
+      <br/>
 
-    <h1>Team Schedule: </h1>
-    <Team_Schedule :curr_team="curr_team"
-    >
-    </Team_Schedule>
-
-    <br/> <br/>
-    <New_User :teams="teams"
-              :teamsRef="storage">
-    </New_User>
-    <h1>Global Calendar:</h1>
-    <Global_Schedule :teams="teams"
-    >
-
-    </Global_Schedule>
-    <h1>Events Calendar:</h1>
-    <br/>
-    <Event_Creator :db="db"
-                   :events="events"
-    ></Event_Creator>
-    <br/>
-    <br/>
-    <Events_Calendar :events="events">
-
-    </Events_Calendar>
-
-    <!--<div v-for="arr in events">-->
-      <!--<div v-for="event in arr">-->
-        <!--<div v-for="bool in event">-->
-          <!--{{bool}}-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<p>{{events[0]['.value']}}</p>-->
-
+      <User v-if="currName !== ''" :name="currName"
+            :teams="teams"
+            :events="events"
+            :db="db"
+      ></User>
+    </div>
+    <div v-if="modeOfViewing === 'admin'">
+      <Admin :teams="teams"
+             :events="events"
+             :db="db"
+      ></Admin>
+    </div>
 
   </div>
 
@@ -79,6 +46,9 @@
   import Personal_Availability from './components/Personal_Availability.vue'
   import Schedule_Builder from './components/Schedule_Builder.vue'
   import Team_Schedule from './components/Team_Schedule.vue'
+  import Guest from './components/Guest.vue'
+  import User from './components/User.vue'
+  import Admin from './components/Admin.vue'
 
 
   var config = {
@@ -101,7 +71,8 @@ export default {
       storage: teamsRef,
       currName: "Matt",
       nameInput: '',
-      db: db
+      db: db,
+      modeOfViewing: ''
     }
   },
   firebase: {
@@ -132,7 +103,10 @@ export default {
     Event_Creator,
     Personal_Availability,
     Schedule_Builder,
-    Team_Schedule
+    Team_Schedule,
+    Guest,
+    User,
+    Admin
   },
   methods: {
     containsName: function(team, name) {
