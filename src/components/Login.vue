@@ -1,11 +1,12 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login col-lg-12">
-        <input type="text" v-model="username" placeholder="Name"><br>
-        <input type="text" v-model="useremail" placeholder="Email"><br><br>
+        <br><input type="text" v-model="username" placeholder="Username"><br>
+        <input type="password" v-model="password" placeholder="Password"><br><br>
+        
         <button class="loginBtn" @click="login">Login</button><br><br>
         Don't have an account?<br>
-        <router-link to="/register" class="signUpLink">Sign up now!</router-link><hr>
+        <router-link to="/register" class="signUpLink">Sign up now!</router-link>
     </div>
 </template>
 
@@ -14,23 +15,37 @@
     
     export default {
         name: 'Login',
+        props: ['teams', 'teamsRef'],
         data: function() {
-            console.log("hi");
             return {
                 username: '',
-                useremail: ''
+                password: '',
+                signedin: false
             }
         },
         methods: {
             login: function() {
-                Firebase.auth().signInWithEmailAndPassword(this.username, this.useremail).then(
-                    function(user) {
-                        alert("Welcome!");
-                    },
-                    function(err) {
-                        alert("Oops! " + err.message);
+                var logged = {
+                    currentUser: this.username,
+                    currentPass: this.password
+                };
+                var signedin = false;
+                var i, j;
+                for (i = 0; i < this.teams.length; i++) {
+                    for (j = 0; j < this.teams[i]["People"].length; j++) {
+                        if (this.teams[i]["People"][j]["name"] == logged.currentUser &&
+                            this.teams[i]["People"][j]["pass"] == logged.currentPass) {
+                            signedin = true;
+                        }
                     }
-                );
+                } if (signedin == true) {
+                    alert("Success!");
+                    this.$router.push('/personalsched')
+                } else {
+                    alert("You are not in our system. Try registering!");
+                }
+                this.username = '';
+                this.password = '';
             }
         }
     }
@@ -48,6 +63,7 @@
         width: 10%;
         font-size: 1.2em;
         text-transform: uppercase;
+        font-weight: bold;
         padding: 1%;
     }
     input {

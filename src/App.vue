@@ -22,12 +22,15 @@
       
       <router-view></router-view>
       
+      <Login :teamsRef="storage"
+             :teams="teams">
+      </Login>
+      
       <div class="col-lg-12">
           <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label><br>
           <input v-model="nameInput"><button @click="submitName">View Info</button>
-          {{currName}} is part of {{curr_team["code"]}}
+<!--          {{currName}} is part of {{curr_team["code"]}}-->
       </div>
-      
       <div class="col-lg-12">
           <Personal_Schedule :teamsRef="storage"
                              :teams="teams"
@@ -38,6 +41,7 @@
       <div class="createScheduleBtn">
         <button @click="createSchedule">Generate random schedule</button>
       </div>
+      
       <a href="https://diddukewin.com" class="didduke">did duke win?</a>
   </div>
 </template>
@@ -46,7 +50,7 @@
     import Firebase from 'firebase'
     import Schedule_Builder from './components/Schedule_Builder.vue'
     import Personal_Schedule from './components/Personal_Schedule.vue'
-    import Register from './components/Register.vue'
+    import Login from './components/Login.vue'
     
     var config = {
         apiKey: "AIzaSyCk3ttnDL-mfdMNJO27thtvd31CvRxpmvM",
@@ -66,9 +70,7 @@
             return {
                 storage: teamsRef,
                 currName: "Matt",
-                nameInput: '',
-                username: '',
-                useremail: ''
+                nameInput: ''
             }
         },
         firebase: {
@@ -85,7 +87,7 @@
         components: {
             Schedule_Builder,
             Personal_Schedule,
-            Register
+            Login
         },
         methods: {
             containsName: function(team, name) {
