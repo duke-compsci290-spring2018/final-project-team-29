@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <table>
+
+    <table v-if="schedule_exists">
       <tr>
         <th v-for="n in 14">
           {{convert_to_time(n)}}
@@ -14,8 +15,8 @@
           </ul>
         </th>
       </tr>
-      <!--<p>{{test[0]}}</p>-->
     </table>
+    <p v-else> No one in your team has signed up for any slots :( Sign up above!!!</p>
   </div>
   <!-- template must have a SINGLE root tag that encloses all others -->
 
@@ -42,6 +43,11 @@
         }
       }
     },
+    computed: {
+      schedule_exists() {
+        return this.schedule.filter(day => day.filter(hour => hour != null).length > 0).length > 0;
+      }
+    },
     methods: {
       convert_to_time(n) {
         if (parseInt(n) == 5) {
@@ -62,7 +68,6 @@
         } else {
           return this.schedule[day][hour].length;
         }
-
       }
     }
 
