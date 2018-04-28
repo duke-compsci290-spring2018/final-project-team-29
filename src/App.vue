@@ -18,7 +18,8 @@
       <button @click="submitName">View Info</button>
       <br/>
 
-      <User v-if="currName !== ''" :name="currName"
+      <User v-if="currName !== ''"
+            :name="currName"
             :teams="teams"
             :events="events"
             :db="db"
