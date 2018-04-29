@@ -47,7 +47,6 @@
     import Firebase from 'firebase';
     
   import Personal_Schedule from './components/Personal_Schedule.vue'
-  import New_User from './components/New_User.vue'
   import Global_Schedule from './components/Global_Schedule.vue'
   import Event_Creator from './components/Event_Creator.vue'
   import Events_Calendar from './components/Events_Calendar.vue'
