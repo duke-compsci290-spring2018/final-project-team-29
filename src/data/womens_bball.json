@@ -1,0 +1,14 @@
+{
+  "0": {
+    "opponent": "Villanova",
+    "day": "Day 2",
+    "time": "10am",
+    "home": true
+  },
+  "1": {
+    "opponent": "UNC",
+    "day": "Day 1",
+    "time": "3pm",
+    "home": true
+  }
+}

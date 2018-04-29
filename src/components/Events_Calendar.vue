@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    {{jsonPath}}
     <table>
       <tr>
         <th v-for="n in 14">
@@ -20,6 +21,7 @@
   <!-- template must have a SINGLE root tag that encloses all others -->
 
 </template>
+this.jsonPath = require("../data/" + path + ".json" );
 
 <script>
   // export anonymous object from this module so it can be accessed by others when imported
@@ -28,7 +30,6 @@
     props: [ 'events'],
     data: function() {
       return {
-        thing: "Hi",
         trueStyle: {
           backgroundColor: 'green'
         },
@@ -50,6 +51,15 @@
         } else {
 
         }
+      },
+      convert_time_to_int(time) {
+        
+      }
+    },
+    computed: {
+      jsonPath: function() {
+        var data = require("../data/mens_bball.json");
+        return data[0];
       }
     }
 

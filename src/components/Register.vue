@@ -1,7 +1,6 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login col-lg-12">
-      <p>{{teams}}</p>
         <div class="btnChoices">
             <!--<input type="text" v-model="email" placeholder="Email"><br>-->
             <!--<input type="password" v-model="password" placeholder="Password"><br>-->
@@ -11,16 +10,17 @@
             <button id="registerTeamBtn">Register<br>New Team</button><br>
 
             Already have an account?<br>
-            <router-link to="/" class="signInLink">Sign in now!</router-link><br><br>
-
+            <router-link to="/login" class="signInLink">Sign in now!</router-link><br><br>
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
             <hr>
         </div>
+      <p>{{teams}}</p>
 
-        <div class="registerPlayerOption">
-            <br><input type="text" v-model="username" placeholder="Username"><br>
+
+      <div class="registerPlayerOption">
+            <br><input type="text" v-model="email" placeholder="Email"><br>
             <input type="password" v-model="password" placeholder="Password"><br>
             <input type="text" v-model="teamcode" placeholder="Your Team Code"><br>
             <button class="registerBtn" @click="registerPlayer">Register</button><br>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="registerTeamOption">
-            <br><input type="text" v-model="username" placeholder="Username"><br>
+            <br><input type="text" v-model="email" placeholder="Email"><br>
             <input type="password" v-model="password" placeholder="Password"><br>
             <input type="text" v-model="teamcode" placeholder="Unique Team Code"><br>
             <button class="registerBtn" @click="registerTeam">Register</button><br>
@@ -84,12 +84,12 @@
                         "available": this.generateFullArray(),
                         "schedule": this.generateFullArray().map(arr => arr.map(bool => !bool)),
                         "captain": false,
-                        "name": this.username,
+                        "name": this.email,
                         "pass": this.password,
                         "key": people_in_team
                     });
                 }
-                this.username = '';
+                this.email = '';
                 this.password = '';
                 this.teamcode = '';
             },
@@ -103,7 +103,7 @@
                                     "schedule": this.generateFullArray().map(arr => arr.map(bool => !bool)),
                                     "captain": true,
                                     "key": "0",
-                                    "name": this.username,
+                                    "name": this.email,
                                     "pass": this.password
                                 }
                             },
@@ -113,9 +113,9 @@
                         alert("This team code already exists!");
                     }
                 } else {
-                    alert("You didn't input a username/team code!");
+                    alert("You didn't input a email/password/team code!");
                 }
-                this.username = '';
+                this.email = '';
                 this.password = '';
                 this.teamcode = '';
             },
@@ -124,7 +124,7 @@
                 return new_array.map(arr => [true, true, true, true, true, true, true, true, true, true, true, true, true]);
             },
             checkEmptyInput() {
-                return (this.username === '' || this.password === '' || this.teamcode === '');
+                return (this.email === '' || this.password === '' || this.teamcode === '');
             },
             isUniqueTeamCode() {
                 return this.teams.filter(team => team["code"] === this.teamcode).length === 0;

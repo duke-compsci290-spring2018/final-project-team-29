@@ -22,12 +22,18 @@
               <h1><router-link to="/" class="routerLink">K-VITE</router-link></h1>
           </div>
 
+        <!--<Login></Login>-->
+        <!--<Register></Register>-->
+
           <div class="col-lg-4">
 
+            <button @click="mode='login'" class="signUpLink">Log in!</button>
+            <button @click="mode='register'" class="signUpLink">Log in!</button>
 
 
-            <router-link to="/login" class="signUpLink">Log in!</router-link>
-            <router-link :to="{path: '/register', props: {teams: teams}}" class="signUpLink">Sign up!</router-link>
+
+            <!--<router-link to="/login" class="signUpLink">Log in!</router-link>-->
+            <!--<router-link to="/register" class="signUpLink">Sign up!</router-link>-->
               <!--<button class="signInBtn" @click="clickedSignIn">-->
                   <!--<router-link to="/login" class="routerLink">Sign in</router-link>-->
               <!--</button>-->
