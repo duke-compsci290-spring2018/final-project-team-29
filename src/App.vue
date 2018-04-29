@@ -70,8 +70,6 @@
 
       <router-view></router-view>
 
-      <a href="https://diddukewin.com" class="didduke">did duke win?</a>
-
   </div>
 </template>
 
@@ -114,6 +112,7 @@ export default {
           db: db,
           userStatus: 'guest',
           signingIn: false,
+          registering: false,
           userEmail: ''
       }
   },
@@ -231,11 +230,11 @@ export default {
         text-align: center;
         font-style: italic;
         font-size: 2em;
-        margin-left: 50%;
+        margin-right: -30%;
         margin-top: 6%;
     }
     .profileIcon {
-        margin-left: 5%;
+        margin-left: 3%;
     }
     .nav {
         margin-left: 3%;
