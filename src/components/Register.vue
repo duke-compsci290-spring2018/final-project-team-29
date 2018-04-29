@@ -57,6 +57,7 @@
                 password: '',
                 teamcode: '',
                 username: '',
+              newUserStatus: ''
             }
         },
         methods: {
@@ -79,6 +80,11 @@
                         "key": people_in_team
                     });
                 }
+              alert("You've successfully created a new player!")
+              this.$router.push('/');
+              this.newUserStatus = 'user';
+              this.$emit('updateUserStatus', this.newUserStatus);
+              this.$emit('updateUserEmail', this.email);
                 this.email = '';
                 this.password = '';
                 this.teamcode = '';
@@ -105,6 +111,11 @@
                 } else {
                     alert("You didn't input a email/password/team code!");
                 }
+              alert("You've successfully created a new team!")
+              this.$router.push('/');
+              this.newUserStatus = 'user';
+              this.$emit('updateUserStatus', this.newUserStatus);
+              this.$emit('updateUserEmail', this.email);
                 this.email = '';
                 this.password = '';
                 this.teamcode = '';

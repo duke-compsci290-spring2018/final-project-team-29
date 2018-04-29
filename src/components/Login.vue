@@ -16,6 +16,8 @@
     <div v-else>
       <Register :teams="teams"
                 :teamsRef="teamsRef"
+                @updateUserStatus="onUpdateUser"
+                @updateUserEmail="onUpdateName">
       >
       </Register>
     </div>
@@ -78,7 +80,13 @@
                 }).catch(function(error) {
                         alert(error.message);
                 });
-            }
+            },
+          onUpdateUser(newStatus) {
+              this.$emit('updateUserStatus', newStatus);
+          },
+          onUpdateName(newName) {
+              this.$emit('updateUserEmail', newName);
+          },
         }
     }
 </script>
