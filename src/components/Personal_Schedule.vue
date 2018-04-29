@@ -10,8 +10,6 @@
 <script>
   import Personal_Calendar from './Personal_Calendar.vue'
   import Personal_Availability from './Personal_Availability.vue'
-
-
   export default {
     name: 'app',
     props: ['teamsRef', 'teams', 'name', 'team'],

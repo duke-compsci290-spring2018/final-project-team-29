@@ -51,6 +51,24 @@
 </script>
 
 <style lang="scss">
+    .border {
+        border: 1px solid black;
+        width: 7.5%;
+        padding: 2%;
+    }
+    .green {
+        background-color: green;
+    }
+    table {
+        text-transform: uppercase;
+    }
+    th {
+        text-align: center;
+    }
+    #day {
+        text-align: right;
+        font-style: italic;
+    }
 </style>
 
 

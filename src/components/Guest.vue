@@ -18,16 +18,13 @@
         <Events_Calendar :events="events">
         </Events_Calendar>
     </div>
-
   </div>
-
 </template>
 
 <script>
 
   import Global_Schedule from './Global_Schedule.vue'
   import Events_Calendar from './Events_Calendar.vue'
-
 
   export default {
     name: 'app',

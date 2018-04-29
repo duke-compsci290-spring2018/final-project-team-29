@@ -1,0 +1,16 @@
+{
+  "0": {
+    "opponent": "Villanova",
+    "day": "Day 2",
+    "time": "2pm",
+    "location": "home",
+    "length": "3"
+  },
+  "1": {
+    "opponent": "UNC",
+    "day": "Day 1",
+    "time": "1pm",
+    "location": "home",
+    "length": "3"
+  }
+}

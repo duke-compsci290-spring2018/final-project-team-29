@@ -118,7 +118,6 @@
       generateRandomSchedule: function() {
         return this.curr_person["schedule"].map(arr => arr.map(bool => Math.random() >= 0.5));
       }
-
     }
   }
 </script>

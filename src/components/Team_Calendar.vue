@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+<!-- template must have a SINGLE root tag that encloses all others -->
+    <div id="app">
     <table>
       <tr>
         <th class="time" v-for="n in 14">
@@ -17,8 +18,6 @@
       <!--<p>{{test[0]}}</p>-->
     </table>
   </div>
-  <!-- template must have a SINGLE root tag that encloses all others -->
-
 </template>
 
 <script>
