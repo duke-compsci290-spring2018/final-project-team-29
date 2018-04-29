@@ -1,10 +1,9 @@
 <template>
-  <div id="app">
-    <label>Enter number of slots to schedule</label>
-    <input v-model="slotsToSchedule">
-    <button @click="generateSchedule">Generate schedule based on availability</button>
-    <br/>
-    <button @click="resetSchedule">Reset Schedule (REMOVES ALL SCHEDULE SLOTS)</button>
+  <div id="slots">
+    <br><label class="enter">Enter number of slots:</label>
+    <input class="slots" v-model="slotsToSchedule"><br><br>
+    <button class="best" @click="generateSchedule">Generate best schedule</button><br><br>
+    <button class="reset" @click="resetSchedule">Reset all scheduled slots</button>
   </div>
   <!-- template must have a SINGLE root tag that encloses all others -->
 </template>
@@ -32,19 +31,44 @@
           }
         }))
       },
+        
       resetSchedule: function() {
         this.personal_schedule.forEach((arr, day) => arr.forEach((bool, hour) =>
           this.db.ref(this.schedule_ref + "/" + day.toString() + "/" + hour.toString()).set(false)
         ));
-
       }
-
     }
 
   }
 </script>
 
 <style lang="scss">
+    .enter {
+        margin-left: 6%;
+    }
+    .slots {
+        width: 3%;
+    }
+    .best, .reset, .random {
+        background-color: #abbeff;
+        color: black;
+        border-radius: 5px;
+        border: 0;
+        width: 33%;
+        font-size: 1em;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 1.8%;
+    }
+    .best {
+        background-color: #e8ffe3;
+    }
+    .reset {
+        background-color: #ffdce2;
+    }
+    #slots {
+        margin-left: 40%;
+    }
 </style>
 
 

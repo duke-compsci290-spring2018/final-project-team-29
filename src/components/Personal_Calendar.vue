@@ -2,13 +2,13 @@
   <!-- template must have a SINGLE root tag that encloses all others -->
   <table>
     <tr>
-      <th v-for="n in 14">
+      <th class="time" v-for="n in 14">
         {{convert_to_time(n)}}
       </th>
     </tr>
     <tr class="border" v-for="(one, col) in schedule">
-      Day {{col+1}}
-      <th class="border" v-for="(two, row) in one" v-bind:style="[two ? trueStyle : falseStyle]">
+        <div class="day"><br>Day {{col+1}}</div><br>
+      <th class="rows" v-for="(two, row) in one" v-bind:style="[two ? trueStyle : falseStyle]">
       </th>
     </tr>
     <!--<p>{{test[0]}}</p>-->
@@ -51,14 +51,6 @@
 </script>
 
 <style lang="scss">
-  .border {
-    border: 1px solid black;
-    width: 50px;
-  }
-  .green {
-    background-color: green;
-
-  }
 </style>
 
 

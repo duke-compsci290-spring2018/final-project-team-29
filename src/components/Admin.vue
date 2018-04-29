@@ -27,7 +27,6 @@
 <script>
 
   import Personal_Schedule from './Personal_Schedule.vue'
-  import New_User from './New_User.vue'
   import Global_Schedule from './Global_Schedule.vue'
   import Event_Creator from './Event_Creator.vue'
   import Events_Calendar from './Events_Calendar.vue'
@@ -65,7 +64,6 @@
     },
     components: {
       Personal_Schedule,
-      New_User,
       Global_Schedule,
       Events_Calendar,
       Event_Creator,

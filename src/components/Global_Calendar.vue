@@ -1,21 +1,20 @@
 <template>
-  <div id="app">
-    <table>
-      <tr>
-        <th v-for="n in 14">
-          {{convert_to_time(n)}}
-        </th>
-      </tr>
-      <tr class="border" v-for="(one, col) in schedule">
-        Day {{col+1}}
-        <th class="border" v-for="(two, row) in one">
-          <ul v-for="person in two">
-            <li>{{person}}</li>
-          </ul>
-        </th>
-      </tr>
-      <!--<p>{{test[0]}}</p>-->
-    </table>
+    <div id="app">
+        <table>
+          <tr>
+            <th class="time" v-for="n in 14">
+              {{convert_to_time(n)}}
+            </th>
+          </tr>
+          <tr class="border" v-for="(one, col) in schedule">
+              <div class="day"><br>D<br>a<br>y<br><br> {{col+1}}</div><br>
+            <th class="border" v-for="(two, row) in one">
+              <ul class="people" v-for="person in two">
+                  <li><i class="fa fa-user" aria-hidden="true">{{person}}</i></li>
+              </ul>
+            </th>
+          </tr>
+        </table>
   </div>
   <!-- template must have a SINGLE root tag that encloses all others -->
 
