@@ -11,7 +11,7 @@
                     </router-link>
                 </tr>
                 <tr class="navOption">
-                    <span class="navIcon glyphicon glyphicon-cogwheels"></span>Settings
+                    <i class="fa fa-gear" aria-hidden="true">Settings
                 </tr>
             </div>
         </div>
