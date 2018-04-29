@@ -11,10 +11,9 @@
 
     <br><br><br>
     <div v-if="modeOfViewing === 'guest'">
-      <Guest :teams="teams"
-             :events="events"
-      ></Guest>
-      <br>
+        <Guest :teams="teams"
+             :events="events">
+        </Guest><br>
     </div>
       
     <div v-if="modeOfViewing === 'user'">
