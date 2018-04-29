@@ -42,7 +42,7 @@
             Welcome<h2 v-if="userStatus === 'user'">, {{ currName }}</h2>!
             <i class="profileIcon fa fa-user-circle-o" aria-hidden="true"></i>
             <div class="dropdown">
-                LOG OUT
+                <button @click="logout">LOG OUT</button>
             </div>
         </h2>
     </div>
@@ -164,7 +164,7 @@ export default {
     Register
   },
   methods: {
-      refresh: function() {
+    refresh: function() {
           this.$router.push('/');
       },
     onUpdateUser(newStatus) {
@@ -205,6 +205,12 @@ export default {
     setUser (user) {
         this.user = user;
     },
+    logout: function() {
+        var sure = confirm("Are you sure you want to log out?");
+        if (sure) {
+            this.userStatus = 'guest';
+        }
+    }
   }
 }
 

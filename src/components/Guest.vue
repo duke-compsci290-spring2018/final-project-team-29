@@ -98,15 +98,15 @@
     .people {
         font-family: Didot;
         margin: 0;
-        margin-left: -20%;
-        font-size: 0.65em;
+        margin-left: -18%;
+        font-size: 0.68em;
         background-color: #f6f6f6;
         text-align: left;
     }
     .events {
         font-family: Didot;
         margin: 0;
-        margin-left: -15%;
+        margin-left: -18%;
         font-size: 0.8em;
         background-color: #f6f6f6;
         text-align: left;
