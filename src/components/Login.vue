@@ -46,7 +46,10 @@
                         console.log("success");
                         this.$router.push('/');
                         this.newUserStatus = 'user';
+                        console.log(this.newUserStatus);
+                        console.log(this.email);
                         this.$emit('updateUserStatus', this.newUserStatus);
+                        this.$emit('updateUserEmail', this.email);
                     }
                 }).catch((error) => {
                     alert("That combination doesn't exist in our records!");
