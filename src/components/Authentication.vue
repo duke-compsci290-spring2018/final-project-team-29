@@ -6,12 +6,22 @@
             <div class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
                 <tr class="navOption">
-                    <router-link to="/team" class="routerLink">
-                        <span class="glyphicon glyphicon-group"></span>Team
+                    <router-link to="/" class="routerLink">
+                        <i class="fa fa-home" aria-hidden="true"> Home</i>
                     </router-link>
                 </tr>
                 <tr class="navOption">
-                    <i class="fa fa-gear" aria-hidden="true">Settings</i>
+                    <router-link to="/search" class="routerLink">
+                        <i class="fa fa-search" aria-hidden="true"> Search</i>
+                    </router-link>
+                </tr>
+                <tr class="navOption">
+                    <router-link to="/team" class="routerLink">
+                        <i class="fa fa-group" aria-hidden="true"> Teams</i>
+                    </router-link>
+                </tr>
+                <tr class="navOption">
+                    <i class="fa fa-gear" aria-hidden="true"> Settings</i>
                 </tr>
             </div>
         </div>

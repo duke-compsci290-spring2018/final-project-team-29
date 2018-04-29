@@ -9,25 +9,26 @@
     <button @click="modeOfViewing = 'user'">User</button>
     <button @click="modeOfViewing = 'admin'">Admin</button>
 
+    <br><br><br>
     <div v-if="modeOfViewing === 'guest'">
       <Guest :teams="teams"
              :events="events"
       ></Guest>
-      <br/>
+      <br>
     </div>
       
     <div v-if="modeOfViewing === 'user'">
-      <User :name="name"
+      <User :name="currName"
             :teams="teams"
             :events="events"
-            :db="db"
-            :teamsRef="teamsRef">
+            :db="db">
       </User>
     </div>
       
     <div v-if="modeOfViewing === 'admin'">
       <Admin :teams="teams"
-             :events="events">
+             :events="events"
+             :db="db">
       </Admin>
     </div>
       
