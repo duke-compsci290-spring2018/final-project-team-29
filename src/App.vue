@@ -43,7 +43,7 @@
         </Login>
     </div>
 
-    <br><br><br>
+    <br><br><br><br><br>
     <div v-if="userStatus === 'guest' && !signingIn">
         <Guest :teams="teams"
                :events="events">
@@ -151,13 +151,11 @@ export default {
           this.$router.push('/');
       },
     onUpdateUser(newStatus) {
-        console.log("test2" + newStatus);
         this.userStatus = newStatus;
         this.signingIn = false;
     },
     onUpdateName(newName) {
         this.currName = newName.split("@")[0];
-        console.log("test3" + currName);
     },
     goToLogin: function() {
         this.signingIn = true;
