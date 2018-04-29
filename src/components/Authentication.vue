@@ -11,7 +11,7 @@
                     </router-link>
                 </tr>
                 <tr class="navOption">
-                    <i class="fa fa-gear" aria-hidden="true">Settings
+                    <i class="fa fa-gear" aria-hidden="true">Settings</i>
                 </tr>
             </div>
         </div>
