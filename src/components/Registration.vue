@@ -1,16 +1,14 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
-    <div class="login col-lg-12">
+    <div class="login col-lg-6">
         <div class="btnChoices">
-            <button id="registerPlayerBtn">Register<br>New Player</button>
-            <button id="registerTeamBtn">Register<br>New Team</button><br>
+            <button class="commReg" id="registerUserBtn">Register New User</button><br>
+            <button class="commReg" id="registerPlayerBtn">Register New Player</button><br>
+            <button class="commReg" id="registerTeamBtn">Register New Team</button><br><br>
 
-            Already have an account?<br>
-            <router-link to="/login" class="signInLink">Sign in now!</router-link><br><br>
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
-            <hr>
         </div>
 
         <div class="registerPlayerOption">
@@ -19,28 +17,35 @@
             <input type="text" v-model="teamcode" placeholder="Your Team Code"><br>
             <button class="registerBtn" @click="registerPlayer">Register</button><br>
 
-            Already have an account?<br>
-            <router-link to="/login" class="signInLink">Sign in now!</router-link><br><br>
+            <span id="icon" class="navIcon glyphicon glyphicon-arrow-left"></span><br><br>
 
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
-            <hr>
+        </div>
+        
+        <div class="registerPlayerOption">
+            <br><input type="text" v-model="email" placeholder="Name"><br>
+            <input type="text" v-model="teamcode" placeholder="Your Team Code"><br>
+            <button class="registerBtn" @click="registerPlayer">Register</button><br>
+
+            <span id="icon" class="navIcon glyphicon glyphicon-arrow-left"></span><br><br>
+
+            <router-link to="/">
+                <button class="guestBtn">Continue as Guest</button>
+            </router-link><br><br>
         </div>
 
         <div class="registerTeamOption">
-            <br><input type="text" v-model="email" placeholder="Email"><br>
-            <input type="password" v-model="password" placeholder="Password"><br>
+            <br><input type="text" v-model="email" placeholder="Name"><br>
             <input type="text" v-model="teamcode" placeholder="Unique Team Code"><br>
             <button class="registerBtn" @click="registerTeam">Register</button><br>
 
-            Already have an account?<br>
-            <router-link to="/login" class="signInLink">Sign in now!</router-link>
+            <span id="icon" class="navIcon glyphicon glyphicon-arrow-left"></span><br><br>
 
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
-            <hr>
         </div>
 
     </div>
@@ -64,7 +69,7 @@
         },
         methods: {
             register: function() {
-              Firebase.auth().createUserWithEmailAndPassword(this.username, this.password).catch(error => alert(error.message));
+              Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(error => alert(error.message));
             },
             registerPlayer: function() {
                 this.register();
@@ -139,6 +144,15 @@
             $('.registerPlayerOption').css('position', 'absolute');
             $('.registerTeamOption').css('visibility', 'visible');
         });
+        $(document).on('click', '#icon', function() {
+            $('.btnChoices').css('visibility', 'visible');
+            $('.registerUserOption').css('visibility', 'hidden');
+            $('.registerUserOption').css('position', 'absolute');
+            $('.registerPlayerOption').css('visibility', 'hidden');
+            $('.registerPlayerOption').css('position', 'absolute');
+            $('.registerTeamOption').css('visibility', 'hidden');
+            $('.registerTeamOption').css('position', 'absolute');
+        });
     });
 
 </script>
@@ -154,38 +168,38 @@
     .signInLink:hover {
         text-decoration: underline;
     }
-    #registerPlayerBtn {
-        background-color: #f2e3ff;
+    .btnChoices {
+        margin-top: 3%;
+    }
+    .commReg {
         border-radius: 5px;
         border: 0;
-        width: 15%;
-        margin: 2%;
+        width: 40%;
+        margin: 1%;
         font-size: 1.2em;
         text-transform: uppercase;
         font-weight: bold;
-        padding: 1%;
+        padding: 2%;
+    }
+    #registerUserBtn {
+        background-color: #fff1d6;
+    }
+    #registerPlayerBtn {
+        background-color: #f2e3ff;
     }
     #registerTeamBtn {
         background-color: #e8ffe3;
-        border-radius: 5px;
-        border: 0;
-        width: 15%;
-        margin: 2%;
-        font-size: 1.2em;
-        text-transform: uppercase;
-        font-weight: bold;
-        padding: 1%;
     }
     .registerBtn {
        background-color: #abbeff;
         border-radius: 5px;
         border: 0;
-        width: 10%;
+        width: 22%;
         margin: 2%;
         font-size: 1.2em;
         text-transform: uppercase;
         font-weight: bold;
-        padding: 1%;
+        padding: 2%;
     }
     .registerPlayerOption {
         visibility: hidden;

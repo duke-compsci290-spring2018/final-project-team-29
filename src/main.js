@@ -3,17 +3,21 @@ import VueFire from 'vuefire'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import User from './components/User.vue'
-import Login from './components/Login.vue'
-import Register from './components/Register.vue'
+import Authentication from './components/Authentication.vue'
+
 import PersonalCal from './components/Personal_Calendar.vue'
 import PersonalSched from './components/Personal_Schedule.vue'
 import Schedule from './components/Schedule_Builder.vue'
 import Team from './components/Team_Calendar.vue'
 
+import Login from './components/Login.vue'
+import Register from './components/Register.vue'
+
 Vue.use(VueFire);
 Vue.use(VueRouter);
 
 const routes = [
+    { path: '/authentication', component: Authentication },
     { path: '/login', component: Login },
     { path: '/register', component: Register },
     { path: '/user', component: User },

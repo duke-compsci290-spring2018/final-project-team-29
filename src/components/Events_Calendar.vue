@@ -2,19 +2,19 @@
   <div id="app">
     <button v-if="showButton" @click="showbball">Show Games</button>
     <table>
-      <tr>
-        <th v-for="n in 14">
-          {{convert_to_time(n)}}
-        </th>
-      </tr>
-      <tr class="border" v-for="(one, col) in events">
-        Day {{col+1}}
-        <th class="border" v-for="(two, row) in one['.value']">
-          <ul v-for="event in two">
-            <li>{{event}}</li>
-          </ul>
-        </th>
-      </tr>
+        <tr>
+            <th class="time" v-for="n in 14">
+              {{convert_to_time(n)}}
+            </th>
+          </tr>
+          <tr class="border" v-for="(one, col) in events">
+              <div class="day"><br>D<br>a<br>y<br><br> {{col+1}}</div><br>
+            <th class="border" v-for="(two, row) in one['.value']">
+              <ul class="events" v-for="event in two">
+                  <li><i class="fa fa-user" aria-hidden="true">{{event}}</i></li>
+              </ul>
+            </th>
+          </tr>
     </table>
   </div>
   <!-- template must have a SINGLE root tag that encloses all others -->

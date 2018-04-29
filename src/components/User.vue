@@ -1,42 +1,58 @@
 <template>
   <div id="app">
-    <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
-    <input v-model="nameInput" type="text">
-    <button @click="submitName">View Info</button><br>
-      
-    <h1>Logged in as {{name}} (part of {{curr_team["code"]}})</h1>
-    <br/>
-    <h1>Personal Availability: Click any cell to edit</h1>
-    <Personal_Availability :schedule="curr_person['available']"
-                           :storage_ref="availability_ref"
-                           :db="db">
-    </Personal_Availability>
+    <br>
+        <div class="calendar"> 
+            <ul>
+                <li class="prev" v-if="count !== 0" v-on:click="count--">&#10094;</li>
+                <li class="next" v-if="count !== 5" v-on:click="count++">&#10095;</li>
+                <li v-if="count === 0">Personal Availability<br><span id="subheading">Click on any cell to edit</span></li>
+                <li v-if="count === 1">Personal Schedule<br><span id="subheading">Click button to generate a random schedule</span></li>
+                <li v-if="count === 2">Schedule Builder</li>
+                <li v-if="count === 3">Team Schedule</li>
+                <li v-if="count === 4">Global Calendar</li>
+                <li v-if="count === 5">Event Calendar</li>
+            </ul>
+        </div>
 
-    <Personal_Schedule :teamsRef="storage"
-                       :teams="teams"
-                       :name="name"
-                       :team="curr_team">
-    </Personal_Schedule>
-    
-    <Schedule_Builder :availability_schedule="curr_person['available']"
-                      :schedule_ref="schedule_ref"
-                      :db="db"
-                      :curr_team="curr_team"
-                      :personal_schedule="curr_person['schedule']">
-    </Schedule_Builder>
+        <div v-if="count === 0">
+            <Personal_Availability :schedule="curr_person['available']"
+                                   :storage_ref="availability_ref"
+                                   :db="db">
+            </Personal_Availability>
+        </div>
+        
+        <div v-if="count === 1">
+            <Personal_Schedule :teamsRef="storage"
+                               :teams="teams"
+                               :name="name"
+                               :team="curr_team">
+            </Personal_Schedule>
+        </div>
       
-    <button @click="createSchedule">Generate a random schedule for this user</button>
-    <br><br>
-
-    <h1>Team Schedule: </h1>
-    <Team_Schedule :curr_team="curr_team">
-    </Team_Schedule>
-    <br><br>
-
-    <Guest :teams="teams"
-           :events="events">
-    </Guest>
+        <div v-if="count === 2">
+            <Schedule_Builder :availability_schedule="curr_person['available']"
+                              :schedule_ref="schedule_ref"
+                              :db="db"
+                              :curr_team="curr_team"
+                              :personal_schedule="curr_person['schedule']">
+            </Schedule_Builder>
+        </div>
       
+        <div v-if="count === 3">
+            <Team_Schedule :curr_team="curr_team">
+            </Team_Schedule>
+        </div>
+      
+        <div v-if="count === 4">
+            <Global_Schedule :teams="teams">
+            </Global_Schedule>
+        </div>
+
+        <div v-if="count === 5">
+            <Events_Calendar :events="events">
+            </Events_Calendar>
+        </div>
+      <br><button class="generate" @click="createSchedule" v-if="count < 3">Generate random schedule</button><br>
   </div>
 
 </template>
@@ -58,7 +74,8 @@
     data () {
       return {
         storage: this.db.ref('Teams'),
-        nameInput: ''
+        nameInput: '',
+        count: 0
       }
     },
     computed: {
@@ -106,4 +123,24 @@
 </script>
 
 <style lang="scss">
+    #subheading {
+        font-size: 0.4em;
+        font-style: italic;
+    }
+    .calendar li {
+        line-height: 0.6em;
+    }
+    .generate {
+        margin: 0 auto;
+        display: block;
+        background-color: #abbeff;
+        color: black;
+        border-radius: 5px;
+        border: 0;
+        width: 20%;
+        font-size: 1em;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 1%;
+    }
 </style>

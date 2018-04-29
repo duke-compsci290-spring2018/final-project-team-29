@@ -86,7 +86,7 @@
         font-weight: bold;
         color: black;
     }
-    signUpLink:hover {
+    .signUpLink:hover {
         text-decoration: underline;
     }
     .guestBtn, .guestBtn:visited, .guestBtn:active, .guestBtn:link  {

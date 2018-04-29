@@ -3,14 +3,14 @@
     <div id="app">
     <table>
       <tr>
-        <th v-for="n in 14">
+        <th class="time" v-for="n in 14">
           {{convert_to_time(n)}}
         </th>
       </tr>
       <tr class="border" v-for="(one, col) in schedule">
-        Day {{col+1}}
-        <th class="border" v-for="(two, row) in one" v-bind:style="styling[people_in_cell(col, row)]">
-          <ul v-for="person in two">
+          <br><div class="day">Day {{col+1}}</div><br>
+        <th class="rows" v-for="(two, row) in one" v-bind:style="styling[people_in_cell(col, row)]">
+          <ul class="team" v-for="person in two">
             <li>{{person}}</li>
           </ul>
         </th>
@@ -69,6 +69,13 @@
 </script>
 
 <style lang="scss">
+    .team {
+        font-family: Didot;
+        margin: 0;
+        margin-left: -20%;
+        font-size: 0.65em;
+        text-align: left;
+    }
 </style>
 
 
