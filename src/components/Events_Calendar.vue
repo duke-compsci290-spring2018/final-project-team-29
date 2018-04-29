@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <button v-if="showButton" @click="showbball">Show Games</button>
     <table>
         <tr>
             <th class="time" v-for="n in 14">
@@ -11,11 +10,12 @@
               <div class="day"><br>D<br>a<br>y<br><br> {{col+1}}</div><br>
             <th class="border" v-for="(two, row) in one['.value']">
               <ul class="events" v-for="event in two">
-                  <li><i class="fa fa-user" aria-hidden="true">{{event}}</i></li>
+                  <li><i class="globalIcon fa fa-calendar-o" aria-hidden="true">{{event}}</i></li>
               </ul>
             </th>
           </tr>
-    </table>
+    </table><br>
+      <button class="generate" v-if="showButton" @click="showbball">Show Games</button>
   </div>
   <!-- template must have a SINGLE root tag that encloses all others -->
 
@@ -103,7 +103,6 @@ this.jsonPath = require("../data/" + path + ".json" );
   }
   .green {
     background-color: green;
-
   }
 </style>
 
