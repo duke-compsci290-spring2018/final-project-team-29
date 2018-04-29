@@ -19,19 +19,14 @@
 
 
           <div class="col-lg-4">
-              <h1><router-link to="/" class="routerLink">K-VITE</router-link></h1>
+              <h1 class="routerLink" @click="refresh">K-VITE</h1>
           </div>
 
           <div class="col-lg-4">
-              <router-link to="/login" class="routerLink">Sign in</router-link>
+              <button class="signInBtn routerLink" @click="goToLogin">Sign in</button>
           </div>
       </div>
-    <router></router>
-
-
-      <router-view>
-      </router-view>
-
+      
       <Guest v-if="userStatus === 'guest' && signingIn === false"
              :teams="teams"
              :events="events">
@@ -50,10 +45,14 @@
              :events="events">
       </Admin>
 
-      <Login v-if="!showLoginReg"
-             :userStatus="userStatus"
-             @updateUserStatus="updateUser">
-      </Login>
+      <div v-if="!showLoginReg">
+          <Login :teams="teams"
+                 :userStatus="userStatus"
+                 @updateUserStatus="onUpdateUser">
+          </Login>
+      </div>
+      
+      <a href="https://diddukewin.com" class="didduke">did duke win?</a>
 
   </div>
 </template>
@@ -84,32 +83,9 @@
         messagingSenderId: "718555914790"
     };
 
-    // var uiConfig = {
-    //     signInSuccessUrl: '<url-to-redirect-to-on-success>',
-    //     signInOptions: [
-    //       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    //       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    //       firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    //       firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    //       firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    //       firebase.auth.PhoneAuthProvider.PROVIDER_ID
-    //     ],
-    //     tosUrl: '<your-tos-url>'
-    // };
-    // Initialize the FirebaseUI Widget using Firebase.
-    // var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    // // The start method will wait until the DOM is loaded.
-    // ui.start('#firebaseui-auth-container', uiConfig);
-
     var db = Firebase.initializeApp(config).database();
     var teamsRef = db.ref('Teams');
     var eventsRef = db.ref('events');
-
-    const router = new VueRouter({
-      routes: [
-        { path: '/register', component: Register }
-      ]
-    })
 
     export default {
         name: 'app',
@@ -158,9 +134,28 @@
             Admin
         },
         methods: {
-            updateUser(newUser) {
-                console.log(userStatus);
-                this.userStatus = newUser;
+            refresh: function() {
+                this.$router.push('/');
+                this.signingIn = false;
+                this.showLoginReg = true;
+            },
+            goToLogin: function() {
+                this.signingIn = true;
+                this.showLoginReg = false;
+                this.$router.push({
+                    path: '/login',
+                    params: {
+                        item: this.userStatus,
+                        item: this.teams,
+                        item: this.teamsRef
+                    }
+                });
+                console.log(this.teams);
+            },
+            onUpdateUser(newStatus) {
+                this.userStatus = newStatus;
+                this.signingIn = false;
+                this.showLoginReg = true;
             },
             containsName: function(team, name) {
               try {
@@ -172,9 +167,6 @@
             submitName: function() {
               this.currName = this.nameInput;
               this.nameInput = '';
-            },
-            test: function() {
-              console.log(this.curr_team);
             },
             createSchedule: function() {
               db.ref("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule").set(
@@ -209,6 +201,7 @@
     .routerLink, .routerLink:hover, .routerLink:visited, .routerLink:active, .routerLink:link {
         color: black;
         text-decoration: none;
+        cursor: pointer;
     }
     h1 {
         font-family: Didot;
