@@ -4,8 +4,8 @@
             <ul>
                 <li class="prev" v-on:click="count--">&#10094;</li>
                 <li class="next" v-on:click="count++">&#10095;</li>
-                <li v-if="count % 6 === 0">Personal Availability<br><span id="subheading">Click on any cell to edit</span></li>
-                <li v-if="count % 6 === 1">Personal Schedule<br><span id="subheading">Click button to generate a random schedule</span></li>
+                <li v-if="count % 6 === 0">Personal Availability<br><span class="subheading">Click on any cell to edit</span></li>
+                <li v-if="count % 6 === 1">Personal Schedule<br><span class="subheading">Click button to generate a random schedule</span></li>
                 <li v-if="count % 6 === 2">Schedule Builder</li>
                 <li v-if="count % 6 === 3">Team Schedule</li>
                 <li v-if="count % 6 === 4">Global Calendar</li>
@@ -122,7 +122,7 @@
 </script>
 
 <style lang="scss">
-    #subheading {
+    .subheading {
         font-size: 0.4em;
         font-style: italic;
     }

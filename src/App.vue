@@ -1,22 +1,56 @@
 <template>
   <div v-if="curr_team != undefined" id="app">
-    
-    <Authentication :getUser="getUser"
-                    :setUser="setUser">
-    </Authentication>
-                    
-    <button @click="modeOfViewing = 'guest'">Guest</button>
-    <button @click="modeOfViewing = 'user'">User</button>
-    <button @click="modeOfViewing = 'admin'">Admin</button>
+      
+    <div class="col-lg-4">
+        <div class="nav" id="openBtn">☰</div>
+              <div class="sidenav">
+                  <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
+                    <tr class="navOption">
+                        <router-link to="/" class="routerLink">
+                            <i class="fa fa-home" aria-hidden="true"> Home</i>
+                        </router-link>
+                    </tr>
+                    <tr class="navOption">
+                        <router-link to="/search" class="routerLink">
+                            <i class="fa fa-search" aria-hidden="true"> Search</i>
+                        </router-link>
+                    </tr>
+                    <tr class="navOption">
+                        <router-link to="/team" class="routerLink">
+                            <i class="fa fa-group" aria-hidden="true"> Teams</i>
+                        </router-link>
+                    </tr>
+                    <tr class="navOption">
+                        <i class="fa fa-gear" aria-hidden="true"> Settings</i>
+                    </tr>
+                </div>
+    </div>
+
+    <div class="col-lg-4">
+      <h1 class="routerLink" @click="refresh">K-VITE</h1>
+      <h2>Welcome, {{ currName }}</h2>
+    </div>
+
+    <div class="col-lg-4">
+      <button class="signInBtn routerLink" @click="goToLogin">Sign in</button>
+    </div>
+      
+    <div v-if="signingIn">
+        <Login :teams="teams"
+               :userStatus="userStatus"
+               @updateUserStatus="onUpdateUser"
+               @updateUserEmail="onUpdateName">
+        </Login>
+    </div>
 
     <br><br><br>
-    <div v-if="modeOfViewing === 'guest'">
+    <div v-if="userStatus === 'guest' && !signingIn">
         <Guest :teams="teams"
-             :events="events">
+               :events="events">
         </Guest><br>
     </div>
       
-    <div v-if="modeOfViewing === 'user'">
+    <div v-if="userStatus === 'user' && !signingIn">
       <User :name="currName"
             :teams="teams"
             :events="events"
@@ -24,7 +58,7 @@
       </User>
     </div>
       
-    <div v-if="modeOfViewing === 'admin'">
+    <div v-if="userStatus === 'admin' && !signingIn">
       <Admin :teams="teams"
              :events="events"
              :db="db">
@@ -48,7 +82,7 @@
   import Personal_Availability from './components/Personal_Availability.vue'
   import Schedule_Builder from './components/Schedule_Builder.vue'
   import Team_Schedule from './components/Team_Schedule.vue'
-  import Authentication from './components/Authentication.vue'
+  import Login from './components/Login.vue'
   import Guest from './components/Guest.vue'
   import User from './components/User.vue'
   import Admin from './components/Admin.vue'
@@ -69,13 +103,15 @@
 export default {
   name: 'app',
   data () {
-    return {
-      storage: teamsRef,
-      currName: "Matt",
-      nameInput: '',
-      db: db,
-      modeOfViewing: ''
-    }
+      return {
+          storage: teamsRef,
+          currName: "Matt",
+          nameInput: '',
+          db: db,
+          userStatus: 'guest',
+          signingIn: false,
+          userEmail: ''
+      }
   },
   firebase: {
     teams: teamsRef,
@@ -105,12 +141,27 @@ export default {
     Personal_Availability,
     Schedule_Builder,
     Team_Schedule,
-    Authentication,
+    Login,
     Guest,
     User,
     Admin
   },
   methods: {
+      refresh: function() {
+          this.$router.push('/');
+      },
+    onUpdateUser(newStatus) {
+        console.log("test2" + newStatus);
+        this.userStatus = newStatus;
+        this.signingIn = false;
+    },
+    onUpdateName(newName) {
+        this.currName = newName.split("@")[0];
+        console.log("test3" + currName);
+    },
+    goToLogin: function() {
+        this.signingIn = true;
+    },
     containsName: function(team, name) {
       try {
         team["People"].forEach(person => console.log(person));
