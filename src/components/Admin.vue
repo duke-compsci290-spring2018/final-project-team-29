@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <br/> <br/>
 
     <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
     <input v-model="nameInput">
@@ -38,12 +39,12 @@
 
   export default {
     name: 'app',
-    props: ['events', 'teams', 'db'],
+    props: ['events', 'teams', 'db', 'currName'],
     data () {
       return {
         storage: this.db.ref('Teams'),
-        currName: "matt",
-        nameInput: ''
+        nameInput: '',
+        people: []
       }
     },
     computed: {
@@ -94,6 +95,9 @@
       },
       generateRandomSchedule: function() {
         return this.curr_person["schedule"].map(arr => arr.map(bool => Math.random() >= 0.5));
+      },
+      showPlayers: function(team) {
+        this.people = team["People"].map(person => person['name']);
       }
 
     }
