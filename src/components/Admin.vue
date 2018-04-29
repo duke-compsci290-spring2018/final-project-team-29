@@ -83,7 +83,11 @@
         }
       },
       submitName: function() {
-        this.currName = this.nameInput;
+        if (this.teams.filter(team => this.containsName(team, this.nameInput.toLowerCase())).length >= 1) {
+          this.currName = this.nameInput.toLowerCase();
+        } else {
+          alert("This user is not in our system")
+        }
         this.nameInput = '';
       },
       test: function() {
