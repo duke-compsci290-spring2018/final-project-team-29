@@ -53,7 +53,7 @@
         </Login>
     </div>
 
-    <br><br>
+    <br><br><br><br><br>
     <div v-if="userStatus === 'guest' && !signingIn">
         <Guest :teams="teams"
                :events="events">

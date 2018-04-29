@@ -7,12 +7,8 @@
 
       <button class="loginBtn" @click="login">Login</button><br><br>
       Don't have an account?<br>
-      <button @click="signUp = true">Sign up now!</button>
-      <!--<router-link to="/register" class="signUpLink">Sign up now!</router-link><br><br>-->
-
-
-
-      <button class="guestBtn" @click="logout">Logout</button>
+      <span class="signUpLink" @click="signUp = true">Sign up now!</span><br><br>
+        
       <router-link to="/">
         <button class="guestBtn">Continue as Guest</button>
       </router-link><br><br>

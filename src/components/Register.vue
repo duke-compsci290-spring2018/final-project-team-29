@@ -3,10 +3,7 @@
     <div class="login col-lg-12">
         <div class="btnChoices">
             <button id="registerPlayerBtn">Register<br>New Player</button>
-            <button id="registerTeamBtn">Register<br>New Team</button><br>
-
-            Already have an account?<br>
-            <router-link to="/login" class="signInLink">Sign in now!</router-link><br><br>
+            <button id="registerTeamBtn">Register<br>New Team</button><br><br>
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
@@ -43,7 +40,6 @@
             </router-link><br><br>
             <hr>
         </div>
-      <router-link to="/user">Continue as this user</router-link>
 
     </div>
 </template>
