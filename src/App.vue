@@ -104,7 +104,6 @@ export default {
   },
   components: {
     Personal_Schedule,
-    New_User,
     Global_Schedule,
     Events_Calendar,
     Event_Creator,
