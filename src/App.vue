@@ -1,6 +1,5 @@
 <template>
   <div v-if="curr_team != undefined" id="app">
-
     <div class="col-lg-4">
         <div class="nav" id="openBtn">☰</div>
               <div class="sidenav">
@@ -15,32 +14,27 @@
                             <i class="fa fa-search" aria-hidden="true"> Search</i>
                         </router-link>
                     </tr>
-                <div v-if="userStatus === 'admin'">
-                  <tr class="navOption">
+                    <tr class="navOption" v-if="userStatus === 'admin'">
                       <i @click="showAllTeams = true" class="fa fa-group" aria-hidden="true"> Teams</i>
                       <div v-if="showAllTeams">
                           <div v-for="team in teams">
                             <p @click="showPlayers(team)">{{team['code']}}</p>
                           </div>
-                          <br/>
+                          <br>
                           <div v-for="person in people">
                             <p @click="currName=person">{{person}}</p>
-                        </div>
+                          </div>
                       </div>
-                  </tr>
-                </div>
-
+                    </tr>
                     <tr class="navOption">
                         <i class="fa fa-gear" aria-hidden="true"> Settings</i>
                     </tr>
-                <tr class="navOption">
-
-                  <a href="https://diddukewin.com" >did duke win?</a>
-                </tr>
-
-                </div>
+                    <tr class="">
+                      <a class="didDukeOption" href="https://diddukewin.com">
+                          did duke win?</a>
+                    </tr>
+            </div>
     </div>
-
 
     <div class="col-lg-4">
       <h1 class="routerLink" @click="refresh">K-VITE</h1>
@@ -96,7 +90,7 @@
 </template>
 
 <script>
-    import Firebase from 'firebase';
+  import Firebase from 'firebase'
 
   import Personal_Schedule from './components/Personal_Schedule.vue'
   import Global_Schedule from './components/Global_Schedule.vue'
@@ -317,7 +311,7 @@ export default {
         position: fixed; z-index: 1;
         top: 0; left: 0;
         overflow: hidden;
-      padding: 10%;
+        padding-top: 10%;
         text-align: center;
     }
     .sidenav .navOption {
@@ -333,13 +327,16 @@ export default {
         font-size: 3em;
         color: black;
     }
-    .didduke {
+    .didDukeOption {
+        padding-top: 50%;
+        text-transform: uppercase;
         color: navy;
         font-weight: bold;
-        font-size: 1.2em;
+        font-size: 2em;
+        font-family: Arial;
         text-transform: uppercase;
-        position: absolute;
-        bottom: 2%; right: 1%;
+        text-align: center;
+        padding-top: 60%;
     }
     .profileIcon {
         position: relative;

@@ -53,7 +53,7 @@
             <Events_Calendar :events="events">
             </Events_Calendar>
         </div>
-      <br><button class="generate" @click="createSchedule" v-if="count < 3">Generate random schedule</button><br>
+      <br><button class="generate" @click="createSchedule" v-if="count % 6 < 3">Generate random schedule</button><br>
   </div>
 
 </template>
