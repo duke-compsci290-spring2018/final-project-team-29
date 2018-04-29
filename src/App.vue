@@ -1,6 +1,7 @@
 <template>
-  <div v-if="curr_team != undefined" id="app">
+  <!--<div v-if="curr_team != undefined" id="app">-->
 
+  <div id="app">
     <Authentication :getUser="getUser"
                     :setUser="setUser">
     </Authentication>
@@ -15,40 +16,6 @@
       ></Guest>
       <br/>
     </div>
-<!--=======-->
-  <!--<div id="app">-->
-      <!--<div class="row">-->
-          <!--<div class="col-lg-4">-->
-              <!--<div class="nav" id="openBtn">☰</div>-->
-              <!--<div class="sidenav">-->
-                  <!--<a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>-->
-                  <!--<tr class="navOption">-->
-                      <!--<router-link to="/team" class="routerLink">-->
-                          <!--<span class="glyphicon glyphicon-group"></span>Team-->
-                      <!--</router-link>-->
-                  <!--</tr>-->
-                  <!--<tr class="navOption">-->
-                      <!--<span class="navIcon glyphicon glyphicon-cogwheels"></span>Settings-->
-                  <!--</tr>-->
-              <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="col-lg-4">-->
-              <!--<h1 class="routerLink" @click="refresh">K-VITE</h1>-->
-          <!--</div>-->
-
-          <!--<div class="col-lg-4">-->
-              <!--<button class="signInBtn routerLink" @click="goToLogin">Sign in</button>-->
-          <!--</div>-->
-      <!--</div>-->
-
-    <!--<router-view></router-view>-->
-
-      <!--<Guest v-if="userStatus === 'guest' && signingIn === false"-->
-             <!--:teams="teams"-->
-             <!--:events="events">-->
-      <!--</Guest>-->
-<!--&gt;>>>>>> 68eef6ddc28b4ec10a645cca45ad0790693b0cdb-->
 
       <User v-if="userStatus === 'user' && signingIn === false"
             :name="name"
@@ -57,9 +24,10 @@
             :db="db"
             :teamsRef="teamsRef">
       </User>
+    </div>
 
-      <Admin v-if="userStatus === 'admin' && signingIn === false"
-             :teams="teams"
+    <div v-if="modeOfViewing === 'admin'">
+      <Admin :teams="teams"
              :events="events">
       </Admin>
 
@@ -140,7 +108,6 @@ export default {
   },
   components: {
     Personal_Schedule,
-    New_User,
     Global_Schedule,
     Events_Calendar,
     Event_Creator,
@@ -182,7 +149,6 @@ export default {
     },
   }
 }
-
 
     $(document).ready(function(){
         $(document).on('click', '#openBtn', function() {
