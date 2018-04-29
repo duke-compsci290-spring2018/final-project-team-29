@@ -2,44 +2,48 @@
   <!--<div v-if="curr_team != undefined" id="app">-->
 
   <div id="app">
-    <Authentication :getUser="getUser"
-                    :setUser="setUser">
-    </Authentication>
+    <Register :teams="teams"
+              :teamsRef="storage">
+    </Register>
+    <!--<Register></Register>-->
+    <!--<Authentication :getUser="getUser"-->
+                    <!--:setUser="setUser">-->
+    <!--</Authentication>-->
 
-    <button @click="modeOfViewing = 'guest'">Guest</button>
-    <button @click="modeOfViewing = 'user'">User</button>
-    <button @click="modeOfViewing = 'admin'">Admin</button>
+    <!--<button @click="modeOfViewing = 'guest'">Guest</button>-->
+    <!--<button @click="modeOfViewing = 'user'">User</button>-->
+    <!--<button @click="modeOfViewing = 'admin'">Admin</button>-->
 
-    <div v-if="modeOfViewing === 'guest'">
-      <Guest :teams="teams"
-             :events="events"
-      ></Guest>
-      <br/>
-    </div>
+    <!--<div v-if="modeOfViewing === 'guest'">-->
+      <!--<Guest :teams="teams"-->
+             <!--:events="events"-->
+      <!--&gt;</Guest>-->
+      <!--<br/>-->
+    <!--</div>-->
 
-      <User v-if="userStatus === 'user' && signingIn === false"
-            :name="name"
-            :teams="teams"
-            :events="events"
-            :db="db"
-            :teamsRef="teamsRef">
-      </User>
-    </div>
+      <!--<User v-if="userStatus === 'user' && signingIn === false"-->
+            <!--:name="name"-->
+            <!--:teams="teams"-->
+            <!--:events="events"-->
+            <!--:db="db"-->
+            <!--:teamsRef="teamsRef">-->
+      <!--</User>-->
+    <!--</div>-->
 
-    <div v-if="modeOfViewing === 'admin'">
-      <Admin :teams="teams"
-             :events="events">
-      </Admin>
+    <!--<div v-if="modeOfViewing === 'admin'">-->
+      <!--<Admin :teams="teams"-->
+             <!--:events="events">-->
+      <!--</Admin>-->
 
-      <div v-if="!showLoginReg">
-          <Login :teams="teams"
-                 :userStatus="userStatus"
-                 @updateUserStatus="onUpdateUser">
-          </Login>
-      </div>
-      <router-view></router-view>
+      <!--<div v-if="!showLoginReg">-->
+          <!--<Login :teams="teams"-->
+                 <!--:userStatus="userStatus"-->
+                 <!--@updateUserStatus="onUpdateUser">-->
+          <!--</Login>-->
+      <!--</div>-->
+      <!--<router-view></router-view>-->
 
-      <a href="https://diddukewin.com" class="didduke">did duke win?</a>
+      <!--<a href="https://diddukewin.com" class="didduke">did duke win?</a>-->
 
   </div>
 </template>
@@ -47,18 +51,19 @@
 <script>
     import Firebase from 'firebase';
 
-    import Personal_Schedule from './components/Personal_Schedule.vue'
-    import Global_Schedule from './components/Global_Schedule.vue'
-    import Event_Creator from './components/Event_Creator.vue'
-    import Events_Calendar from './components/Events_Calendar.vue'
-    import Personal_Availability from './components/Personal_Availability.vue'
-    import Schedule_Builder from './components/Schedule_Builder.vue'
-    import Team_Schedule from './components/Team_Schedule.vue'
+    // import Personal_Schedule from './components/Personal_Schedule.vue'
+    // import Global_Schedule from './components/Global_Schedule.vue'
+    // import Event_Creator from './components/Event_Creator.vue'
+    // import Events_Calendar from './components/Events_Calendar.vue'
+    // import Personal_Availability from './components/Personal_Availability.vue'
+    // import Schedule_Builder from './components/Schedule_Builder.vue'
+    // import Team_Schedule from './components/Team_Schedule.vue'
     import Login from './components/Login.vue'
     import Register from './components/Register.vue'
-    import Guest from './components/Guest.vue'
-    import Admin from './components/Admin.vue'
-    import Authentication from './components/Authentication.vue'
+    // import Guest from './components/Guest.vue'
+    // import Admin from './components/Admin.vue'
+    // import Authentication from './components/Authentication.vue'
+    // import User from './components/User.vue'
     import VueRouter from 'vue-router'
 
 
@@ -91,6 +96,9 @@ export default {
     events: eventsRef
   },
   computed: {
+    firebase_teams: function() {
+      this.teams.filter(team => team['code'] === 'TEAM 0');
+    },
     curr_team: function() {
       return this.teams.filter(team => this.containsName(team, this.currName))[0];
     },
@@ -107,17 +115,18 @@ export default {
     }
   },
   components: {
-    Personal_Schedule,
-    Global_Schedule,
-    Events_Calendar,
-    Event_Creator,
-    Personal_Availability,
-    Schedule_Builder,
-    Team_Schedule,
-    Authentication,
-    Guest,
-    User,
-    Admin
+    // Personal_Schedule,
+    // Global_Schedule,
+    // Events_Calendar,
+    // Event_Creator,
+    // Personal_Availability,
+    // Schedule_Builder,
+    // Team_Schedule,
+    // Authentication,
+    // Guest,
+    // User,
+    // Admin,
+    Register
   },
   methods: {
     containsName: function(team, name) {
@@ -132,7 +141,8 @@ export default {
       this.nameInput = '';
     },
     test: function() {
-      console.log(this.curr_team);
+      console.log(this.containsName('TEAM 0', 'Matt'));
+      console.log('a');
     },
     createSchedule: function() {
       db.ref("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule").set(
