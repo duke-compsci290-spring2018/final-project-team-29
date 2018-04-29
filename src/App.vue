@@ -11,10 +11,9 @@
 
     <br><br><br>
     <div v-if="modeOfViewing === 'guest'">
-      <Guest :teams="teams"
-             :events="events"
-      ></Guest>
-      <br>
+        <Guest :teams="teams"
+             :events="events">
+        </Guest><br>
     </div>
 
     <div v-if="modeOfViewing === 'user'">
@@ -42,19 +41,19 @@
 <script>
     import Firebase from 'firebase';
 
-    // import Personal_Schedule from './components/Personal_Schedule.vue'
-    // import Global_Schedule from './components/Global_Schedule.vue'
-    // import Event_Creator from './components/Event_Creator.vue'
-    // import Events_Calendar from './components/Events_Calendar.vue'
-    // import Personal_Availability from './components/Personal_Availability.vue'
-    // import Schedule_Builder from './components/Schedule_Builder.vue'
-    // import Team_Schedule from './components/Team_Schedule.vue'
+    import Personal_Schedule from './components/Personal_Schedule.vue'
+    import Global_Schedule from './components/Global_Schedule.vue'
+    import Event_Creator from './components/Event_Creator.vue'
+    import Events_Calendar from './components/Events_Calendar.vue'
+    import Personal_Availability from './components/Personal_Availability.vue'
+    import Schedule_Builder from './components/Schedule_Builder.vue'
+    import Team_Schedule from './components/Team_Schedule.vue'
     import Login from './components/Login.vue'
     import Register from './components/Register.vue'
-    // import Guest from './components/Guest.vue'
-    // import Admin from './components/Admin.vue'
-    // import Authentication from './components/Authentication.vue'
-    // import User from './components/User.vue'
+    import Guest from './components/Guest.vue'
+    import Admin from './components/Admin.vue'
+    import Authentication from './components/Authentication.vue'
+    import User from './components/User.vue'
     import VueRouter from 'vue-router'
 
 
