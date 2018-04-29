@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <button @click="test">Test</button>
-    <br>
         <div class="calendar">
             <ul>
                 <li class="prev" v-if="count !== 0" v-on:click="count--">&#10094;</li>

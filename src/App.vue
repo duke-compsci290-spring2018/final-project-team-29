@@ -1,49 +1,40 @@
 <template>
-  <!--<div v-if="curr_team != undefined" id="app">-->
+  <div v-if="curr_team != undefined" id="app">
 
-  <div id="app">
-    <Register :teams="teams"
-              :teamsRef="storage">
-    </Register>
-    <!--<Register></Register>-->
-    <!--<Authentication :getUser="getUser"-->
-                    <!--:setUser="setUser">-->
-    <!--</Authentication>-->
+    <Authentication :getUser="getUser"
+                    :setUser="setUser">
+    </Authentication>
 
-    <!--<button @click="modeOfViewing = 'guest'">Guest</button>-->
-    <!--<button @click="modeOfViewing = 'user'">User</button>-->
-    <!--<button @click="modeOfViewing = 'admin'">Admin</button>-->
+    <button @click="modeOfViewing = 'guest'">Guest</button>
+    <button @click="modeOfViewing = 'user'">User</button>
+    <button @click="modeOfViewing = 'admin'">Admin</button>
 
-    <!--<div v-if="modeOfViewing === 'guest'">-->
-      <!--<Guest :teams="teams"-->
-             <!--:events="events"-->
-      <!--&gt;</Guest>-->
-      <!--<br/>-->
-    <!--</div>-->
+    <br><br><br>
+    <div v-if="modeOfViewing === 'guest'">
+      <Guest :teams="teams"
+             :events="events"
+      ></Guest>
+      <br>
+    </div>
 
-      <!--<User v-if="userStatus === 'user' && signingIn === false"-->
-            <!--:name="name"-->
-            <!--:teams="teams"-->
-            <!--:events="events"-->
-            <!--:db="db"-->
-            <!--:teamsRef="teamsRef">-->
-      <!--</User>-->
-    <!--</div>-->
+    <div v-if="modeOfViewing === 'user'">
+      <User :name="currName"
+            :teams="teams"
+            :events="events"
+            :db="db">
+      </User>
+    </div>
 
-    <!--<div v-if="modeOfViewing === 'admin'">-->
-      <!--<Admin :teams="teams"-->
-             <!--:events="events">-->
-      <!--</Admin>-->
+    <div v-if="modeOfViewing === 'admin'">
+      <Admin :teams="teams"
+             :events="events"
+             :db="db">
+      </Admin>
+    </div>
 
-      <!--<div v-if="!showLoginReg">-->
-          <!--<Login :teams="teams"-->
-                 <!--:userStatus="userStatus"-->
-                 <!--@updateUserStatus="onUpdateUser">-->
-          <!--</Login>-->
-      <!--</div>-->
-      <!--<router-view></router-view>-->
+      <router-view></router-view>
 
-      <!--<a href="https://diddukewin.com" class="didduke">did duke win?</a>-->
+      <a href="https://diddukewin.com" class="didduke">did duke win?</a>
 
   </div>
 </template>
@@ -115,17 +106,17 @@ export default {
     }
   },
   components: {
-    // Personal_Schedule,
-    // Global_Schedule,
-    // Events_Calendar,
-    // Event_Creator,
-    // Personal_Availability,
-    // Schedule_Builder,
-    // Team_Schedule,
-    // Authentication,
-    // Guest,
-    // User,
-    // Admin,
+    Personal_Schedule,
+    Global_Schedule,
+    Events_Calendar,
+    Event_Creator,
+    Personal_Availability,
+    Schedule_Builder,
+    Team_Schedule,
+    Authentication,
+    Guest,
+    User,
+    Admin,
     Register
   },
   methods: {
