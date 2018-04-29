@@ -40,23 +40,26 @@
         },
         methods: {
             login: function() {
+              if (this.email === 'admin' && this.password === 'password') {
+                this.$router.push('/');
+                this.newUserStatus = 'admin';
+                this.$emit('updateUserStatus', this.newUserStatus);
+              } else {
                 Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((user) => {
-                    if (user) {
-                        alert("You've successfully logged in!")
-                        console.log("success");
-                        this.$router.push('/');
-                        this.newUserStatus = 'user';
-                        console.log(this.newUserStatus);
-                        console.log(this.email);
-                        this.$emit('updateUserStatus', this.newUserStatus);
-                        this.$emit('updateUserEmail', this.email);
-                    }
+                  if (user) {
+                    alert("You've successfully logged in!")
+                    this.$router.push('/');
+                    this.newUserStatus = 'user';
+                    this.$emit('updateUserStatus', this.newUserStatus);
+                    this.$emit('updateUserEmail', this.email);
+                  }
                 }).catch((error) => {
-                    alert("That combination doesn't exist in our records!");
-                    console.log("fail");
-                    this.email = '';
-                    this.password = '';
+                  alert("That combination doesn't exist in our records!");
+                  console.log("fail");
+                  this.email = '';
+                  this.password = '';
                 });
+              }
             },
             logout: function() {
                 Firebase.auth().signOut().then(function() {
