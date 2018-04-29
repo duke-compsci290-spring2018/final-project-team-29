@@ -16,16 +16,24 @@
               </div>
           </div>
 
+
+
           <div class="col-lg-4">
               <h1><router-link to="/" class="routerLink">K-VITE</router-link></h1>
           </div>
 
           <div class="col-lg-4">
-              <button class="signInBtn" @click="clickedSignIn">
-                  <router-link to="/login" class="routerLink">Sign in</router-link>
-              </button>
+
+
+
+            <router-link to="/login" class="signUpLink">Log in!</router-link>
+            <router-link :to="{path: '/register', props: {teams: teams}}" class="signUpLink">Sign up!</router-link>
+              <!--<button class="signInBtn" @click="clickedSignIn">-->
+                  <!--<router-link to="/login" class="routerLink">Sign in</router-link>-->
+              <!--</button>-->
           </div>
       </div>
+
 
       <router-view></router-view>
 
@@ -44,7 +52,6 @@
              :events="events">
       </Admin>
 
-      <a href="https://diddukewin.com" class="didduke">did duke win?</a>
   </div>
 </template>
 

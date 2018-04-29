@@ -1,76 +1,80 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login col-lg-12">
+      <p>{{teams}}</p>
         <div class="btnChoices">
-            <input type="text" v-model="email" placeholder="Email"><br>
-            <input type="password" v-model="password" placeholder="Password"><br>
-            <button class="registerBtn" @click="register">Register</button><br>
-            
+            <!--<input type="text" v-model="email" placeholder="Email"><br>-->
+            <!--<input type="password" v-model="password" placeholder="Password"><br>-->
+            <!--<button class="registerBtn" @click="register">Register</button><br>-->
+
             <button id="registerPlayerBtn">Register<br>New Player</button>
             <button id="registerTeamBtn">Register<br>New Team</button><br>
-            
+
             Already have an account?<br>
             <router-link to="/" class="signInLink">Sign in now!</router-link><br><br>
-            
+
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
             <hr>
         </div>
-        
+
         <div class="registerPlayerOption">
             <br><input type="text" v-model="username" placeholder="Username"><br>
             <input type="password" v-model="password" placeholder="Password"><br>
             <input type="text" v-model="teamcode" placeholder="Your Team Code"><br>
             <button class="registerBtn" @click="registerPlayer">Register</button><br>
-            
+
             Already have an account?<br>
             <router-link to="/login" class="signInLink">Sign in now!</router-link><br><br>
-            
+
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
             <hr>
         </div>
-        
+
         <div class="registerTeamOption">
             <br><input type="text" v-model="username" placeholder="Username"><br>
             <input type="password" v-model="password" placeholder="Password"><br>
             <input type="text" v-model="teamcode" placeholder="Unique Team Code"><br>
             <button class="registerBtn" @click="registerTeam">Register</button><br>
-            
+
             Already have an account?<br>
             <router-link to="/login" class="signInLink">Sign in now!</router-link>
-            
+
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
             <hr>
         </div>
-        
+
     </div>
 </template>
 
 <script>
-    import Firebase from 'firebase'
-    
-    export default {
+
+  import Firebase from 'firebase'
+
+
+  export default {
         name: 'Register',
         props: ['teams', 'teamsRef'],
         data: function() {
             return {
                 email: '',
                 password: '',
-                teamcode: ''
+                teamcode: '',
+                username: ''
             }
         },
         methods: {
             register: function() {
-                Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
-                    alert(error.message);
-                }
-            )},
+              Firebase.auth().createUserWithEmailAndPassword(this.username, this.password).catch(error => alert(error.message));
+            },
             registerPlayer: function() {
+                this.register();
+                console.log("Yay");
                 if (this.isUniqueTeamCode()) {
                     alert("This team code is not in our system");
                 } else {
@@ -127,7 +131,7 @@
             }
         }
     }
-    
+
     $(document).ready(function(){
         $(document).on('click', '#registerPlayerBtn', function() {
             $('.btnChoices').css('visibility', 'hidden');
@@ -142,7 +146,7 @@
             $('.registerTeamOption').css('visibility', 'visible');
         });
     });
-    
+
 </script>
 
 <style lang="scss">
