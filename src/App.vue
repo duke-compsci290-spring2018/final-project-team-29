@@ -15,11 +15,21 @@
                             <i class="fa fa-search" aria-hidden="true"> Search</i>
                         </router-link>
                     </tr>
-                    <tr class="navOption">
-                        <router-link to="/team" class="routerLink">
-                            <i class="fa fa-group" aria-hidden="true"> Teams</i>
-                        </router-link>
-                    </tr>
+                <div v-if="userStatus === 'admin'">
+                  <tr class="navOption">
+                      <i @click="showAllTeams = true" class="fa fa-group" aria-hidden="true"> Teams</i>
+                      <div v-if="showAllTeams">
+                          <div v-for="team in teams">
+                            <p @click="showPlayers(team)">{{team['code']}}</p>
+                          </div>
+                          <br/>
+                          <div v-for="person in people">
+                            <p @click="currName=person">{{person}}</p>
+                        </div>
+                      </div>
+                  </tr>
+                </div>
+
                     <tr class="navOption">
                         <i class="fa fa-gear" aria-hidden="true"> Settings</i>
                     </tr>
@@ -74,7 +84,9 @@
     <div v-if="userStatus === 'admin' && !signingIn">
       <Admin :teams="teams"
              :events="events"
-             :db="db">
+             :db="db"
+             :currName="currName"
+      >
       </Admin>
     </div>
 
@@ -123,7 +135,9 @@ export default {
           userStatus: 'guest',
           signingIn: false,
           registering: false,
-          userEmail: ''
+          userEmail: '',
+        people: [],
+        showAllTeams: false
       }
   },
   firebase: {
@@ -210,6 +224,9 @@ export default {
         if (sure) {
             this.userStatus = 'guest';
         }
+    },
+    showPlayers: function(team) {
+      this.people = team["People"].map(person => person['name']);
     }
   }
 }
@@ -300,7 +317,7 @@ export default {
         position: fixed; z-index: 1;
         top: 0; left: 0;
         overflow: hidden;
-        padding-top: 30%;
+      padding: 10%;
         text-align: center;
     }
     .sidenav .navOption {
