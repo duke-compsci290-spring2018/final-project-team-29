@@ -1,7 +1,6 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login col-lg-12">
-      <p>{{teams}}</p>
         <div class="btnChoices">
             <!--<input type="text" v-model="email" placeholder="Email"><br>-->
             <!--<input type="password" v-model="password" placeholder="Password"><br>-->

@@ -7,7 +7,6 @@
         <button class="loginBtn" @click="login">Login</button><br><br>
         Don't have an account?<br>
         <router-link to="/register" class="signUpLink">Sign up now!</router-link><br><br>
-
         <button class="guestBtn" @click="logout">Logout</button>
         <router-link to="/">
             <button class="guestBtn">Continue as Guest</button>
@@ -47,7 +46,7 @@
                         console.log("success");
                         this.$router.push('/');
                         this.newUserStatus = 'user';
-                        this.$emit('updateUserStatus', this.newUserStatus);  
+                        this.$emit('updateUserStatus', this.newUserStatus);
                     }
                 }).catch((error) => {
                     alert("That combination doesn't exist in our records!");

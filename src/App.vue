@@ -26,7 +26,9 @@
               <button class="signInBtn routerLink" @click="goToLogin">Sign in</button>
           </div>
       </div>
-      
+
+    <router-view></router-view>
+
       <Guest v-if="userStatus === 'guest' && signingIn === false"
              :teams="teams"
              :events="events">
@@ -51,7 +53,7 @@
                  @updateUserStatus="onUpdateUser">
           </Login>
       </div>
-      
+
       <a href="https://diddukewin.com" class="didduke">did duke win?</a>
 
   </div>
