@@ -23,6 +23,11 @@
                     <tr class="navOption">
                         <i class="fa fa-gear" aria-hidden="true"> Settings</i>
                     </tr>
+                <tr class="navOption">
+
+                  <a href="https://diddukewin.com" >did duke win?</a>
+                </tr>
+
                 </div>
     </div>
 
@@ -32,7 +37,7 @@
 
     <div class="col-lg-4">
         <button class="signInBtn routerLink" @click="goToLogin" v-if="userStatus === 'guest'">Sign in</button>
-        <h2 v-if="userStatus !== 'guest'">
+        <h2 v-if="userStatus === 'user'">
             Welcome, {{ currName }}
             <i class="profileIcon fa fa-user-circle-o" aria-hidden="true"></i>
         </h2>
@@ -70,7 +75,6 @@
 
       <router-view></router-view>
 
-      <a href="https://diddukewin.com" class="didduke">did duke win?</a>
 
   </div>
 </template>
