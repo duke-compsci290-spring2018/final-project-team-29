@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div v-if="curr_team != undefined" id="app">
     
     <Authentication :getUser="getUser"
@@ -16,39 +15,7 @@
       ></Guest>
       <br/>
     </div>
-=======
-  <div id="app">
-      <div class="row">
-          <div class="col-lg-4">
-              <div class="nav" id="openBtn">☰</div>
-              <div class="sidenav">
-                  <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
-                  <tr class="navOption">
-                      <router-link to="/team" class="routerLink">
-                          <span class="glyphicon glyphicon-group"></span>Team
-                      </router-link>
-                  </tr>
-                  <tr class="navOption">
-                      <span class="navIcon glyphicon glyphicon-cogwheels"></span>Settings
-                  </tr>
-              </div>
-          </div>
-
-          <div class="col-lg-4">
-              <h1 class="routerLink" @click="refresh">K-VITE</h1>
-          </div>
-
-          <div class="col-lg-4">
-              <button class="signInBtn routerLink" @click="goToLogin">Sign in</button>
-          </div>
-      </div>
       
-      <Guest v-if="userStatus === 'guest' && signingIn === false"
-             :teams="teams"
-             :events="events">
-      </Guest>
->>>>>>> 68eef6ddc28b4ec10a645cca45ad0790693b0cdb
-
       <User v-if="userStatus === 'user' && signingIn === false"
             :name="name"
             :teams="teams"
@@ -78,8 +45,7 @@
 
 <script>
     import Firebase from 'firebase';
-
-<<<<<<< HEAD
+    
   import Personal_Schedule from './components/Personal_Schedule.vue'
   import New_User from './components/New_User.vue'
   import Global_Schedule from './components/Global_Schedule.vue'
@@ -92,21 +58,6 @@
   import Guest from './components/Guest.vue'
   import User from './components/User.vue'
   import Admin from './components/Admin.vue'
-=======
-    import Personal_Schedule from './components/Personal_Schedule.vue'
-    import Global_Schedule from './components/Global_Schedule.vue'
-    import Event_Creator from './components/Event_Creator.vue'
-    import Events_Calendar from './components/Events_Calendar.vue'
-    import Personal_Availability from './components/Personal_Availability.vue'
-    import Schedule_Builder from './components/Schedule_Builder.vue'
-    import Team_Schedule from './components/Team_Schedule.vue'
-    import Login from './components/Login.vue'
-    import Register from './components/Register.vue'
-    import Guest from './components/Guest.vue'
-    import Admin from './components/Admin.vue'
-    import VueRouter from 'vue-router'
->>>>>>> 68eef6ddc28b4ec10a645cca45ad0790693b0cdb
-
 
     var config = {
         apiKey: "AIzaSyCk3ttnDL-mfdMNJO27thtvd31CvRxpmvM",
@@ -121,7 +72,6 @@
     var teamsRef = db.ref('Teams');
     var eventsRef = db.ref('events');
 
-<<<<<<< HEAD
 export default {
   name: 'app',
   data () {
@@ -198,98 +148,6 @@ export default {
   }
 }
     
-=======
-    export default {
-        name: 'app',
-        data () {
-            return {
-                storage: teamsRef,
-                currName: "Matt",
-                nameInput: '',
-                db: db,
-                userStatus: 'guest',
-                signingIn: false,
-                showLoginReg: true
-            }
-        },
-        firebase: {
-            teams: teamsRef,
-            events: eventsRef
-        },
-        computed: {
-            curr_team: function() {
-              return this.teams.filter(team => this.containsName(team, this.currName))[0];
-            },
-            curr_person: function() {
-              if (this.curr_team !== undefined) {
-                return this.curr_team["People"].filter(person => person["name"] === this.currName)[0];
-              }
-            },
-            availability_ref: function() {
-              return 'Teams/' + this.curr_team['.key'] + "/People/" + this.curr_person['key'] + "/available/";
-            },
-            schedule_ref: function() {
-              return 'Teams/' + this.curr_team['.key'] + "/People/" + this.curr_person['key'] + "/schedule/";
-            }
-        },
-        components: {
-            Personal_Schedule,
-            Global_Schedule,
-            Events_Calendar,
-            Event_Creator,
-            Personal_Availability,
-            Schedule_Builder,
-            Team_Schedule,
-            Login,
-            Register,
-            Guest,
-            Admin
-        },
-        methods: {
-            refresh: function() {
-                this.$router.push('/');
-                this.signingIn = false;
-            },
-            goToLogin: function() {
-                this.signingIn = true;
-                this.$router.push({
-                    path: '/login',
-                    params: {
-                        item: this.userStatus,
-                        item: this.teams,
-                        item: this.teamsRef
-                    }
-                });
-            },
-            onUpdateUser(newStatus) {
-                this.userStatus = newStatus;
-                this.signingIn = false;
-            },
-            containsName: function(team, name) {
-              try {
-                team["People"].forEach(person => console.log(person));
-                return team["People"].filter(person => person["name"] === name).length >= 1;
-              } catch(err) {
-              }
-            },
-            submitName: function() {
-              this.currName = this.nameInput;
-              this.nameInput = '';
-            },
-            createSchedule: function() {
-              db.ref("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule").set(
-                this.generateRandomSchedule());
-            },
-            generateRandomSchedule: function() {
-              return this.curr_person["schedule"].map(arr => arr.map(bool => Math.random() >= 0.5));
-            },
-          nothing: function() {
-              
-          }
-        }
-    }
-
->>>>>>> 68eef6ddc28b4ec10a645cca45ad0790693b0cdb
     $(document).ready(function(){
         $(document).on('click', '#openBtn', function() {
             $('.sidenav').css('width', '20%');
@@ -300,10 +158,7 @@ export default {
             $('body').css('margin-left', '0');
         });
     });
-<<<<<<< HEAD
-=======
 
->>>>>>> 68eef6ddc28b4ec10a645cca45ad0790693b0cdb
 </script>
 
 <style lang="scss">
@@ -396,10 +251,6 @@ export default {
         font-size: 1.2em;
         text-transform: uppercase;
         position: absolute;
-<<<<<<< HEAD
-        bottom: 5; right: 1.5%;
-=======
         bottom: 2%; right: 1%;
->>>>>>> 68eef6ddc28b4ec10a645cca45ad0790693b0cdb
     }
 </style>
