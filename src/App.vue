@@ -31,6 +31,7 @@
                 </div>
     </div>
 
+
     <div class="col-lg-4">
       <h1 class="routerLink" @click="refresh">K-VITE</h1>
     </div>
@@ -46,12 +47,13 @@
     <div v-if="signingIn">
         <Login :teams="teams"
                :userStatus="userStatus"
+               :teamsRef="storage"
                @updateUserStatus="onUpdateUser"
                @updateUserEmail="onUpdateName">
         </Login>
     </div>
 
-    <br><br><br><br><br>
+    <br><br>
     <div v-if="userStatus === 'guest' && !signingIn">
         <Guest :teams="teams"
                :events="events">

@@ -1,8 +1,6 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login col-lg-12">
-      <p>{{teams}}</p>
-      <button @click="getApp">Test reading from App</button>
         <div class="btnChoices">
             <button id="registerPlayerBtn">Register<br>New Player</button>
             <button id="registerTeamBtn">Register<br>New Team</button><br>
