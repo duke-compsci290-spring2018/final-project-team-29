@@ -11,33 +11,34 @@
         </div>
 
         <div class="registerPlayerOption">
+            <h2>Register New Player</h2>
+            <h3>on an existing team</h3>
             <br><input type="text" v-model="email" placeholder="Email"><br>
             <input type="password" v-model="password" placeholder="Password"><br>
             <input type="text" v-model="teamcode" placeholder="Your Team Code"><br>
             <button class="registerBtn" @click="registerPlayer">Register</button><br>
-          <p>{{email}}</p>
-
-            Already have an account?<br>
-            <router-link to="/login" class="signInLink">Sign in now!</router-link><br><br>
 
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
+            
+            <i class="backIcon fa fa-backward" aria-hidden="true"></i><br><br>
             <hr>
         </div>
 
         <div class="registerTeamOption">
+            <h2>Register New Team</h2>
+            <h3>as a new player</h3>
             <br><input type="text" v-model="email" placeholder="Email"><br>
             <input type="password" v-model="password" placeholder="Password"><br>
             <input type="text" v-model="teamcode" placeholder="Unique Team Code"><br>
             <button class="registerBtn" @click="registerTeam">Register</button><br>
 
-            Already have an account?<br>
-            <router-link to="/login" class="signInLink">Sign in now!</router-link>
-
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
+            
+            <i class="backIcon fa fa-backward" aria-hidden="true"></i><br><br>
             <hr>
         </div>
 
@@ -45,17 +46,14 @@
 </template>
 
 <script>
-
   import Firebase from 'firebase'
-
-
 
   export default {
         name: 'Register',
     props: ['teams', 'teamsRef'],
         data: function() {
             return {
-                email: 'test',
+                email: '',
                 password: '',
                 teamcode: '',
                 username: '',
@@ -140,11 +138,23 @@
             $('.registerPlayerOption').css('position', 'absolute');
             $('.registerTeamOption').css('visibility', 'visible');
         });
+        $(document).on('click', '.backIcon', function() {
+            $('.btnChoices').css('visibility', 'visible');
+            $('.btnChoices').css('position', 'none');
+            $('.registerPlayerOption').css('visibility', 'hidden');
+            $('.registerPlayerOption').css('position', 'absolute');
+            $('.registerTeamOption').css('visibility', 'hidden');
+            $('.registerTeamOption').css('position', 'absolute');
+        });
     });
 
 </script>
 
 <style lang="scss">
+    h3 {
+        font-style: italic;
+        line-height: 0.1em;
+    }
     .register {
         text-align: center;
     }
@@ -181,7 +191,7 @@
        background-color: #abbeff;
         border-radius: 5px;
         border: 0;
-        width: 10%;
+        width: 11%;
         margin: 2%;
         font-size: 1.2em;
         text-transform: uppercase;
@@ -200,6 +210,9 @@
     .signInLink {
         font-weight: bold;
         color: black;
+    }
+    .backIcon {
+        font-size: 2em;
     }
 </style>
 

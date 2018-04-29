@@ -111,7 +111,7 @@
         background-color: lightgrey;
         border-radius: 5px;
         border: 0;
-        width: 12%;
+        width: 11%;
         font-size: 0.8em;
         text-transform: uppercase;
         padding: 1%;

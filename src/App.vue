@@ -38,9 +38,12 @@
 
     <div class="col-lg-4">
         <button class="signInBtn routerLink" @click="goToLogin" v-if="userStatus === 'guest'">Sign in</button>
-        <h2 v-if="userStatus === 'user'">
-            Welcome, {{ currName }}
+        <h2 class="welcomeMsg" v-if="userStatus !== 'guest'">
+            Welcome<h2 v-if="userStatus === 'user'">, {{ currName }}</h2>!
             <i class="profileIcon fa fa-user-circle-o" aria-hidden="true"></i>
+            <div class="dropdown">
+                LOG OUT
+            </div>
         </h2>
     </div>
 
@@ -114,7 +117,7 @@ export default {
   data () {
       return {
           storage: teamsRef,
-          currName: "Matt",
+          currName: "matt",
           nameInput: '',
           db: db,
           userStatus: 'guest',
@@ -232,7 +235,7 @@ export default {
         font-weight: bold;
         font-size: 3em;
     }
-    h2 {
+    .welcomeMsg {
         font-family: Didot;
         text-align: center;
         font-style: italic;
@@ -314,5 +317,21 @@ export default {
         text-transform: uppercase;
         position: absolute;
         bottom: 2%; right: 1%;
+    }
+    .profileIcon {
+        position: relative;
+        display: inline-block;
+    }
+    .dropdown {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+    .profileIcon:hover, .dropdown {
+        display: block;
     }
 </style>

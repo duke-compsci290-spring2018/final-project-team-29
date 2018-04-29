@@ -42,7 +42,7 @@
     data () {
       return {
         storage: this.db.ref('Teams'),
-        currName: "Matt",
+        currName: "matt",
         nameInput: ''
       }
     },
