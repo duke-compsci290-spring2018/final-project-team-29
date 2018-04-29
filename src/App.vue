@@ -19,38 +19,38 @@
           <div class="col-lg-4">
               <h1><router-link to="/" class="routerLink">K-VITE</router-link></h1>
           </div>
-          
+
           <div class="col-lg-4">
               <button class="signInBtn" @click="clickedSignIn">
                   <router-link to="/login" class="routerLink">Sign in</router-link>
               </button>
           </div>
       </div>
-      
+
       <router-view></router-view>
-      
+
       <Guest v-if="userStatus === 'guest' && signingIn === false"
              :teams="teams"
              :events="events">
       </Guest>
-      
+
       <User v-if="userStatus === 'user' && signingIn === false"
              :teams="teams"
              :events="events">
       </User>
-      
+
       <Admin v-if="userStatus === 'admin' && signingIn === false"
              :teams="teams"
              :events="events">
       </Admin>
-      
+
       <a href="https://diddukewin.com" class="didduke">did duke win?</a>
   </div>
 </template>
 
 <script>
     import Firebase from 'firebase';
-    
+
     import Personal_Schedule from './components/Personal_Schedule.vue'
     import Global_Schedule from './components/Global_Schedule.vue'
     import Event_Creator from './components/Event_Creator.vue'
@@ -62,8 +62,8 @@
     import Register from './components/Register.vue'
     import Guest from './components/Guest.vue'
     import Admin from './components/Admin.vue'
-    
-    
+
+
     var config = {
         apiKey: "AIzaSyCk3ttnDL-mfdMNJO27thtvd31CvRxpmvM",
         authDomain: "final-efcc8.firebaseapp.com",
@@ -88,11 +88,11 @@
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
     // The start method will wait until the DOM is loaded.
     ui.start('#firebaseui-auth-container', uiConfig);
-    
+
     var db = Firebase.initializeApp(config).database();
     var teamsRef = db.ref('Teams');
     var eventsRef = db.ref('events');
-    
+
     export default {
         name: 'app',
         data () {
@@ -168,7 +168,7 @@
             }
         }
     }
-    
+
     $(document).ready(function(){
         $(document).on('click', '#openBtn', function() {
             $('.sidenav').css('width', '20%');
@@ -179,7 +179,7 @@
             $('body').css('margin-left', '0');
         });
     });
-    
+
 </script>
 
 <style lang="scss">
