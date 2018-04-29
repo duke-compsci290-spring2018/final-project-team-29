@@ -5,12 +5,11 @@
         <input type="password" v-model="password" placeholder="Password"><br><br>
         
         <button class="loginBtn" @click="login">Login</button><br><br>
-        Don't have an account?<br>{{ teams }}
+        Don't have an account?<br>
         <router-link to="/register" class="signUpLink">Sign up now!</router-link><br><br>
-        
         <button class="guestBtn" @click="logout">Logout</button>
         <router-link to="/">
-            <button class="guestBtn" @click="clickedSignIn">Continue as Guest</button>
+            <button class="guestBtn">Continue as Guest</button>
         </router-link><br><br>
     </div>
 </template>
@@ -21,12 +20,13 @@
     
     export default {
         name: 'Login',
-        props: ['teams', 'teamsRef', 'userStatus'],
+        props: ['teams', 'userStatus'],
         data: function() {
             return {
                 email: '',
                 password: '',
-                newUserStatus: this.userStatus
+                newUserStatus: this.userStatus,
+                cTeams: this.teams
             }
         },
         components: {
@@ -40,13 +40,13 @@
         },
         methods: {
             login: function() {
-                console.log("test" + this.newUserStatus);
                 Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((user) => {
                     if (user) {
                         alert("You've successfully logged in!")
                         console.log("success");
                         this.$router.push('/');
-                        this.$emit('updateUserStatus', 'user');
+                        this.newUserStatus = 'user';
+                        this.$emit('updateUserStatus', this.newUserStatus);  
                     }
                 }).catch((error) => {
                     alert("That combination doesn't exist in our records!");
@@ -60,10 +60,6 @@
                 }).catch(function(error) {
                         alert(error.message);
                 });
-            },
-            clickedSignIn: function() {
-                var newData = false;
-                this.$emit('update', newData);
             }
         }
     }
