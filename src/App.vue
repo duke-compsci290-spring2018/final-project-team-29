@@ -16,25 +16,20 @@
       <br/>
     </div>
       
-      <User v-if="userStatus === 'user' && signingIn === false"
-            :name="name"
+    <div v-if="modeOfViewing === 'user'">
+      <User :name="name"
             :teams="teams"
             :events="events"
             :db="db"
             :teamsRef="teamsRef">
       </User>
-
-      <Admin v-if="userStatus === 'admin' && signingIn === false"
-             :teams="teams"
+    </div>
+      
+    <div v-if="modeOfViewing === 'admin'">
+      <Admin :teams="teams"
              :events="events">
       </Admin>
-
-      <div v-if="!showLoginReg">
-          <Login :teams="teams"
-                 :userStatus="userStatus"
-                 @updateUserStatus="onUpdateUser">
-          </Login>
-      </div>
+    </div>
       
       <router-view></router-view>
       
