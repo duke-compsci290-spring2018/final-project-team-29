@@ -1,0 +1,23 @@
+{
+  "0": {
+    "opponent": "UNC",
+    "day": "Day 2",
+    "time": "6pm",
+    "location": "home",
+    "length": "2"
+  },
+  "1": {
+    "opponent": "Notre Dame",
+    "day": "Day 4",
+    "time": "1pm",
+    "location": "away",
+    "length": "3"
+  },
+  "2": {
+    "opponent": "UVA",
+    "day": "Day 3",
+    "time": "4pm",
+    "location": "away",
+    "length": "2"
+  }
+}

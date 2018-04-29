@@ -16,10 +16,12 @@
               </div>
           </div>
 
+
+
           <div class="col-lg-4">
               <h1 class="routerLink" @click="refresh">K-VITE</h1>
           </div>
-          
+
           <div class="col-lg-4">
               <button class="signInBtn routerLink" @click="goToLogin">Sign in</button>
           </div>
@@ -29,7 +31,7 @@
              :teams="teams"
              :events="events">
       </Guest>
-      
+
       <User v-if="userStatus === 'user' && signingIn === false"
             :name="name"
             :teams="teams"
@@ -37,12 +39,12 @@
             :db="db"
             :teamsRef="teamsRef">
       </User>
-      
+
       <Admin v-if="userStatus === 'admin' && signingIn === false"
              :teams="teams"
              :events="events">
       </Admin>
-      
+
       <div v-if="!showLoginReg">
           <Login :teams="teams"
                  :userStatus="userStatus"
@@ -51,12 +53,13 @@
       </div>
       
       <a href="https://diddukewin.com" class="didduke">did duke win?</a>
+
   </div>
 </template>
 
 <script>
     import Firebase from 'firebase';
-    
+
     import Personal_Schedule from './components/Personal_Schedule.vue'
     import Global_Schedule from './components/Global_Schedule.vue'
     import Event_Creator from './components/Event_Creator.vue'
@@ -68,8 +71,9 @@
     import Register from './components/Register.vue'
     import Guest from './components/Guest.vue'
     import Admin from './components/Admin.vue'
-    
-    
+    import VueRouter from 'vue-router'
+
+
     var config = {
         apiKey: "AIzaSyCk3ttnDL-mfdMNJO27thtvd31CvRxpmvM",
         authDomain: "final-efcc8.firebaseapp.com",
@@ -78,11 +82,11 @@
         storageBucket: "final-efcc8.appspot.com",
         messagingSenderId: "718555914790"
     };
-    
+
     var db = Firebase.initializeApp(config).database();
     var teamsRef = db.ref('Teams');
     var eventsRef = db.ref('events');
-    
+
     export default {
         name: 'app',
         data () {
@@ -170,10 +174,13 @@
             },
             generateRandomSchedule: function() {
               return this.curr_person["schedule"].map(arr => arr.map(bool => Math.random() >= 0.5));
-            }
+            },
+          nothing: function() {
+              
+          }
         }
     }
-    
+
     $(document).ready(function(){
         $(document).on('click', '#openBtn', function() {
             $('.sidenav').css('width', '20%');
@@ -184,7 +191,7 @@
             $('body').css('margin-left', '0');
         });
     });
-    
+
 </script>
 
 <style lang="scss">

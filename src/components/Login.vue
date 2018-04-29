@@ -3,10 +3,11 @@
     <div class="login col-lg-12">
         <br><input type="text" v-model="email" placeholder="Email"><br>
         <input type="password" v-model="password" placeholder="Password"><br><br>
-        
+
         <button class="loginBtn" @click="login">Login</button><br><br>
         Don't have an account?<br>
         <router-link to="/register" class="signUpLink">Sign up now!</router-link><br><br>
+
         <button class="guestBtn" @click="logout">Logout</button>
         <router-link to="/">
             <button class="guestBtn">Continue as Guest</button>
@@ -17,7 +18,7 @@
 <script>
     import Firebase from 'firebase'
     import User from './User.vue'
-    
+
     export default {
         name: 'Login',
         props: ['teams', 'userStatus'],
