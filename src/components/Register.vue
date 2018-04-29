@@ -1,6 +1,8 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login col-lg-12">
+      <p>{{teams}}</p>
+      <button @click="getApp">Test reading from App</button>
         <div class="btnChoices">
             <button id="registerPlayerBtn">Register<br>New Player</button>
             <button id="registerTeamBtn">Register<br>New Team</button><br>
@@ -18,6 +20,7 @@
             <input type="password" v-model="password" placeholder="Password"><br>
             <input type="text" v-model="teamcode" placeholder="Your Team Code"><br>
             <button class="registerBtn" @click="registerPlayer">Register</button><br>
+          <p>{{email}}</p>
 
             Already have an account?<br>
             <router-link to="/login" class="signInLink">Sign in now!</router-link><br><br>
@@ -42,6 +45,7 @@
             </router-link><br><br>
             <hr>
         </div>
+      <router-link to="/user">Continue as this user</router-link>
 
     </div>
 </template>
@@ -51,34 +55,34 @@
   import Firebase from 'firebase'
 
 
+
   export default {
         name: 'Register',
-        props: ['teams', 'teamsRef'],
+    props: ['teams', 'teamsRef'],
         data: function() {
             return {
-                email: '',
+                email: 'test',
                 password: '',
                 teamcode: '',
-                username: ''
+                username: '',
             }
         },
         methods: {
             register: function() {
-              Firebase.auth().createUserWithEmailAndPassword(this.username, this.password).catch(error => alert(error.message));
+              Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(error => alert(error.message));
             },
             registerPlayer: function() {
                 this.register();
-                console.log("Yay");
                 if (this.isUniqueTeamCode()) {
                     alert("This team code is not in our system");
                 } else {
-                    var key = this.teams.filter(team => team["code"] === this.teamCode)[0];
-                    var people_in_team = this.teams.filter(team => team["code"] === this.teamCode)[0]["People"].length;
+                    var key = this.teams.filter(team => team["code"] === this.teamcode)[0];
+                    var people_in_team = this.teams.filter(team => team["code"] === this.teamcode)[0]["People"].length;
                     this.teamsRef.child(key['.key']).child("People").child(people_in_team).set({
                         "available": this.generateFullArray(),
                         "schedule": this.generateFullArray().map(arr => arr.map(bool => !bool)),
                         "captain": false,
-                        "name": this.email,
+                        "name": this.generate_user_from_email(this.email),
                         "pass": this.password,
                         "key": people_in_team
                     });
@@ -97,7 +101,7 @@
                                     "schedule": this.generateFullArray().map(arr => arr.map(bool => !bool)),
                                     "captain": true,
                                     "key": "0",
-                                    "name": this.email,
+                                    "name": this.generate_user_from_email(this.email),
                                     "pass": this.password
                                 }
                             },
@@ -113,6 +117,9 @@
                 this.password = '';
                 this.teamcode = '';
             },
+          generate_user_from_email (email) {
+              return email.split("@")[0];
+          },
             generateFullArray() {
                 var new_array = [[], [], [], [], []]
                 return new_array.map(arr => [true, true, true, true, true, true, true, true, true, true, true, true, true]);

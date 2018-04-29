@@ -7,7 +7,7 @@
       </th>
     </tr>
     <tr class="border" v-for="(one, col) in schedule">
-        <div class="day"><br>Day {{col+1}}</div><br>
+      <div class="day"><br>Day {{col+1}}</div><br>
       <th class="rows" v-for="(two, row) in one" v-bind:style="[two ? trueStyle : falseStyle]">
       </th>
     </tr>
@@ -42,33 +42,29 @@
         else if (parseInt(n) >= 2) {
           return (n+7).toString() + "am";
         } else {
-
         }
       }
     }
-
   }
 </script>
 
 <style lang="scss">
-    .border {
-        border: 1px solid black;
-        width: 7.5%;
-        padding: 2%;
-    }
-    .green {
-        background-color: green;
-    }
-    table {
-        text-transform: uppercase;
-    }
-    th {
-        text-align: center;
-    }
-    #day {
-        text-align: right;
-        font-style: italic;
-    }
+  .border {
+    border: 1px solid black;
+    width: 7.5%;
+    padding: 2%;
+  }
+  .green {
+    background-color: green;
+  }
+  table {
+    text-transform: uppercase;
+  }
+  th {
+    text-align: center;
+  }
+  #day {
+    text-align: right;
+    font-style: italic;
+  }
 </style>
-
-

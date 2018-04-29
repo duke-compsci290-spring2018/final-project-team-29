@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <button @click="showbball">Show Games</button>
+    <button v-if="showButton" @click="showbball">Show Games</button>
     <table>
         <tr>
             <th class="time" v-for="n in 14">
@@ -29,12 +29,7 @@ this.jsonPath = require("../data/" + path + ".json" );
     props: [ 'events'],
     data: function() {
       return {
-        trueStyle: {
-          backgroundColor: 'green'
-        },
-        falseStyle: {
-          backgroundColor: 'red'
-        }
+        showButton: true
       }
     },
     methods: {
@@ -87,6 +82,7 @@ this.jsonPath = require("../data/" + path + ".json" );
 
       },
       showbball() {
+        this.showButton=false;
         var men_data = require("../data/mens_bball.json");
         this.addEvent(men_data['0'], true);
         this.addEvent(men_data['1'], true);

@@ -1,6 +1,6 @@
 <template>
   <div v-if="curr_team != undefined" id="app">
-      
+
     <div class="col-lg-4">
         <div class="nav" id="openBtn">☰</div>
               <div class="sidenav">
@@ -34,7 +34,7 @@
     <div class="col-lg-4">
       <button class="signInBtn routerLink" @click="goToLogin">Sign in</button>
     </div>
-      
+
     <div v-if="signingIn">
         <Login :teams="teams"
                :userStatus="userStatus"
@@ -49,7 +49,7 @@
                :events="events">
         </Guest><br>
     </div>
-      
+
     <div v-if="userStatus === 'user' && !signingIn">
       <User :name="currName"
             :teams="teams"
@@ -57,16 +57,16 @@
             :db="db">
       </User>
     </div>
-      
+
     <div v-if="userStatus === 'admin' && !signingIn">
       <Admin :teams="teams"
              :events="events"
              :db="db">
       </Admin>
     </div>
-      
+
       <router-view></router-view>
-      
+
       <a href="https://diddukewin.com" class="didduke">did duke win?</a>
 
   </div>
@@ -74,7 +74,7 @@
 
 <script>
     import Firebase from 'firebase';
-    
+
   import Personal_Schedule from './components/Personal_Schedule.vue'
   import Global_Schedule from './components/Global_Schedule.vue'
   import Event_Creator from './components/Event_Creator.vue'
@@ -86,6 +86,7 @@
   import Guest from './components/Guest.vue'
   import User from './components/User.vue'
   import Admin from './components/Admin.vue'
+    import Register from './components/Register.vue'
 
     var config = {
         apiKey: "AIzaSyCk3ttnDL-mfdMNJO27thtvd31CvRxpmvM",
@@ -118,6 +119,9 @@ export default {
     events: eventsRef
   },
   computed: {
+    firebase_teams: function() {
+      this.teams.filter(team => team['code'] === 'TEAM 0');
+    },
     curr_team: function() {
       return this.teams.filter(team => this.containsName(team, this.currName))[0];
     },
@@ -144,7 +148,8 @@ export default {
     Login,
     Guest,
     User,
-    Admin
+    Admin,
+    Register
   },
   methods: {
       refresh: function() {
@@ -155,6 +160,8 @@ export default {
         this.signingIn = false;
     },
     onUpdateName(newName) {
+        console.log("UPDATENAME");
+        console.log(newName);
         this.currName = newName.split("@")[0];
     },
     goToLogin: function() {
@@ -172,7 +179,8 @@ export default {
       this.nameInput = '';
     },
     test: function() {
-      console.log(this.curr_team);
+      console.log(this.containsName('TEAM 0', 'Matt'));
+      console.log('a');
     },
     createSchedule: function() {
       db.ref("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule").set(
@@ -189,7 +197,7 @@ export default {
     },
   }
 }
-    
+
     $(document).ready(function(){
         $(document).on('click', '#openBtn', function() {
             $('.sidenav').css('width', '20%');
@@ -200,7 +208,6 @@ export default {
             $('body').css('margin-left', '0');
         });
     });
-
 </script>
 
 <style lang="scss">

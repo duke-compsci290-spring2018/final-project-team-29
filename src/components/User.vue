@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-        <div class="calendar"> 
+        <div class="calendar">
             <ul>
                 <li class="prev" v-on:click="count--">&#10094;</li>
                 <li class="next" v-on:click="count++">&#10095;</li>
@@ -19,7 +19,7 @@
                                    :db="db">
             </Personal_Availability>
         </div>
-        
+
         <div v-if="count % 6 === 1">
             <Personal_Schedule :teamsRef="storage"
                                :teams="teams"
@@ -27,7 +27,8 @@
                                :team="curr_team">
             </Personal_Schedule>
         </div>
-      
+
+
         <div v-if="count % 6 === 2">
             <Schedule_Builder :availability_schedule="curr_person['available']"
                               :schedule_ref="schedule_ref"
@@ -36,12 +37,13 @@
                               :personal_schedule="curr_person['schedule']">
             </Schedule_Builder>
         </div>
-      
+
         <div v-if="count % 6 === 3">
             <Team_Schedule :curr_team="curr_team">
             </Team_Schedule>
         </div>
-      
+
+
         <div v-if="count % 6 === 4">
             <Global_Schedule :teams="teams">
             </Global_Schedule>
@@ -65,6 +67,7 @@
   import Schedule_Builder from './Schedule_Builder.vue'
   import Team_Schedule from './Team_Schedule.vue'
   import Guest from './Guest.vue'
+  import Register from './Register'
 
 
   export default {
