@@ -83,7 +83,7 @@
         }
       },
       submitName: function() {
-        this.currName = this.nameInput;
+        this.currName = this.nameInput.toLowerCase();
         this.nameInput = '';
       },
       test: function() {

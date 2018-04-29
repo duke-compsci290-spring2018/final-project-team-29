@@ -311,7 +311,7 @@ export default {
         position: fixed; z-index: 1;
         top: 0; left: 0;
         overflow: hidden;
-      padding: 10%;
+      padding-top: 10%;
         text-align: center;
     }
     .sidenav .navOption {
