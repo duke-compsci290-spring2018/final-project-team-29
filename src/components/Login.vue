@@ -8,6 +8,7 @@
         Don't have an account?<br>{{ teams }}
         <router-link to="/register" class="signUpLink">Sign up now!</router-link><br><br>
         
+        <button class="guestBtn" @click="logout">Logout</button>
         <router-link to="/">
             <button class="guestBtn" @click="clickedSignIn">Continue as Guest</button>
         </router-link><br><br>
@@ -31,19 +32,29 @@
         components: {
             User
         },
+        computed: {
+            loginCheck: function() {
+                console.log(Firebase.auth().currentUser);
+                return Firebase.auth().currentUser;
+            }
+        },
         methods: {
+            success: function() {
+                console.log("hi");
+            },
             login: function() {
-                Firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+                Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((user) => {
+                    if (user) {
+                        alert("You've successfully logged in!")
+                        console.log("success");
+                        this.$router.push('/user')
+                    }
+                }).catch((error) => {
                     alert("That combination doesn't exist in our records!");
-                });
-                var user = firebase.auth().currentUser;
-                if (user) {
-                    this.$router.push('/user');
-                } else {
+                    console.log("fail");
                     this.email = '';
                     this.password = '';
-                    this.$router.push('/');
-                }
+                });
             },
             logout: function() {
                 Firebase.auth().signOut().then(function() {
