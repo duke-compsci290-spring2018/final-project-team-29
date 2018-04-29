@@ -17,7 +17,6 @@ Vue.use(VueFire);
 Vue.use(VueRouter);
 
 const routes = [
-<<<<<<< HEAD
     { path: '/authentication', component: Authentication },
     { path: '/login', component: Login },
     { path: '/register', component: Register },
