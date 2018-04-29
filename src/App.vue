@@ -23,8 +23,14 @@
                     <tr class="navOption">
                         <i class="fa fa-gear" aria-hidden="true"> Settings</i>
                     </tr>
+                <tr class="navOption">
+
+                  <a href="https://diddukewin.com" >did duke win?</a>
+                </tr>
+
                 </div>
     </div>
+
 
     <div class="col-lg-4">
       <h1 class="routerLink" @click="refresh">K-VITE</h1>
@@ -32,7 +38,7 @@
 
     <div class="col-lg-4">
         <button class="signInBtn routerLink" @click="goToLogin" v-if="userStatus === 'guest'">Sign in</button>
-        <h2 v-if="userStatus !== 'guest'">
+        <h2 v-if="userStatus === 'user'">
             Welcome, {{ currName }}
             <i class="profileIcon fa fa-user-circle-o" aria-hidden="true"></i>
         </h2>
@@ -41,12 +47,13 @@
     <div v-if="signingIn">
         <Login :teams="teams"
                :userStatus="userStatus"
+               :teamsRef="storage"
                @updateUserStatus="onUpdateUser"
                @updateUserEmail="onUpdateName">
         </Login>
     </div>
 
-    <br><br><br><br><br>
+    <br><br>
     <div v-if="userStatus === 'guest' && !signingIn">
         <Guest :teams="teams"
                :events="events">

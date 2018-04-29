@@ -1,36 +1,52 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
-    <div class="login col-lg-12">
-        <br><input type="text" v-model="email" placeholder="Email"><br>
-        <input type="password" v-model="password" placeholder="Password"><br><br>
+  <div>
+    <div v-if="!signUp" class="login col-lg-12">
+      <br><input type="text" v-model="email" placeholder="Email"><br>
+      <input type="password" v-model="password" placeholder="Password"><br><br>
 
-        <button class="loginBtn" @click="login">Login</button><br><br>
-        Don't have an account?<br>
-        <router-link to="/register" class="signUpLink">Sign up now!</router-link><br><br>
-        <button class="guestBtn" @click="logout">Logout</button>
-        <router-link to="/">
-            <button class="guestBtn">Continue as Guest</button>
-        </router-link><br><br>
+      <button class="loginBtn" @click="login">Login</button><br><br>
+      Don't have an account?<br>
+      <button @click="signUp = true">Sign up now!</button>
+      <!--<router-link to="/register" class="signUpLink">Sign up now!</router-link><br><br>-->
+
+
+
+      <button class="guestBtn" @click="logout">Logout</button>
+      <router-link to="/">
+        <button class="guestBtn">Continue as Guest</button>
+      </router-link><br><br>
     </div>
+    <div v-else>
+      <Register :teams="teams"
+                :teamsRef="teamsRef"
+      >
+      </Register>
+    </div>
+  </div>
+
 </template>
 
 <script>
     import Firebase from 'firebase'
     import User from './User.vue'
+    import Register from './Register.vue'
 
     export default {
         name: 'Login',
-        props: ['teams', 'userStatus'],
+        props: ['teams', 'userStatus', 'teamsRef'],
         data: function() {
             return {
                 email: '',
                 password: '',
                 newUserStatus: this.userStatus,
-                cTeams: this.teams
+                cTeams: this.teams,
+              signUp: false
             }
         },
         components: {
-            User
+            User,
+          Register
         },
         computed: {
             loginCheck: function() {
