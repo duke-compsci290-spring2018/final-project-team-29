@@ -161,8 +161,6 @@ export default {
         this.signingIn = false;
     },
     onUpdateName(newName) {
-        console.log("UPDATENAME");
-        console.log(newName);
         this.currName = newName.split("@")[0];
     },
     goToLogin: function() {
