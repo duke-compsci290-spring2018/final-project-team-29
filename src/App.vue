@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @update="updateSignIn">
+  <div id="app">
       <div class="row">
           <div class="col-lg-4">
               <div class="nav" id="openBtn">☰</div>
@@ -21,7 +21,7 @@
           </div>
           
           <div class="col-lg-4">
-              <button class="signInBtn" @click="clickedSignIn">
+              <button class="signInBtn">
                   <router-link to="/login" class="routerLink">Sign in</router-link>
               </button>
           </div>
@@ -35,14 +35,22 @@
       </Guest>
       
       <User v-if="userStatus === 'user' && signingIn === false"
-             :teams="teams"
-             :events="events">
+            :name="name"
+            :teams="teams"
+            :events="events"
+            :db="db"
+            :teamsRef="teamsRef">
       </User>
       
       <Admin v-if="userStatus === 'admin' && signingIn === false"
              :teams="teams"
              :events="events">
       </Admin>
+      
+      <Login v-if="!showLoginReg"
+             :userStatus="userStatus"
+             @updateUserStatus="updateUser">
+      </Login>
       
       <a href="https://diddukewin.com" class="didduke">did duke win?</a>
   </div>
@@ -87,6 +95,7 @@
                 db: db,
                 userStatus: 'guest',
                 signingIn: false,
+                showLoginReg: true
             }
         },
         firebase: {
@@ -123,11 +132,9 @@
             Admin
         },
         methods: {
-            clickedSignIn(signingIn) {
-                this.signingIn = signingIn;
-            },
-            updateSignIn(newData) {
-                this.signingIn = newData;
+            updateUser(newUser) {
+                console.log(userStatus);
+                this.userStatus = newUser;
             },
             containsName: function(team, name) {
               try {
