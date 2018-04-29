@@ -28,11 +28,14 @@
 
     <div class="col-lg-4">
       <h1 class="routerLink" @click="refresh">K-VITE</h1>
-      <h2>Welcome, {{ currName }}</h2>
     </div>
 
     <div class="col-lg-4">
-      <button class="signInBtn routerLink" @click="goToLogin">Sign in</button>
+        <button class="signInBtn routerLink" @click="goToLogin" v-if="userStatus === 'guest'">Sign in</button>
+        <h2 v-if="userStatus !== 'guest'">
+            Welcome, {{ currName }}
+            <i class="profileIcon fa fa-user-circle-o" aria-hidden="true"></i>
+        </h2>
     </div>
 
     <div v-if="signingIn">
@@ -226,9 +229,15 @@ export default {
         font-size: 3em;
     }
     h2 {
+        font-family: Didot;
         text-align: center;
         font-style: italic;
-        font-size: 1.5em;
+        font-size: 2em;
+        margin-left: 50%;
+        margin-top: 6%;
+    }
+    .profileIcon {
+        margin-left: 5%;
     }
     .nav {
         margin-left: 3%;
