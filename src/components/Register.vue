@@ -1,12 +1,7 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login col-lg-12">
-      <p>{{teams}}</p>
         <div class="btnChoices">
-            <!--<input type="text" v-model="email" placeholder="Email"><br>-->
-            <!--<input type="password" v-model="password" placeholder="Password"><br>-->
-            <!--<button class="registerBtn" @click="register">Register</button><br>-->
-
             <button id="registerPlayerBtn">Register<br>New Player</button>
             <button id="registerTeamBtn">Register<br>New Team</button><br>
 
@@ -151,6 +146,13 @@
 <style lang="scss">
     .register {
         text-align: center;
+    }
+    .signInLink, .signInLink:visited, .signInLink:active, .signInLink:link {
+        font-weight: bold;
+        color: black;
+    }
+    .signInLink:hover {
+        text-decoration: underline;
     }
     #registerPlayerBtn {
         background-color: #f2e3ff;

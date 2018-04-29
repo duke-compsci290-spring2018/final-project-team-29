@@ -16,8 +16,6 @@
               </div>
           </div>
 
-
-
           <div class="col-lg-4">
               <h1 class="routerLink" @click="refresh">K-VITE</h1>
           </div>
@@ -51,6 +49,8 @@
                  @updateUserStatus="onUpdateUser">
           </Login>
       </div>
+      
+      <router-view></router-view>
       
       <a href="https://diddukewin.com" class="didduke">did duke win?</a>
 
@@ -137,11 +137,9 @@
             refresh: function() {
                 this.$router.push('/');
                 this.signingIn = false;
-                this.showLoginReg = true;
             },
             goToLogin: function() {
                 this.signingIn = true;
-                this.showLoginReg = false;
                 this.$router.push({
                     path: '/login',
                     params: {
@@ -150,12 +148,10 @@
                         item: this.teamsRef
                     }
                 });
-                console.log(this.teams);
             },
             onUpdateUser(newStatus) {
                 this.userStatus = newStatus;
                 this.signingIn = false;
-                this.showLoginReg = true;
             },
             containsName: function(team, name) {
               try {
