@@ -43,6 +43,7 @@
             </Team_Schedule>
         </div>
 
+
         <div v-if="count % 6 === 4">
             <Global_Schedule :teams="teams">
             </Global_Schedule>

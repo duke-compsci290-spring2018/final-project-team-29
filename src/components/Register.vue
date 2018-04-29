@@ -68,9 +68,6 @@
             }
         },
         methods: {
-          test: function() {
-            console.log(App.data());
-          },
             register: function() {
               Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(error => alert(error.message));
             },
