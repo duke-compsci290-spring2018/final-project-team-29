@@ -1,7 +1,7 @@
 <template>
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login col-lg-12">
-        <br><input type="text" v-model="username" placeholder="Username"><br>
+        <br><input type="text" v-model="email" placeholder="Email"><br>
         <input type="password" v-model="password" placeholder="Password"><br><br>
         
         <button class="loginBtn" @click="login">Login</button><br><br>
@@ -23,7 +23,7 @@
         props: ['teams', 'teamsRef', 'signingIn'],
         data: function() {
             return {
-                username: '',
+                email: '',
                 password: '',
                 signedin: false
             }
@@ -33,28 +33,23 @@
         },
         methods: {
             login: function() {
-                console.log(this.teams);
-                var logged = {
-                    currentUser: this.username,
-                    currentPass: this.password
-                };
-                var signedin = false;
-                var i, j;
-                for (i = 0; i < this.teams.length; i++) {
-                    for (j = 0; j < this.teams[i]["People"].length; j++) {
-                        if (this.teams[i]["People"][j]["name"] == logged.currentUser &&
-                            this.teams[i]["People"][j]["pass"] == logged.currentPass) {
-                            signedin = true;
-                        }
-                    }
-                } if (signedin == true) {
-                    alert("Success!");
-                    this.$router.push('/user')
+                Firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+                    alert("That combination doesn't exist in our records!");
+                });
+                var user = firebase.auth().currentUser;
+                if (user) {
+                    this.$router.push('/user');
                 } else {
-                    alert("You are not in our system. Try registering!");
+                    this.email = '';
+                    this.password = '';
+                    this.$router.push('/');
                 }
-                this.username = '';
-                this.password = '';
+            },
+            logout: function() {
+                Firebase.auth().signOut().then(function() {
+                }).catch(function(error) {
+                        alert(error.message);
+                });
             },
             clickedSignIn: function() {
                 var newData = false;

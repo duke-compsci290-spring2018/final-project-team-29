@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueFire from 'vuefire'
 import VueRouter from 'vue-router'
-import * as firebaseui from 'firebaseui'
 import App from './App.vue'
 import User from './components/User.vue'
 import Login from './components/Login.vue'
