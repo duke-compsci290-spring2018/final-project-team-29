@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @update="updateSignIn">
+  <div id="app">
       <div class="row">
           <div class="col-lg-4">
               <div class="nav" id="openBtn">☰</div>
@@ -22,26 +22,15 @@
               <h1><router-link to="/" class="routerLink">K-VITE</router-link></h1>
           </div>
 
-        <!--<Login></Login>-->
-        <!--<Register></Register>-->
-
           <div class="col-lg-4">
-
-            <button @click="mode='login'" class="signUpLink">Log in!</button>
-            <button @click="mode='register'" class="signUpLink">Log in!</button>
-
-
-
-            <!--<router-link to="/login" class="signUpLink">Log in!</router-link>-->
-            <!--<router-link to="/register" class="signUpLink">Sign up!</router-link>-->
-              <!--<button class="signInBtn" @click="clickedSignIn">-->
-                  <!--<router-link to="/login" class="routerLink">Sign in</router-link>-->
-              <!--</button>-->
+              <router-link to="/login" class="routerLink">Sign in</router-link>
           </div>
       </div>
+    <router></router>
 
 
-      <router-view></router-view>
+      <router-view>
+      </router-view>
 
       <Guest v-if="userStatus === 'guest' && signingIn === false"
              :teams="teams"
@@ -49,14 +38,22 @@
       </Guest>
 
       <User v-if="userStatus === 'user' && signingIn === false"
-             :teams="teams"
-             :events="events">
+            :name="name"
+            :teams="teams"
+            :events="events"
+            :db="db"
+            :teamsRef="teamsRef">
       </User>
 
       <Admin v-if="userStatus === 'admin' && signingIn === false"
              :teams="teams"
              :events="events">
       </Admin>
+
+      <Login v-if="!showLoginReg"
+             :userStatus="userStatus"
+             @updateUserStatus="updateUser">
+      </Login>
 
   </div>
 </template>
@@ -75,6 +72,7 @@
     import Register from './components/Register.vue'
     import Guest from './components/Guest.vue'
     import Admin from './components/Admin.vue'
+    import VueRouter from 'vue-router'
 
 
     var config = {
@@ -107,6 +105,12 @@
     var teamsRef = db.ref('Teams');
     var eventsRef = db.ref('events');
 
+    const router = new VueRouter({
+      routes: [
+        { path: '/register', component: Register }
+      ]
+    })
+
     export default {
         name: 'app',
         data () {
@@ -117,6 +121,7 @@
                 db: db,
                 userStatus: 'guest',
                 signingIn: false,
+                showLoginReg: true
             }
         },
         firebase: {
@@ -153,11 +158,9 @@
             Admin
         },
         methods: {
-            clickedSignIn(signingIn) {
-                this.signingIn = signingIn;
-            },
-            updateSignIn(newData) {
-                this.signingIn = newData;
+            updateUser(newUser) {
+                console.log(userStatus);
+                this.userStatus = newUser;
             },
             containsName: function(team, name) {
               try {
@@ -179,7 +182,10 @@
             },
             generateRandomSchedule: function() {
               return this.curr_person["schedule"].map(arr => arr.map(bool => Math.random() >= 0.5));
-            }
+            },
+          nothing: function() {
+              
+          }
         }
     }
 

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
-    <input v-model="nameInput">
+    <input v-model="nameInput" type="text">
     <button @click="submitName">View Info</button><br>
       
     <h1>Logged in as {{name}} (part of {{curr_team["code"]}})</h1>
@@ -19,10 +19,10 @@
     </Personal_Schedule>
     
     <Schedule_Builder :availability_schedule="curr_person['available']"
-    :schedule_ref="schedule_ref"
-    :db="db"
-    :curr_team="curr_team"
-    :personal_schedule="curr_person['schedule']">
+                      :schedule_ref="schedule_ref"
+                      :db="db"
+                      :curr_team="curr_team"
+                      :personal_schedule="curr_person['schedule']">
     </Schedule_Builder>
       
     <button @click="createSchedule">Generate a random schedule for this user</button>
@@ -58,7 +58,7 @@
     data () {
       return {
         storage: this.db.ref('Teams'),
-        nameInput: '',
+        nameInput: ''
       }
     },
     computed: {

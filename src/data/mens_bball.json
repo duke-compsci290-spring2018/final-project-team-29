@@ -3,18 +3,21 @@
     "opponent": "UNC",
     "day": "Day 2",
     "time": "6pm",
-    "home": false
+    "location": "home",
+    "length": "2"
   },
   "1": {
     "opponent": "Notre Dame",
     "day": "Day 4",
     "time": "1pm",
-    "home": true
+    "location": "away",
+    "length": "3"
   },
   "2": {
     "opponent": "UVA",
     "day": "Day 3",
     "time": "4pm",
-    "home": false
+    "location": "away",
+    "length": "2"
   }
 }

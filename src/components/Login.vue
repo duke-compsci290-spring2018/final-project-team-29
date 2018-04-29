@@ -21,12 +21,12 @@
 
     export default {
         name: 'Login',
-        props: ['teams', 'teamsRef', 'signingIn'],
+        props: ['teams', 'teamsRef', 'userStatus'],
         data: function() {
             return {
                 email: '',
                 password: '',
-                signedin: false
+                newUserStatus: this.userStatus
             }
         },
         components: {
@@ -39,15 +39,14 @@
             }
         },
         methods: {
-            success: function() {
-                console.log("hi");
-            },
             login: function() {
+                console.log("test" + this.newUserStatus);
                 Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((user) => {
                     if (user) {
                         alert("You've successfully logged in!")
                         console.log("success");
-                        this.$router.push('/user')
+                        this.$router.push('/');
+                        this.$emit('updateUserStatus', 'user');
                     }
                 }).catch((error) => {
                     alert("That combination doesn't exist in our records!");
