@@ -1,14 +1,5 @@
 <template>
   <div id="app">
-    <h3>All teams: (click to view players in a team and click a player to see their info)</h3>
-    <div v-for="team in teams">
-      <p @click="showPlayers(team)">{{team['code']}}</p>
-    </div>
-    <br/>
-    <div v-for="person in people">
-      <p @click="currName=person">{{person}}</p>
-    </div>
-    <br/> <br/>
 
     <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
     <input v-model="nameInput">
@@ -52,8 +43,7 @@
       return {
         storage: this.db.ref('Teams'),
         currName: "Matt",
-        nameInput: '',
-        people: []
+        nameInput: ''
       }
     },
     computed: {
@@ -70,9 +60,6 @@
       },
       schedule_ref: function() {
         return 'Teams/' + this.curr_team['.key'] + "/People/" + this.curr_person['key'] + "/schedule/";
-      },
-      all_teams: function() {
-        return this.teams.map(team => team['.key']);
       }
     },
     components: {
@@ -107,9 +94,6 @@
       },
       generateRandomSchedule: function() {
         return this.curr_person["schedule"].map(arr => arr.map(bool => Math.random() >= 0.5));
-      },
-      showPlayers: function(team) {
-        this.people = team["People"].map(person => person['name']);
       }
 
     }

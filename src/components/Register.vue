@@ -2,6 +2,10 @@
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login col-lg-12">
         <div class="btnChoices">
+            <input type="text" v-model="email" placeholder="Email"><br>
+            <input type="password" v-model="password" placeholder="Password"><br>
+            <button class="registerBtn" @click="register">Register</button><br>
+            
             <button id="registerPlayerBtn">Register<br>New Player</button>
             <button id="registerTeamBtn">Register<br>New Team</button><br>
             
@@ -55,12 +59,17 @@
         props: ['teams', 'teamsRef'],
         data: function() {
             return {
-                username: '',
+                email: '',
                 password: '',
                 teamcode: ''
             }
         },
         methods: {
+            register: function() {
+                Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
+                    alert(error.message);
+                }
+            )},
             registerPlayer: function() {
                 if (this.isUniqueTeamCode()) {
                     alert("This team code is not in our system");
