@@ -27,8 +27,6 @@
                 <span class="navOption">
                     <i class="fa fa-gear" aria-hidden="true"> Settings</i>
                 </span>
-
-                <a class="didDukeOption" href="https://diddukewin.com">did duke win?</a>
             </div>
         </div>
         
@@ -343,24 +341,6 @@
         cursor: pointer;
     }
     .sidenav span:hover {
-        color: navy;
-    }
-    .didDukeOption {
-        text-transform: uppercase;
-        color: #d4ebff;
-        font-weight: bold;
-        font-size: 1.5em;
-        font-family: Arial;
-        text-transform: uppercase;
-        text-align: center;
-        margin-left: -28%;
-        font-style: italic;
-        position: absolute;
-        bottom: 0;
-    }
-    .didDukeOption:hover {
-        text-decoration: none;
-        font-style: normal;
         color: navy;
     }
     .welcomeMsg {
