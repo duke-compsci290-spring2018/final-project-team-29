@@ -106,6 +106,9 @@
       Guest
     },
     methods: {
+      slotFull: function(day, hour) {
+        return this.curr_team["People"].filter(person => person["schedule"][day][hour]).length >= 2;
+      },
       containsName: function(team, name) {
         try {
           team["People"].forEach(person => console.log(person));
@@ -118,7 +121,8 @@
           this.generateRandomSchedule());
       },
       generateRandomSchedule: function() {
-        return this.curr_person["schedule"].map(arr => arr.map(bool => Math.random() >= 0.5));
+        return this.curr_person["schedule"].map((arr, day) => arr.map((bool, hour) =>
+          !this.slotFull(day, hour) && Math.random() >= 0.5));
       }
     }
   }

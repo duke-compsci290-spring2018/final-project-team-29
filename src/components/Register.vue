@@ -21,7 +21,7 @@
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
-            
+
             <i class="backIcon fa fa-backward" aria-hidden="true"></i><br><br>
             <hr>
         </div>
@@ -37,7 +37,7 @@
             <router-link to="/">
                 <button class="guestBtn">Continue as Guest</button>
             </router-link><br><br>
-            
+
             <i class="backIcon fa fa-backward" aria-hidden="true"></i><br><br>
             <hr>
         </div>
@@ -90,6 +90,7 @@
                 this.teamcode = '';
             },
             registerTeam: function() {
+              this.register();
                 if (!this.checkEmptyInput()) {
                     if (this.isUniqueTeamCode()) {
                         this.teamsRef.push({
@@ -99,8 +100,7 @@
                                     "schedule": this.generateFullArray().map(arr => arr.map(bool => !bool)),
                                     "captain": true,
                                     "key": "0",
-                                    "name": this.generate_user_from_email(this.email),
-                                    "pass": this.password
+                                    "name": this.generate_user_from_email(this.email)
                                 }
                             },
                             "code": this.teamcode
