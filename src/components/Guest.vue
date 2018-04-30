@@ -8,7 +8,8 @@
             <li v-if="event">Event Calendar</li>
         </ul>
     </div>
-      
+    
+    <!--calendars that everyone can see-->
     <div v-if="global">
         <Global_Schedule :teams="teams">
         </Global_Schedule>

@@ -1,5 +1,7 @@
 <template>
     <div v-if="curr_team != undefined" id="app">
+        
+        <!--navigation bar-->
         <div class="col-lg-4">
             <div class="nav" id="openBtn">☰</div>
             <div class="sidenav">
@@ -21,6 +23,7 @@
             </div>
         </div>
         
+        <!--admin can search for specific users-->
         <div class="searchMod"><br><br><br>
             <div class="searchModal">
                 <span class="closeSearch">&times;</span><br>
@@ -32,6 +35,7 @@
             </div>
         </div>
         
+        <!--admin can look through each team-->
         <div class="teamsMod"><br><br><br>
             <div class="teamsModal">
                 <span class="closeTeams">&times;</span><br>
@@ -50,6 +54,7 @@
             <h1 class="routerLink" @click="refresh">K-VITE</h1>
         </div>
 
+        <!--deals with user welcome-->
         <div class="col-lg-4">
             <button class="signInBtn routerLink" @click="goToLogin" v-if="userStatus === 'guest' && !signingIn">Sign in</button>
 
@@ -64,6 +69,7 @@
             </div>
         </div>
 
+        <!--added login component to homepage-->
         <div v-if="signingIn">
             <Login :teams="teams"
                    :userStatus="userStatus"
@@ -74,6 +80,8 @@
         </div>
 
         <br><br><br><br><br>
+        
+        <!--different components are shown based on type of user-->
         <div v-if="userStatus === 'guest' && !signingIn">
             <Guest :teams="teams"
                    :events="events">
@@ -191,10 +199,12 @@
                 this.$router.push('/');
             },
             onUpdateUser(newStatus) {
+                //brings in data changed by child component and changes data in parent component
                 this.userStatus = newStatus;
                 this.signingIn = false;
             },
             onUpdateName(newName) {
+                //brings in data changed by child component and changes data in parent component
                 this.currName = newName.split("@")[0];
             },
             goToLogin: function() {
@@ -245,6 +255,7 @@
         }
     }
 
+    //mostly hover/hide/popup stuff
     $(document).ready(function(){
         $(document).on('click', '#openBtn', function() {
             $('.sidenav').css('width', '20%');
@@ -393,6 +404,7 @@
         margin-right: 10%;
         margin-top: 10%;
     }
+    //inspired from CSS tutorial for dropdown menu
     .dropdown {
         position: relative;
         display: inline-block;

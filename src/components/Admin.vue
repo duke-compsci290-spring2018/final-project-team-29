@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <br>
+    <!--admin can view everything user does and more-->
     <User v-if="currName !== ''" :name="currName"
           :teams="teams"
           :events="events"

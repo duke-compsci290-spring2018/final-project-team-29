@@ -3,10 +3,10 @@
     <button id="eventBtn" class="addEventBtn">
         <i class="fa fa-plus-square" aria-hidden="true"></i>
     </button>
-      
+    
+    <!--functionality only available for admins to create new events to go on event calendar-->
     <div class="modal"><br><br><br>
       <div class="eventModal">
-
         <span class="close">&times;</span>
         <br><label>New Event</label><br><br>
         <input v-model="eventName" class="eventInput" placeholder="Event Name">
@@ -95,6 +95,7 @@
     }
   }
     
+    //popup functionality in jquery
     $(document).ready(function(){
         $(document).on('click', '#eventBtn', function() {
             $('.modal').css('display', 'block');

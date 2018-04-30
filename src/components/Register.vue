@@ -2,6 +2,7 @@
     <!-- template must have a SINGLE root tag that encloses all others -->
     <div class="login col-lg-12">
         <div class="btnChoices">
+            <!--people have two options of registering-->
             <button id="registerPlayerBtn">Register<br>New Player</button>
             <button id="registerTeamBtn">Register<br>New Team</button><br><br>
 
@@ -9,6 +10,7 @@
             <hr>
         </div>
 
+        <!--don't have an account but belong to a team-->
         <div class="registerPlayerOption">
             <h2>Register New Player</h2>
             <h3>on an existing team</h3>
@@ -21,7 +23,8 @@
             <button class="guestBtn" @click="continueGuest">Continue as Guest</button><br><br>
             <hr>
         </div>
-
+        
+        <!--don't have an account or a team-->
         <div class="registerTeamOption">
             <h2>Register New Team</h2>
             <h3>as a new player</h3>
@@ -139,6 +142,7 @@
         }
     }
 
+    //alternates between two button options
     $(document).ready(function(){
         $(document).on('click', '#registerPlayerBtn', function() {
             $('.btnChoices').css('visibility', 'hidden');

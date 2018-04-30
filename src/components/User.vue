@@ -2,6 +2,7 @@
   <div id="app">
         <div class="calendar">
             <ul>
+                <!--uses a counter to determine which calendar to view-->
                 <li class="prev" v-on:click="count--">&#10094;</li>
                 <li class="next" v-on:click="count++">&#10095;</li>
                 <li v-if="count % 6 === 0">Personal Availability<br><span class="subheading">Click on any cell to edit</span></li>

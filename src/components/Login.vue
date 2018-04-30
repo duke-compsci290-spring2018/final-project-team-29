@@ -7,8 +7,10 @@
 
       <button class="loginBtn" @click="login">Login</button><br><br>
       Don't have an account?<br>
+      <!--people can move to registration if they're not a user yet-->
       <span class="signUpLink" @click="signUp = true">Sign up now!</span><br><br>
 
+      <!--or people can continue exploring as a guest-->
       <button class="guestBtn" @click="continueGuest">Continue as Guest</button><br><br>
     </div>
     <div v-else>
@@ -51,6 +53,7 @@
         },
         methods: {
             login: function() {
+            //firebase authentication
               if (this.email === 'admin' && this.password === 'password') {
                 this.$router.push('/');
                 this.newUserStatus = 'admin';
@@ -79,12 +82,15 @@
                 });
             },
             onUpdateUser(newStatus) {
+                //changes made in child component can be carried over to parent component
                 this.$emit('updateUserStatus', newStatus);
             },
             onUpdateName(newName) {
+                //changes made in child component can be carried over to parent component
                 this.$emit('updateUserEmail', newName);
             },
             continueGuest: function() {
+                //routes back to homepage as a guest
                 this.$router.push('/');
                 this.newUserStatus = 'guest';
                 this.$emit('updateUserStatus', this.newUserStatus);

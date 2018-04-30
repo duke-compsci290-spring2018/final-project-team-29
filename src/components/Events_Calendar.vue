@@ -61,6 +61,7 @@ this.jsonPath = require("../data/" + path + ".json" );
         return parseInt(string.split(' ')[1]) - 1;
       },
       convert_to_name(school, home, bool) {
+        //fake dataset of potential basketball games
         if (bool) {
           return 'MENS BASKETBALL: Playing ' + school + ' @ ' + home;
         } else {

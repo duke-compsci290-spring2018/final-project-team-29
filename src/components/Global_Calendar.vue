@@ -2,6 +2,7 @@
     <div id="app">
         <table>
           <tr>
+            <!--iterates through time and day possibilities to make calendar-->
             <th class="time" v-for="n in 14">
               {{convert_to_time(n)}}
             </th>
@@ -9,6 +10,7 @@
           <tr class="border" v-for="(one, col) in schedule">
               <div class="day"><br>D<br>a<br>y<br><br> {{col+1}}</div><br>
             <th class="rows" v-for="(two, row) in one">
+              <!--displays each person for each day and time-->
               <ul class="people" v-for="person in two">
                   <li><i class="fa fa-user" aria-hidden="true">{{person}}</i></li>
               </ul>
