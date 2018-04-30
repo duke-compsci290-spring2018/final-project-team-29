@@ -159,4 +159,8 @@
     .prev, .next, .prev li, .next li {
         cursor: pointer;
     }
+    table {
+        margin-left: 1.5%;
+        width: 97%;
+    }
 </style>

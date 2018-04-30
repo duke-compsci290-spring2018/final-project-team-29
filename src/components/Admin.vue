@@ -1,11 +1,5 @@
 <template>
   <div id="app">
-    <br/> <br/>
-
-    <label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
-    <input v-model="nameInput">
-    <button @click="submitName">View Info</button>
-
     <br><br>
     <User v-if="currName !== ''" :name="currName"
           :teams="teams"
@@ -101,4 +95,8 @@
 </script>
 
 <style lang="scss">
+    table {
+        margin-left: 1.5%;
+        width: 97%;
+    }
 </style>

@@ -5,13 +5,14 @@
             <div class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
 
-                <tr class="navOption">
+                <span class="tentIcon glyphicon glyphicon-tent" onClick="window.location.reload()"></span><br><br><br><br>
+                <span class="navOption" onClick="window.location.reload()">
                     <i class="fa fa-home" aria-hidden="true"> Home</i>
-                </tr>
-                <tr class="navOption">
+                </span>
+                <span class="navOption searchOption" v-if="userStatus === 'admin'">
                     <i class="fa fa-search" aria-hidden="true"> Search</i>
-                </tr>
-                <tr class="navOption" v-if="userStatus === 'admin'">
+                </span>
+                <span class="navOption" v-if="userStatus === 'admin'">
                     <i @click="showAllTeams = true" class="fa fa-group" aria-hidden="true"> Teams</i>
                     <div v-if="showAllTeams">
                         <div v-for="team in teams">
@@ -21,14 +22,22 @@
                             <p @click="currName=person">{{person}}</p>
                         </div>
                     </div>
-                </tr>
-                <tr class="navOption">
+                </span>
+                <span class="navOption">
                     <i class="fa fa-gear" aria-hidden="true"> Settings</i>
-                </tr>
+                </span>
 
-                <tr class="">
-                    <a class="didDukeOption" href="https://diddukewin.com">did duke win?</a>
-                </tr>
+                <a class="didDukeOption" href="https://diddukewin.com">did duke win?</a>
+            </div>
+        </div>
+        
+        <div class="mod"><br><br><br>
+            <div class="searchModal">
+                <span class="closeSearch">&times;</span>
+                <br><label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
+                <input v-model="nameInput" class="eventInput"></label>
+                <button @click="submitName">View Info</button><br><br>
+                <br><br>
             </div>
         </div>
 
@@ -228,6 +237,15 @@
             $('.sidenav').css('width', '0');
             $('body').css('margin-left', '0');
         });
+        $(document).on('click', '.searchOption', function() {
+            $('.mod').css('display', 'block');
+        });
+        $(document).on('click', '.closeSearch', function() {
+            $('.mod').css('display', 'none');
+        });
+        $(document).on('click', '.submitBtn', function() {
+            $('.mod').css('display', 'none');
+        });
     });
     
 </script>
@@ -290,39 +308,59 @@
         margin: 0 auto;
         width: 15%;
     }
+    .tentIcon {
+        font-size: 10em;
+        color: navy;
+    }
     .sidenav {
         background-color: white;
         height: 100%; width: 0;
         position: fixed; z-index: 1;
         top: 0; left: 0;
         overflow: hidden;
-        padding-top: 10%;
+        padding-top: 8%;
         text-align: center;
     }
-    .sidenav, .navOption {
+    .sidenav .navOption {
         display: block;
         padding-bottom: 5%;
-        font-family: Didot;
-        text-transform: lowercase;
+        font-family: Arial;
+        text-transform: uppercase;
+        text-align: left;
         font-size: 2em;
+        margin-left: 20%;
     }
-    .sidenav, .closebtn, .closebtn:hover {
+    .sidenav .closebtn {
         position: absolute;
         top: 0; right: 10%;
         font-size: 3em;
         color: black;
         text-decoration: none;
     }
-    .didDukeOption {
-        padding-top: 50%;
-        text-transform: uppercase;
+    .sidenav span {
+        color: black;
+        cursor: pointer;
+    }
+    .sidenav span:hover {
         color: navy;
+    }
+    .didDukeOption {
+        text-transform: uppercase;
+        color: #d4ebff;
         font-weight: bold;
-        font-size: 2em;
+        font-size: 1.5em;
         font-family: Arial;
         text-transform: uppercase;
         text-align: center;
-        padding-top: 60%;
+        margin-left: -28%;
+        font-style: italic;
+        position: absolute;
+        bottom: 0;
+    }
+    .didDukeOption:hover {
+        text-decoration: none;
+        font-style: normal;
+        color: navy;
     }
     .welcomeMsg {
         font-family: Didot;
@@ -370,5 +408,33 @@
     }
     .dropdown:hover .dropdown-content {
         display: block;
+    }
+    .mod {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+    }
+    .searchModal {
+        background-color: #fefefe;
+        margin: auto;
+        width: 40%;
+        color: black;
+    }
+    .closeSearch {
+        color: #aaa;
+        float: right;
+        padding-right: 2%;
+        font-size: 1em;
+        font-weight: bold;
+    }
+    .closeSearch:hover, .closeSearch:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
     }
 </style>
