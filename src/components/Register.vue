@@ -4,7 +4,7 @@
         <div class="btnChoices">
             <button id="registerPlayerBtn">Register<br>New Player</button>
             <button id="registerTeamBtn">Register<br>New Team</button><br><br>
-            
+
             <button class="guestBtn" @click="continueGuest">Continue as Guest</button><br><br>
             <hr>
         </div>
@@ -15,9 +15,9 @@
             <br><input type="text" v-model="email" placeholder="Email"><br>
             <input type="password" v-model="password" placeholder="Password"><br>
             <input type="text" v-model="teamcode" placeholder="Your Team Code"><br>
-            
+
             <button class="registerBtn" @click="registerPlayer">Register</button><br>
-            
+
             <button class="guestBtn" @click="continueGuest">Continue as Guest</button><br><br>
             <hr>
         </div>
@@ -54,10 +54,9 @@
         },
         methods: {
             register: function() {
-              Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(error => alert(error.message));
+              return Firebase.auth().createUserWithEmailAndPassword(this.email, this.password);
             },
             registerPlayer: function() {
-                this.register();
                 if (this.isUniqueTeamCode()) {
                     alert("This team code is not in our system");
                 } else {
@@ -70,15 +69,16 @@
                         "name": this.generate_user_from_email(this.email),
                         "key": people_in_team
                     });
+                  alert("You've successfully created a new player!")
+                  this.$router.push('/');
+                  this.newUserStatus = 'user';
+                  this.$emit('updateUserStatus', this.newUserStatus);
+                  this.$emit('updateUserEmail', this.email);
+                  this.email = '';
+                  this.password = '';
+                  this.teamcode = '';
                 }
-              alert("You've successfully created a new player!")
-              this.$router.push('/');
-              this.newUserStatus = 'user';
-              this.$emit('updateUserStatus', this.newUserStatus);
-              this.$emit('updateUserEmail', this.email);
-                this.email = '';
-                this.password = '';
-                this.teamcode = '';
+
             },
             registerTeam: function() {
                 if (!this.checkEmptyInput()) {
@@ -95,20 +95,21 @@
                             },
                             "code": this.teamcode
                         });
+                      alert("You've successfully created a new team!")
+                      this.$router.push('/');
+                      this.newUserStatus = 'user';
+                      this.$emit('updateUserStatus', this.newUserStatus);
+                      this.$emit('updateUserEmail', this.email);
+                      this.email = '';
+                      this.password = '';
+                      this.teamcode = '';
                     } else {
                         alert("This team code already exists!");
                     }
                 } else {
                     alert("You didn't input a email/password/team code!");
                 }
-                alert("You've successfully created a new team!")
-                this.$router.push('/');
-                this.newUserStatus = 'user';
-                this.$emit('updateUserStatus', this.newUserStatus);
-                this.$emit('updateUserEmail', this.email);
-                this.email = '';
-                this.password = '';
-                this.teamcode = '';
+
             },
             generate_user_from_email (email) {
                 return email.split("@")[0];
