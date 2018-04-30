@@ -48,7 +48,7 @@
     }
     .calendar {
         padding: 3% 5%;
-        width: 90.1%;
+        width: 97%;
         margin: 0 auto;
         background: navy;
         text-align: center;
@@ -74,7 +74,6 @@
         font-family: Didot;
         margin: 0;
         padding: 0 0;
-        with: 80%;
         background-color: #f6f6f6;
         text-transform: uppercase;
     }
@@ -95,25 +94,17 @@
         text-transform: uppercase;
         text-align: center;
     }
-    .people {
-        font-family: Didot;
-        margin: 0;
-        margin-left: -18%;
-        font-size: 0.68em;
-        background-color: #f6f6f6;
-        text-align: left;
-    }
     .events {
         font-family: Didot;
         margin: 0;
-        margin-left: -18%;
-        font-size: 0.8em;
+        margin-left: -20%;
+        font-size: 0.7em;
         background-color: #f6f6f6;
         text-align: left;
     }
     table {
-        margin-left: 4.9%;
-        width: 90.1%;
+        margin-left: 1.5%;
+        width: 97%;
     }
     .day {
         text-align: center;

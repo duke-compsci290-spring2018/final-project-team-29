@@ -8,7 +8,7 @@
           </tr>
           <tr class="border" v-for="(one, col) in schedule">
               <div class="day"><br>D<br>a<br>y<br><br> {{col+1}}</div><br>
-            <th class="border" v-for="(two, row) in one">
+            <th class="rows" v-for="(two, row) in one">
               <ul class="people" v-for="person in two">
                   <li><i class="fa fa-user" aria-hidden="true">{{person}}</i></li>
               </ul>
@@ -56,6 +56,14 @@
 </script>
 
 <style lang="scss">
+    .people {
+        font-family: Didot;
+        margin: 0;
+        margin-left: -18%;
+        font-size: 0.7em;
+        background-color: #f6f6f6;
+        text-align: left;
+    }
 </style>
 
 

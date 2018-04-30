@@ -29,7 +29,8 @@
             this.db.ref(this.schedule_ref + "/" + day.toString() + "/" + hour.toString()).set(true);
             i++;
           }
-        }))
+        }));
+        alert("Your schedule has been created!");
       },
         
       resetSchedule: function() {

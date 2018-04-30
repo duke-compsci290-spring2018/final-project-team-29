@@ -9,16 +9,13 @@
       Don't have an account?<br>
       <span class="signUpLink" @click="signUp = true">Sign up now!</span><br><br>
         
-      <router-link to="/">
-        <button class="guestBtn">Continue as Guest</button>
-      </router-link><br><br>
+      <button class="guestBtn" @click="continueGuest">Continue as Guest</button><br><br>
     </div>
     <div v-else>
       <Register :teams="teams"
                 :teamsRef="teamsRef"
                 @updateUserStatus="onUpdateUser"
                 @updateUserEmail="onUpdateName">
-      >
       </Register>
     </div>
   </div>
@@ -39,7 +36,7 @@
                 password: '',
                 newUserStatus: this.userStatus,
                 cTeams: this.teams,
-              signUp: false
+                signUp: false
             }
         },
         components: {
@@ -81,12 +78,17 @@
                         alert(error.message);
                 });
             },
-          onUpdateUser(newStatus) {
-              this.$emit('updateUserStatus', newStatus);
-          },
-          onUpdateName(newName) {
-              this.$emit('updateUserEmail', newName);
-          },
+            onUpdateUser(newStatus) {
+                this.$emit('updateUserStatus', newStatus);
+            },
+            onUpdateName(newName) {
+                this.$emit('updateUserEmail', newName);
+            },
+            continueGuest: function() {
+                this.$router.push('/');
+                this.newUserStatus = 'guest';
+                this.$emit('updateUserStatus', this.newUserStatus);
+            }
         }
     }
 </script>
@@ -114,6 +116,7 @@
     }
     .signUpLink:hover {
         text-decoration: underline;
+        cursor: pointer;
     }
     .guestBtn, .guestBtn:visited, .guestBtn:active, .guestBtn:link  {
         background-color: lightgrey;

@@ -4,9 +4,8 @@
         <div class="btnChoices">
             <button id="registerPlayerBtn">Register<br>New Player</button>
             <button id="registerTeamBtn">Register<br>New Team</button><br><br>
-            <router-link to="/">
-                <button class="guestBtn">Continue as Guest</button>
-            </router-link><br><br>
+            
+            <button class="guestBtn" @click="continueGuest">Continue as Guest</button><br><br>
             <hr>
         </div>
 
@@ -16,13 +15,10 @@
             <br><input type="text" v-model="email" placeholder="Email"><br>
             <input type="password" v-model="password" placeholder="Password"><br>
             <input type="text" v-model="teamcode" placeholder="Your Team Code"><br>
+            
             <button class="registerBtn" @click="registerPlayer">Register</button><br>
-
-            <router-link to="/">
-                <button class="guestBtn">Continue as Guest</button>
-            </router-link><br><br>
-
-            <i class="backIcon fa fa-backward" aria-hidden="true"></i><br><br>
+            
+            <button class="guestBtn" @click="continueGuest">Continue as Guest</button><br><br>
             <hr>
         </div>
 
@@ -34,11 +30,7 @@
             <input type="text" v-model="teamcode" placeholder="Unique Team Code"><br>
             <button class="registerBtn" @click="registerTeam">Register</button><br>
 
-            <router-link to="/">
-                <button class="guestBtn">Continue as Guest</button>
-            </router-link><br><br>
-
-            <i class="backIcon fa fa-backward" aria-hidden="true"></i><br><br>
+            <button class="guestBtn" @click="continueGuest">Continue as Guest</button><br><br>
             <hr>
         </div>
 
@@ -57,7 +49,7 @@
                 password: '',
                 teamcode: '',
                 username: '',
-              newUserStatus: ''
+                newUserStatus: ''
             }
         },
         methods: {
@@ -65,7 +57,7 @@
               Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(error => alert(error.message));
             },
             registerPlayer: function() {
-                return this.register();
+                this.register();
                 if (this.isUniqueTeamCode()) {
                     alert("This team code is not in our system");
                 } else {
@@ -76,7 +68,6 @@
                         "schedule": this.generateFullArray().map(arr => arr.map(bool => !bool)),
                         "captain": false,
                         "name": this.generate_user_from_email(this.email),
-                        "pass": this.password,
                         "key": people_in_team
                     });
                 }
@@ -90,8 +81,7 @@
                 this.teamcode = '';
             },
             registerTeam: function() {
-              return Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(error => alert(error.message));
-              if (!this.checkEmptyInput()) {
+                if (!this.checkEmptyInput()) {
                     if (this.isUniqueTeamCode()) {
                         this.teamsRef.push({
                             "People" : {
@@ -111,18 +101,18 @@
                 } else {
                     alert("You didn't input a email/password/team code!");
                 }
-              alert("You've successfully created a new team!")
-              this.$router.push('/');
-              this.newUserStatus = 'user';
-              this.$emit('updateUserStatus', this.newUserStatus);
-              this.$emit('updateUserEmail', this.email);
+                alert("You've successfully created a new team!")
+                this.$router.push('/');
+                this.newUserStatus = 'user';
+                this.$emit('updateUserStatus', this.newUserStatus);
+                this.$emit('updateUserEmail', this.email);
                 this.email = '';
                 this.password = '';
                 this.teamcode = '';
             },
-          generate_user_from_email (email) {
-              return email.split("@")[0];
-          },
+            generate_user_from_email (email) {
+                return email.split("@")[0];
+            },
             generateFullArray() {
                 var new_array = [[], [], [], [], []]
                 return new_array.map(arr => [true, true, true, true, true, true, true, true, true, true, true, true, true]);
@@ -132,6 +122,11 @@
             },
             isUniqueTeamCode() {
                 return this.teams.filter(team => team["code"] === this.teamcode).length === 0;
+            },
+            continueGuest: function() {
+                this.$router.push('/');
+                this.newUserStatus = 'guest';
+                this.$emit('updateUserStatus', this.newUserStatus);
             }
         }
     }
@@ -149,14 +144,6 @@
             $('.registerPlayerOption').css('position', 'absolute');
             $('.registerTeamOption').css('visibility', 'visible');
         });
-        $(document).on('click', '.backIcon', function() {
-            $('.btnChoices').css('visibility', 'visible');
-            $('.btnChoices').css('position', 'none');
-            $('.registerPlayerOption').css('visibility', 'hidden');
-            $('.registerPlayerOption').css('position', 'absolute');
-            $('.registerTeamOption').css('visibility', 'hidden');
-            $('.registerTeamOption').css('position', 'absolute');
-        });
     });
 
 </script>
@@ -168,13 +155,6 @@
     }
     .register {
         text-align: center;
-    }
-    .signInLink, .signInLink:visited, .signInLink:active, .signInLink:link {
-        font-weight: bold;
-        color: black;
-    }
-    .signInLink:hover {
-        text-decoration: underline;
     }
     #registerPlayerBtn {
         background-color: #f2e3ff;

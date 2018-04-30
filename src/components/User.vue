@@ -9,7 +9,14 @@
                 <li v-if="count % 6 === 2">Schedule Builder</li>
                 <li v-if="count % 6 === 3">Team Schedule</li>
                 <li v-if="count % 6 === 4">Global Calendar</li>
-                <li v-if="count % 6 === 5">Event Calendar</li>
+                <li v-if="count % 6 === 5">Event Calendar
+                    <span v-if="userStatus === 'admin'">
+                        <Event_Creator :db="db"
+                                       :events="events">
+                        </Event_Creator>
+                    </span>
+                </li>
+
             </ul>
         </div>
 
@@ -59,25 +66,25 @@
 </template>
 
 <script>
-
   import Personal_Schedule from './Personal_Schedule.vue'
   import Global_Schedule from './Global_Schedule.vue'
   import Events_Calendar from './Events_Calendar.vue'
+  import Event_Creator from './Event_Creator.vue'
   import Personal_Availability from './Personal_Availability.vue'
   import Schedule_Builder from './Schedule_Builder.vue'
   import Team_Schedule from './Team_Schedule.vue'
   import Guest from './Guest.vue'
   import Register from './Register'
 
-
   export default {
     name: 'app',
-    props: ['name', 'teams', 'events', 'db', 'teamsRef'],
+    props: ['name', 'teams', 'events', 'db', 'teamsRef', 'userStatus'],
     data () {
       return {
         storage: this.db.ref('Teams'),
         nameInput: '',
-        count: 0
+        count: 30,
+        currentStatus: this.userStatus
       }
     },
     computed: {
@@ -103,12 +110,10 @@
       Personal_Availability,
       Schedule_Builder,
       Team_Schedule,
+      Event_Creator,
       Guest
     },
     methods: {
-      slotFull: function(day, hour) {
-        return this.curr_team["People"].filter(person => person["schedule"][day][hour]).length >= 2;
-      },
       containsName: function(team, name) {
         try {
           team["People"].forEach(person => console.log(person));
@@ -121,8 +126,7 @@
           this.generateRandomSchedule());
       },
       generateRandomSchedule: function() {
-        return this.curr_person["schedule"].map((arr, day) => arr.map((bool, hour) =>
-          !this.slotFull(day, hour) && Math.random() >= 0.5));
+          return this.curr_person["schedule"].map(arr => arr.map(bool => Math.random() >= 0.5));
       }
     }
   }
@@ -148,5 +152,11 @@
         text-transform: uppercase;
         font-weight: bold;
         padding: 1%;
+    }
+    .addEvent {
+        cursor: pointer;
+    }
+    .prev, .next, .prev li, .next li {
+        cursor: pointer;
     }
 </style>

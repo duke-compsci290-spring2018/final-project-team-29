@@ -6,20 +6,14 @@
     <input v-model="nameInput">
     <button @click="submitName">View Info</button>
 
-    <br/> <br/>
-
+    <br><br>
     <User v-if="currName !== ''" :name="currName"
           :teams="teams"
           :events="events"
           :db="db"
-    ></User>
-
-    <br/> <br/>
-
-    <Event_Creator :db="db"
-                   :events="events"
-    ></Event_Creator>
-
+          :userStatus="currentStatus">
+    </User>
+    <br><br>
 
   </div>
 
@@ -29,7 +23,6 @@
 
   import Personal_Schedule from './Personal_Schedule.vue'
   import Global_Schedule from './Global_Schedule.vue'
-  import Event_Creator from './Event_Creator.vue'
   import Events_Calendar from './Events_Calendar.vue'
   import Personal_Availability from './Personal_Availability.vue'
   import Schedule_Builder from './Schedule_Builder.vue'
@@ -39,12 +32,13 @@
 
   export default {
     name: 'app',
-    props: ['events', 'teams', 'db', 'currName'],
+    props: ['events', 'teams', 'db', 'currName', 'userStatus'],
     data () {
       return {
         storage: this.db.ref('Teams'),
         nameInput: '',
-        people: []
+        people: [],
+        currentStatus: this.userStatus
       }
     },
     computed: {
@@ -67,7 +61,6 @@
       Personal_Schedule,
       Global_Schedule,
       Events_Calendar,
-      Event_Creator,
       Personal_Availability,
       Schedule_Builder,
       Team_Schedule,
@@ -103,7 +96,6 @@
       showPlayers: function(team) {
         this.people = team["People"].map(person => person['name']);
       }
-
     }
   }
 </script>

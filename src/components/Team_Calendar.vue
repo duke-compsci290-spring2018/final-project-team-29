@@ -72,7 +72,7 @@
     .team {
         font-family: Didot;
         margin: 0;
-        margin-left: -20%;
+        margin-left: -13%;
         font-size: 0.65em;
         text-align: left;
     }

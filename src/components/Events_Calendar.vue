@@ -8,9 +8,9 @@
           </tr>
           <tr class="border" v-for="(one, col) in events">
               <div class="day"><br>D<br>a<br>y<br><br> {{col+1}}</div><br>
-            <th class="border" v-for="(two, row) in one['.value']">
+            <th class="rows" v-for="(two, row) in one['.value']">
               <ul class="events" v-for="event in two">
-                  <li><i class="globalIcon fa fa-calendar-o" aria-hidden="true">{{event}}</i></li>
+                  <li><i class="globalIcon fa fa-calendar-o" aria-hidden="true">{{event}}</i><br><br></li>
               </ul>
             </th>
           </tr>
@@ -77,9 +77,6 @@ this.jsonPath = require("../data/" + path + ".json" );
           this.events[this.convert_to_date(data['day']).toString()]['.value'][this.convert_time_to_int(data['time'])+i]
             .push(this.convert_to_name(data['opponent'], data['location'], men));
         }
-
-
-
       },
       showbball() {
         this.showButton=false;
@@ -90,10 +87,8 @@ this.jsonPath = require("../data/" + path + ".json" );
         var women_data = require("../data/womens_bball.json");
         this.addEvent(women_data['0'], false);
         this.addEvent(women_data['1'], false);
-
       }
     }
-
   }
 </script>
 
