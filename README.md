@@ -18,7 +18,7 @@ We wanted to carry this issue over to a popular tradition at Duke: tenting. Stud
 
 With k-vite, we wanted to work towards building an application in the future that could even organize tenting groups for those who have difficulty finding one, or one that could organize relaxing events at Cameron that students can attend while fulfilling their tenting responsibilities. (Hench the name k-vite...like an e-vite...get it?)
 
-### instructions
+## instructions
 
 The easiest way to see our application is through our public site: https://duke-compsci290-spring2018.github.io/final-project-team-29. You can view it as either a guest, user, or admin. Anyone can be a user for our application; simply register using the platform. For viewing admin privileges, use the creative combination below:
 
@@ -39,7 +39,7 @@ npm install
 4. If you want to tweak our code and see the changes, you can use your local host server to do so with the following command:
 npm run dev
 
-#### data authenticity
+## data authenticity
 
 Since tenting season is over, it was difficult getting the actual availability of tenting participants and modeling our application similar to how tenting functions with twelve members planning their shifts. We decided to instead use fake datasets to mimic how events (specifically basketball games) would be displayed on our tenting calendar. Members participating in tenting would also be notified of these events, and could see them along with their individual tenting schedule.
 
@@ -47,7 +47,7 @@ The JSON files that we used to reference this data can be found at these two lin
 https://duke-compsci290-spring2018.github.io/final-project-team-29/src/data/mens_bball.json
 https://duke-compsci290-spring2018.github.io/final-project-team-29/src/data/womens_bball.json
 
-##### pros/cons of frameworks
+## pros/cons of frameworks
 
 We went into the project with the idea that we were going to use Node and Vue since we had been using and learning them in class in great detail. Using components in Vue made it very easy for us to break the sections of authorization down into Guest, User, and Admin. Along with components we used routing to accomplish our main goal of being able to display multiple calendars and having different user abilities, so we think that Node made this possible with its module functionality.
 
