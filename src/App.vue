@@ -383,6 +383,7 @@
         font-size: 2.2em;
         margin-left: 30%;
         margin-top: 6%;
+        text-transform: capitalize;
     }
     .profileIcon {
         color: navy;

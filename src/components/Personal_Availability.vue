@@ -65,8 +65,6 @@
     background-color: green;
   }
     table {
-        width: 90.1%;
+        width: 97%;
     }
 </style>
-
-
