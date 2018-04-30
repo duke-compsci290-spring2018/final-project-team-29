@@ -65,7 +65,7 @@
               Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(error => alert(error.message));
             },
             registerPlayer: function() {
-                this.register();
+                return this.register();
                 if (this.isUniqueTeamCode()) {
                     alert("This team code is not in our system");
                 } else {
@@ -90,8 +90,8 @@
                 this.teamcode = '';
             },
             registerTeam: function() {
-              this.register();
-                if (!this.checkEmptyInput()) {
+              return Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(error => alert(error.message));
+              if (!this.checkEmptyInput()) {
                     if (this.isUniqueTeamCode()) {
                         this.teamsRef.push({
                             "People" : {
