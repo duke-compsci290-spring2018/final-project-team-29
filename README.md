@@ -1,14 +1,14 @@
 # kvite
 
-A web application designed to expediate and simplify the tenting process at Duke
-Check it out at https://duke-compsci290-spring2018.github.io/final-project-team-29/ !!
+A web application designed to expediate and simplify the tenting process at Duke<br>
+Check it out at https://duke-compsci290-spring2018.github.io/final-project-team-29/ !!<br><br>
 
-Names: Christine Hwang (jmh146) & Matthew O'Boyle (mo121)
-Time Spent: 3/29-4/30 (about a month & 70-80 hours total)
-Collaborators: Heck to the no! 😤😤😤 this is our masterpiece
-Resources: Tutorials on firebase authentication, CSS tutorials on dropdown menus/hover text/etc.
-Assets: We got some cute icons from https://fontawesome.com and http://glyphicons.com
-Insects: No bugs to report as far as we know!
+Names: Christine Hwang (jmh146) & Matthew O'Boyle (mo121)<br>
+Time Spent: 3/29-4/30 (about a month & 70-80 hours total)<br>
+Collaborators: Heck to the no! 😤😤😤 this is our masterpiece<br>
+Resources: Tutorials on firebase authentication, CSS tutorials on dropdown menus/hover text/etc.<br>
+Assets: We got some cute icons from https://fontawesome.com and http://glyphicons.com<br>
+Insects: No bugs to report as far as we know!<br>
 
 ## our application's utility
 
@@ -22,7 +22,7 @@ With k-vite, we wanted to work towards building an application in the future tha
 
 The easiest way to see our application is through our public site: https://duke-compsci290-spring2018.github.io/final-project-team-29. You can view it as either a guest, user, or admin. Anyone can be a user for our application; simply register using the platform. For viewing admin privileges, use the creative combination below:
 
-Email: admin
+Email: admin<br>
 Password: password
 
 If you think code is beautiful and want to run it locally, here are some tips!
