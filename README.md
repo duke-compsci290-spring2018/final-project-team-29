@@ -40,7 +40,7 @@ Or you can download it physically via that link.
 npm install
 ```
 
-4. If you want to tweak our code and see the changes, you can use your local host server to do so with the following command:
+4. If you want to tweak our code and see the changes, you can use your local host server with the following command:
 ```
 npm run dev
 ```
