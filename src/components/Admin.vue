@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <br><br>
+    <br>
     <User v-if="currName !== ''" :name="currName"
           :teams="teams"
           :events="events"

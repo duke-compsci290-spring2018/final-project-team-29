@@ -3,7 +3,6 @@
         <div class="col-lg-4">
             <div class="nav" id="openBtn">☰</div>
             <div class="sidenav">
-              <p>Test</p>
                 <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
 
                 <span class="tentIcon glyphicon glyphicon-tent" onClick="window.location.reload()"></span><br><br><br><br>
@@ -13,16 +12,8 @@
                 <span class="navOption searchOption" v-if="userStatus === 'admin'">
                     <i class="fa fa-search" aria-hidden="true"> Search</i>
                 </span>
-                <span class="navOption" v-if="userStatus === 'admin'">
-                    <i @click="showAllTeams = true" class="fa fa-group" aria-hidden="true"> Teams</i>
-                    <div v-if="showAllTeams">
-                        <div v-for="team in teams">
-                            <p @click="showPlayers(team)">{{team['code']}}</p>
-                        </div><br>
-                        <div v-for="person in people">
-                            <p @click="currName=person">{{person}}</p>
-                        </div>
-                    </div>
+                <span class="navOption teamsOption" @click="showAllTeams = true"  v-if="userStatus === 'admin'">
+                    <i class="fa fa-group" aria-hidden="true"> Teams</i>
                 </span>
                 <span class="navOption">
                     <i class="fa fa-gear" aria-hidden="true"> Settings</i>
@@ -30,13 +21,28 @@
             </div>
         </div>
         
-        <div class="mod"><br><br><br>
+        <div class="searchMod"><br><br><br>
             <div class="searchModal">
-                <span class="closeSearch">&times;</span>
-                <br><label>Input a user to see their schedule (Eg. "Matt", "Matthew", "Christine", "Other")</label>
-                <input v-model="nameInput" class="eventInput"></label>
-                <button @click="submitName">View Info</button><br><br>
+                <span class="closeSearch">&times;</span><br>
+                <h1>USER SEARCH</h1><br>
+                    <label class="col-lg-6">Input a user to see their schedule (e.g., "Matt", "Matthew", "Christine", "Other")</label>
+                    <input v-model="nameInput" class="searchInput" placeholder="Player Name">
+                <button @click="submitUser" class="infoBtn">View Info</button><br><br>
                 <br><br>
+            </div>
+        </div>
+        
+        <div class="teamsMod"><br><br><br>
+            <div class="teamsModal">
+                <span class="closeTeams">&times;</span><br>
+                <h1>TENTING TEAMS</h1><br>
+                    <div v-if="showAllTeams">
+                        <span class="prompt">Check out each team!</span>
+                            <ul class="teamNames" v-for="team in teams" @click="showPlayers(team)" v-on:click="selectedTeam = true">{{team['code']}}</ul><hr>
+                        <span class="prompt" v-if="selectedTeam === true">Check out each player!</span>
+                            <li class="playerNames" v-for="person in people" @click="currName=person">{{person}}</li><br>
+                    </div>
+                <br>
             </div>
         </div>
 
@@ -139,7 +145,8 @@
                 registering: false,
                 userEmail: '',
                 people: [],
-                showAllTeams: false
+                showAllTeams: false,
+                selectedTeam: false
             }
         },
         firebase: {
@@ -204,9 +211,20 @@
                 this.currName = this.nameInput;
                 this.nameInput = '';
             },
-            test: function() {
-                console.log(this.containsName('TEAM 0', 'Matt'));
-                console.log('a');
+            containsUser: function(team, name) {
+                try {
+                    team["People"].forEach(person => console.log(person));
+                    return team["People"].filter(person => person["name"] === name).length >= 1;
+                } catch(err) {
+                }
+            },
+            submitUser: function() {
+                if (this.teams.filter(team => this.containsUser(team, this.nameInput.toLowerCase())).length >= 1) {
+                    this.currName = this.nameInput.toLowerCase();
+                } else {
+                    alert("This user is not in our system")
+                }
+                this.nameInput = '';
             },
             createSchedule: function() {
                 db.ref("Teams/" + this.curr_team[".key"] + "/People/" + this.curr_person["key"] + "/schedule").set(
@@ -237,13 +255,28 @@
             $('body').css('margin-left', '0');
         });
         $(document).on('click', '.searchOption', function() {
-            $('.mod').css('display', 'block');
+            $('.searchMod').css('display', 'block');
+            $('.teamsMod').css('display', 'none');
         });
         $(document).on('click', '.closeSearch', function() {
-            $('.mod').css('display', 'none');
+            $('.searchMod').css('display', 'none');
         });
-        $(document).on('click', '.submitBtn', function() {
-            $('.mod').css('display', 'none');
+        $(document).on('click', '.infoBtn', function() {
+            $('.searchMod').css('display', 'none');
+            $('.sidenav').css('width', '0');
+            $('body').css('margin-left', '0');
+        });
+        $(document).on('click', '.teamsOption', function() {
+            $('.teamsMod').css('display', 'block');
+            $('.searchMod').css('display', 'none');
+        });
+        $(document).on('click', '.closeTeams', function() {
+            $('.teamsMod').css('display', 'none');
+        });
+        $(document).on('click', '.playerNames', function() {
+            $('.teamsMod').css('display', 'none');
+            $('.sidenav').css('width', '0');
+            $('body').css('margin-left', '0');
         });
     });
 
@@ -377,7 +410,7 @@
     }
     .dropdown-content a {
         color: black;
-        padding: 10%;
+        padding: 8%;
         font-weight: bold;
         text-align: center;
         display: block;
@@ -390,7 +423,7 @@
     .dropdown:hover .dropdown-content {
         display: block;
     }
-    .mod {
+    .searchMod, .teamsMod {
         display: none;
         position: fixed;
         z-index: 1;
@@ -400,22 +433,66 @@
         background-color: rgb(0,0,0);
         background-color: rgba(0,0,0,0.4);
     }
-    .searchModal {
+    .searchModal, .teamsModal {
         background-color: #fefefe;
         margin: auto;
-        width: 40%;
+        margin-left: 15%;
+        width: 45%;
+        padding: 2%;
         color: black;
     }
-    .closeSearch {
+    .closeSearch, .closeTeams {
         color: #aaa;
         float: right;
-        padding-right: 2%;
-        font-size: 1em;
+        margin-right: -2%;
+        margin-top: -5%;
+        font-size: 2.5em;
         font-weight: bold;
     }
     .closeSearch:hover, .closeSearch:focus {
         color: black;
         text-decoration: none;
+        cursor: pointer;
+    }
+    .searchInput {
+        margin-left: -2%;
+        margin-top: 0.8%;
+        padding: 1%;
+    }
+    label {
+        font-weight: normal;
+    }
+    .infoBtn {
+        background-color: #ffdce2;
+        border-radius: 5px;
+        border: 0;
+        width: 20%;
+        font-size: 1em;
+        font-family: Arial;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: 1.5%;
+    }
+    .prompt {
+        font-weight: bold;
+        margin-left: 2%;
+    }
+    .prompt, .teamNames {
+        font-size: 1.2em;
+        display: inline;
+    }
+    .teamNames:hover {
+        font-style: italic;
+        cursor: pointer;
+    }
+    .playerNames {
+        margin-left: 7%;
+        text-transform: capitalize;
+        display: inline;
+        font-size: 1.2em;
+    }
+    .playerNames:hover {
+        font-style: italic;
         cursor: pointer;
     }
 </style>
