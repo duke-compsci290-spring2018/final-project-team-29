@@ -60,7 +60,8 @@
                 this.register();
                 if (this.isUniqueTeamCode()) {
                     alert("This team code is not in our system");
-                } else {
+                } else { 
+                  if (this.email.split("@").length > 0) {
                     var key = this.teams.filter(team => team["code"] === this.teamcode)[0];
                     var people_in_team = this.teams.filter(team => team["code"] === this.teamcode)[0]["People"].length;
                     this.teamsRef.child(key['.key']).child("People").child(people_in_team).set({
@@ -70,19 +71,23 @@
                         "name": this.generate_user_from_email(this.email),
                         "key": people_in_team
                     });
-                }
-              alert("You've successfully created a new player!")
-              this.$router.push('/');
-              this.newUserStatus = 'user';
-              this.$emit('updateUserStatus', this.newUserStatus);
-              this.$emit('updateUserEmail', this.email);
-                this.email = '';
-                this.password = '';
-                this.teamcode = '';
+                    alert("You've successfully created a new player!")
+                    this.$router.push('/');
+                    this.newUserStatus = 'user';
+                    this.$emit('updateUserStatus', this.newUserStatus);
+                    this.$emit('updateUserEmail', this.email);
+                      this.email = '';
+                      this.password = '';
+                      this.teamcode = '';
+                      }
+                   else {
+                   alert("Not a valid email address");
+              
             },
             registerTeam: function() {
                 if (!this.checkEmptyInput()) {
                     if (this.isUniqueTeamCode()) {
+                      if (this.email.split("@").length > 0) {
                         this.teamsRef.push({
                             "People" : {
                                 "0": {
@@ -95,20 +100,23 @@
                             },
                             "code": this.teamcode
                         });
+                        alert("You've successfully created a new team!")
+                        this.$router.push('/');
+                        this.newUserStatus = 'user';
+                        this.$emit('updateUserStatus', this.newUserStatus);
+                        this.$emit('updateUserEmail', this.email);
+                        this.email = '';
+                        this.password = '';
+                        this.teamcode = '';
+                    } else {
+                      alert("Not a valid email address")
                     } else {
                         alert("This team code already exists!");
                     }
                 } else {
                     alert("You didn't input a email/password/team code!");
                 }
-                alert("You've successfully created a new team!")
-                this.$router.push('/');
-                this.newUserStatus = 'user';
-                this.$emit('updateUserStatus', this.newUserStatus);
-                this.$emit('updateUserEmail', this.email);
-                this.email = '';
-                this.password = '';
-                this.teamcode = '';
+                
             },
             generate_user_from_email (email) {
                 return email.split("@")[0];
