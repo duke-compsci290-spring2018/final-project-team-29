@@ -47,10 +47,10 @@ npm run dev
 
 ## data authenticity
 
-Since tenting season is over, it was difficult getting the actual availability of tenting participants and modeling our application similar to how tenting functions with twelve members planning their shifts. We decided to instead use fake datasets to mimic how events (specifically basketball games) would be displayed on our tenting calendar. Members participating in tenting would also be notified of these events, and could see them along with their individual tenting schedule.
+Since tenting season is over, it was difficult getting the actual availability of tenting participants and modeling our application similar to how tenting functions with twelve members planning their shifts all simultaneously. We decided to instead use fake datasets to mimic how events (specifically basketball games) would be displayed on our other calendars. Members participating in tenting would also be notified of these events, and could see them along with their individual tenting schedule.
 
-The JSON files that we used to reference this data can be found at these two links:
-https://duke-compsci290-spring2018.github.io/final-project-team-29/src/data/mens_bball.json
+The JSON files that we used to reference this data can be found at these two links:<br>
+https://duke-compsci290-spring2018.github.io/final-project-team-29/src/data/mens_bball.json<br>
 https://duke-compsci290-spring2018.github.io/final-project-team-29/src/data/womens_bball.json
 
 ## pros/cons of frameworks
