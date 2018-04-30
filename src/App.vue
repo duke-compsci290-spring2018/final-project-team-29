@@ -3,6 +3,7 @@
         <div class="col-lg-4">
             <div class="nav" id="openBtn">☰</div>
             <div class="sidenav">
+              <p>Test</p>
                 <a href="javascript:void(0)" class="closebtn" id="closeBtn">&times;</a>
 
                 <span class="tentIcon glyphicon glyphicon-tent" onClick="window.location.reload()"></span><br><br><br><br>
@@ -247,7 +248,7 @@
             $('.mod').css('display', 'none');
         });
     });
-    
+
 </script>
 
 <style lang="scss">
@@ -315,7 +316,7 @@
     .sidenav {
         background-color: white;
         height: 100%; width: 0;
-        position: fixed; z-index: 1;
+        position: fixed;
         top: 0; left: 0;
         overflow: hidden;
         padding-top: 8%;
