@@ -1,7 +1,7 @@
 # kvite
 
 A web application designed to expediate and simplify the tenting process at Duke<br>
-Check it out at https://duke-compsci290-spring2018.github.io/final-project-team-29/ !!<br><br>
+Check it out at https://duke-compsci290-spring2018.github.io/final-project-team-29/ !!<br>
 
 Names: Christine Hwang (jmh146) & Matthew O'Boyle (mo121)<br>
 Time Spent: 3/29-4/30 (about a month & 70-80 hours total)<br>
@@ -28,16 +28,22 @@ Password: password
 If you think code is beautiful and want to run it locally, here are some tips!
 
 1. Clone the git repository by typing this in your terminal:
+```
 git clone https://github.com/duke-compsci290-spring2018/final-project-team-29
+```
 Or you can download it physically via that link.
 
 2. Download Node (or update a probably old version)
 
 3. Install all necessary packages, modules, dependencies with the following command:
+```
 npm install
+```
 
 4. If you want to tweak our code and see the changes, you can use your local host server to do so with the following command:
+```
 npm run dev
+```
 
 ## data authenticity
 
