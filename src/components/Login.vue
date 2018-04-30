@@ -8,7 +8,7 @@
       <button class="loginBtn" @click="login">Login</button><br><br>
       Don't have an account?<br>
       <span class="signUpLink" @click="signUp = true">Sign up now!</span><br><br>
-        
+
       <button class="guestBtn" @click="continueGuest">Continue as Guest</button><br><br>
     </div>
     <div v-else>

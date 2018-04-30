@@ -1,0 +1,43 @@
+{
+  "Teams" : {
+    "-LB48kHZEkl6KlHNWCCO" : {
+      "People" : [ {
+        "available" : [ [ true, false, false, false, false, false, false, false, false, false, false, false, true ], [ true, false, true, false, false, false, false, false, false, true, false, false, false ], [ false, false, false, false, true, false, false, false, false, false, false, false, false ], [ false, false, false, false, false, false, false, false, false, false, false, false, false ], [ true, false, false, false, false, true, true, false, false, false, false, true, true ] ],
+        "captain" : true,
+        "key" : "0",
+        "name" : "matt",
+        "schedule" : [ [ true, false, false, false, false, true, false, false, true, false, false, false, true ], [ true, true, true, false, false, false, false, false, false, true, false, false, false ], [ false, false, false, false, true, false, false, false, false, false, false, false, false ], [ false, false, false, false, false, false, false, false, false, false, false, false, false ], [ true, false, false, false, false, true, true, false, false, false, false, true, true ] ]
+      }, {
+        "available" : [ [ false, false, true, true, false, false, true, false, false, true, true, true, true ], [ false, false, false, false, true, false, true, false, false, false, false, false, true ], [ false, false, true, false, true, true, false, false, true, true, true, true, true ], [ false, false, false, false, false, false, false, true, false, false, false, false, true ], [ false, true, true, false, true, true, false, true, false, true, true, true, true ] ],
+        "captain" : false,
+        "key" : 1,
+        "name" : "matthew",
+        "schedule" : [ [ false, false, true, true, false, false, true, false, false, true, true, true, false ], [ false, false, false, false, false, false, false, false, false, false, false, false, true ], [ false, false, true, false, false, true, false, false, true, true, true, true, true ], [ false, false, false, false, false, false, false, false, false, false, false, false, true ], [ false, true, true, false, true, false, false, true, false, true, true, false, false ] ]
+      }, {
+        "available" : [ [ false, false, true, false, false, true, true, false, false, false, false, true, true ], [ false, false, false, false, false, true, true, false, false, false, true, true, true ], [ false, true, false, false, false, true, false, true, false, false, true, true, true ], [ true, true, true, true, true, false, true, true, true, true, true, true, true ], [ true, true, true, true, true, true, true, true, true, false, true, true, true ] ],
+        "captain" : false,
+        "key" : 2,
+        "name" : "duvall",
+        "schedule" : [ [ false, false, true, false, true, true, true, false, true, true, false, true, true ], [ true, true, true, true, false, true, true, false, false, false, true, true, true ], [ true, true, false, true, true, true, false, true, false, false, true, true, true ], [ true, true, true, true, true, false, true, true, true, true, true, true, true ], [ true, true, true, true, true, true, true, true, true, false, true, true, true ] ]
+      } ],
+      "code" : "TEAM 0"
+    },
+    "-LB77C7Zcbp5nxPBarH2" : {
+      "People" : [ {
+        "available" : [ [ false, false, false, false, false, false, false, false, false, false, true, true, true ], [ false, false, false, false, false, false, false, false, false, false, true, true, true ], [ false, false, false, false, false, false, false, false, false, false, true, true, true ], [ false, false, false, false, false, false, false, false, false, false, true, true, true ], [ false, false, false, false, false, false, false, false, false, false, true, true, true ] ],
+        "captain" : true,
+        "key" : "0",
+        "name" : "christine",
+        "schedule" : [ [ false, false, false, false, false, false, false, false, false, false, true, true, true ], [ false, false, false, false, false, false, false, false, false, false, true, true, true ], [ false, false, false, false, false, false, false, false, false, false, true, true, true ], [ false, false, false, false, false, false, false, false, false, false, true, true, true ], [ false, false, false, false, false, false, false, false, false, false, true, true, true ] ]
+      }, {
+        "available" : [ [ true, true, true, true, true, true, true, true, true, true, true, true, true ], [ true, true, true, true, true, true, true, true, true, true, true, true, true ], [ true, true, true, true, true, true, true, true, true, true, true, true, true ], [ true, true, true, true, true, true, true, true, true, true, true, true, true ], [ true, true, true, true, true, true, true, true, true, true, true, true, true ] ],
+        "captain" : false,
+        "key" : 1,
+        "name" : "other",
+        "schedule" : [ [ true, false, true, true, false, false, false, true, true, true, false, false, false ], [ true, true, true, true, false, false, false, true, true, false, false, true, true ], [ false, false, true, false, true, true, true, false, false, true, true, true, false ], [ false, false, false, false, false, true, true, true, false, true, true, true, true ], [ false, true, true, false, true, true, false, false, false, false, false, true, true ] ]
+      } ],
+      "code" : "TEAM 1"
+    }
+  },
+  "events" : [ [ false, [ "grace" ], [ "grace" ], [ "grace" ], false, false, false, [ "GRACE" ], [ "GRACE" ], false, false, false, [ "Night hours Begin" ] ], [ false, false, false, false, false, [ "Grace" ], [ "Grace" ], [ "Grace" ], false, false, false, false, [ "Night hours begin" ] ], [ false, false, [ "Grace" ], [ "Grace" ], [ "Grace" ], false, false, false, false, false, false, false, [ "Night hours begin" ] ], [ false, false, false, false, false, false, false, [ "Trivia" ], [ "Trivia" ], [ "Trivia" ], [ "Trivia" ], false, [ "Night hours begin" ] ], [ [ "ESPN Game Day" ], [ "ESPN Game Day" ], [ "ESPN Game Day" ], [ "ESPN Game Day" ], [ "ESPN Game Day" ], false, false, false, false, false, [ "Grace" ], [ "Grace" ], [ "Night hours begin" ] ] ]
+}
